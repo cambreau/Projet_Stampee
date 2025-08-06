@@ -1,0 +1,71 @@
+/* --- Bouton --- */
+
+/* Style pour les boutons */
+.bouton {
+  display: flex;
+  align-content: center;
+  height: fit-content;
+  border: 1px solid var(--couleur-fond-accent);
+  border-radius: var(--arrondi-grand);
+  font-size: var(--taille-police-moyen);
+  color: var(--couleur-fond);
+  font-weight: var(--epaisseur-police-tres-gras);
+  padding: var(--espacement-tres-serre) var(--espacement-base);
+  justify-content: center;
+}
+
+@media screen and (max-width: 1500px) {
+  .bouton {
+    font-weight: var(--epaisseur-police-gras);
+    padding: var(--espacement-tres-serre) var(--espacement-serre);
+  }
+}
+
+/* Variant */
+
+/*** Variant classique ***/
+.bouton-classique {
+  background-color: var(--couleur-fonctionnalite-secondaire);
+}
+.bouton-classique:hover {
+  background-color: var(--couleur-fonctionnalite-secondaire-hover);
+  color: var(--couleur-fonctionnalite-secondaire);
+}
+
+/*** Variant accent***/
+.bouton-accent {
+  background-color: var(--couleur-fonctionnalite);
+}
+.bouton-accent:hover {
+  background-color: var(--couleur-fonctionnalite-hover);
+  color: var(--couleur-fonctionnalite);
+}
+
+/*** Variant fond ***/
+.bouton-fond {
+  min-height: 40px;
+  background-color: var(--couleur-fond);
+  color: var(--couleur-fonctionnalite-secondaire);
+  border-radius: 0;
+  border: none;
+  border-left: 1px solid var(--couleur-fond-accent);
+  border-right: 1px solid var(--couleur-fond-accent);
+}
+.bouton-fond:hover {
+  background-color: var(--couleur-fonctionnalite-secondaire-hover);
+}
+
+/*** Variant bouton plus grand ***/
+
+.bouton-medium {
+  min-width: 170px;
+}
+
+.bouton-grand {
+  min-width: 300px;
+}
+@media screen and (max-width: 1320px) {
+  .bouton-grand {
+    min-width: auto;
+  }
+}

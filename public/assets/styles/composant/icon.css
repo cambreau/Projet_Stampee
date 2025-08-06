@@ -1,0 +1,17 @@
+/* --- Icon --- */
+
+.icon {
+  display: block;
+  max-width: 45px;
+  padding: var(--espacement-serre);
+}
+
+.icon:hover {
+  background-color: var(--couleur-fonctionnalite-hover);
+}
+
+/** Variant petit **/
+.icon_petit {
+  max-width: 25px;
+  height: 100%;
+}

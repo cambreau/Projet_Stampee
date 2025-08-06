@@ -1,0 +1,18 @@
+/* Importation des composants */
+@import url("./composant/entete.css");
+@import url("./composant/logo.css");
+@import url("./composant/navigation-principale.css");
+@import url("./composant/bouton.css");
+@import url("./composant/recherche.css");
+@import url("./composant/filtres.css");
+@import url("./composant/detail-timbre.css");
+@import url("./composant/carrousel.css");
+@import url("./composant/icon.css");
+@import url("./composant/conteneur-timbres.css");
+@import url("./composant/catalogue-timbre.css");
+@import url("./composant/img.css");
+@import url("./composant/pied-de-page.css");
+
+/* Importation variable et general */
+@import url("./variable.css");
+@import url("./general.css");

@@ -1,0 +1,32 @@
+/* --- Filtres --- */
+
+.filtres {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--police-general);
+  background-color: var(--couleur-fond);
+  color: var(--couleur-texte);
+}
+.filtres__categories {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacement-base);
+}
+
+.filtres__categorie {
+  display: flex;
+  flex-direction: column;
+}
+.filtres__categorie select {
+  padding: var(--espacement-tres-serre);
+}
+
+@media screen and (max-width: 1150px) {
+  .filtres {
+    margin-top: var(--espacement-tres-espace);
+    align-items: center;
+  }
+  .filtres .bouton {
+    max-width: 300px;
+  }
+}

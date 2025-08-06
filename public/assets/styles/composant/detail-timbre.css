@@ -1,0 +1,180 @@
+/* --- Detail timbre --- */
+.detail-timbre {
+  display: grid;
+  grid-template-columns: 0.5fr 1fr;
+  gap: var(--espacement-espace);
+  padding: var(--espacement-base);
+  border: 1px solid var(--couleur-secondaire);
+  border-radius: var(--arrondi-petit);
+}
+
+/* Les images du timbre */
+/** Image principale */
+.detail-timbre__image-principale {
+  display: block;
+  height: 400px;
+}
+
+/** Galerie photos */
+.detail-timbre__galerie {
+  display: flex;
+  gap: var(--espacement-base);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: var(--espacement-serre);
+}
+
+.detail-timbre__galerie__miniature {
+  background-color: var(--couleur-fond-accent);
+  border-radius: var(--arrondi-petit);
+  width: 130px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.detail-timbre__galerie__miniature img:hover {
+  transform: scale(1.05);
+}
+
+/** Boutons */
+
+.detail-timbre .form-offre {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--espacement-tres-espace);
+  align-items: center;
+  justify-items: center;
+  gap: var(--espacement-serre);
+}
+
+.detail-timbre .form-offre input {
+  height: 37px;
+  border-radius: var(--arrondi-grand);
+  border: 2px solid var(--couleur-fonctionnalite);
+}
+
+.detail-timbre .form-offre input::placeholder {
+  padding-left: var(--espacement-serre);
+  font-size: var(--taille-police-moyen);
+}
+
+/* -------------------------------------------------------------------------------*/
+/* Entete detail-timbre */
+.detail-timbre__premiere-ligne {
+  display: grid;
+  grid-template-columns: 6fr 0.5fr;
+  align-items: first baseline;
+}
+
+.detail-timbre__sous-titre {
+  margin: var(--espacement-serre) 0 var(--espacement-espace)
+    var(--espacement-tres-serre);
+  font-size: var(--taille-police-moyen);
+  font-style: italic;
+}
+
+/* Contenu detail-timbre */
+.detail-timbre__infos__contenu {
+  margin-left: var(--espacement-tres-serre);
+}
+
+/** Info */
+.detail-timbre__prix {
+  background-color: var(--couleur-fond-accent);
+  padding: var(--espacement-serre);
+  margin-bottom: var(--espacement-base);
+  border-left: 10px solid var(--couleur-principale);
+  border-radius: var(--arrondi-petit) 0 0 var(--arrondi-petit);
+}
+
+.detail-timbre__prix > * {
+  font-size: var(--taille-police-moyen);
+  font-weight: var(--epaisseur-police-tres-gras);
+  color: var(--couleur-principale);
+}
+
+.detail-timbre__compteur {
+  width: fit-content;
+  font-size: var(--taille-police-moyen);
+  font-weight: var(--epaisseur-police-gras);
+  color: var(--couleur-principale);
+  border: thick double var(--couleur-secondaire);
+  border-radius: var(--arrondi-petit);
+  padding: var(--espacement-serre);
+  margin-bottom: var(--espacement-espace);
+}
+.detail-timbre__temps {
+  font-weight: var(--epaisseur-police-tres-gras);
+}
+
+/** Les details suplementaires du timbres */
+.detail-timbre__details {
+  border: 0.5px solid var(--couleur-secondaire);
+  padding: var(--espacement-serre);
+  border-radius: var(--arrondi-petit);
+}
+
+.detail-timbre__details__liste {
+  margin-top: var(--espacement-serre);
+}
+
+.detail-timbre__details__liste .detail-timbre__details__detail:nth-child(odd) {
+  background-color: var(--couleur-fond-accent);
+}
+
+.detail-timbre__details__liste .detail-timbre__details__detail:nth-child(even) {
+  background-color: var(--couleur-fond);
+}
+
+.detail-timbre__details__detail {
+  display: grid;
+  grid-template-columns: 1.5fr 6fr;
+  margin-top: var(--espacement-serre);
+  padding: var(--espacement-tres-serre);
+  gap: var(--espacement-base);
+}
+
+.detail-timbre__details__intitule {
+  font-weight: var(--epaisseur-police-gras);
+  border-right: 0.5px solid gainsboro;
+  padding: 0 var(--espacement-tres-serre);
+}
+
+@media screen and (max-width: 1320px) {
+  .detail-timbre {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .detail-timbre__images {
+    display: flex;
+    gap: var(--espacement-base);
+  }
+
+  .detail-timbre__galerie {
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    gap: var(--espacement-serre);
+    margin-top: 0;
+  }
+
+  .detail-timbre__image-principale {
+    display: block;
+    width: 70%;
+  }
+  .detail-timbre__boutons {
+    min-width: auto;
+    max-width: 70%;
+  }
+}
+
+@media screen and (max-width: 1320px) {
+  .detail-timbre__details__detail {
+    grid-template-columns: 1fr 2fr;
+  }
+
+  .detail-timbre__boutons {
+    min-width: auto;
+    max-width: unset;
+  }
+}

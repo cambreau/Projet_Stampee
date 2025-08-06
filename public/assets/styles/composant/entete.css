@@ -1,0 +1,41 @@
+/* Style pour l'entête de la page */
+.entete {
+  border-bottom: 2px solid var(--couleur-secondaire);
+}
+
+/** Entete principale **/
+.entete__principale {
+  display: grid;
+  grid-template-columns: 0.5fr 2fr 3fr;
+  align-items: center;
+  gap: var(--espacement-base);
+  padding: var(--espacement-serre) var(--espacement-espace);
+}
+
+/** Conteneur pour les boutons actions **/
+.entete__actions {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.entete__actions.secondaire {
+  margin-left: var(--espacement-tres-espace);
+}
+
+/** Media **/
+@media screen and (max-width: 1320px) {
+  .entete__actions.secondaire {
+    margin-left: var(--espacement-base);
+  }
+}
+
+@media screen and (max-width: 1150px) {
+  .entete__principale {
+    grid-template-columns: 0.5fr 0.5fr 3fr;
+  }
+
+  .entete__actions {
+    display: none;
+  }
+}

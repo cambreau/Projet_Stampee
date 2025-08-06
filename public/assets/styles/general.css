@@ -1,0 +1,72 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: var(--taille-police-normal);
+}
+
+body {
+  font-family: var(--police-general);
+  color: var(--couleur-texte);
+  background-color: var(--couleur-fond);
+}
+
+/* --- Titres --- */
+h1 {
+  font-family: var(--police-decorative);
+  font-size: var(--taille-police-h1);
+  font-weight: var(--epaisseur-police-tres-gras);
+  color: var(--couleur-principale);
+  margin-bottom: var(--espacement-base);
+}
+
+h2 {
+  font-size: var(--taille-police-h2);
+  font-weight: var(--epaisseur-police-gras);
+  color: var(--couleur-principale);
+  padding-bottom: var(--espacement-tres-serre);
+  border-bottom: 1px solid var(--couleur-secondaire);
+}
+
+h3 {
+  font-size: var(--taille-police-h3);
+  font-weight: var(--epaisseur-police-gras);
+  color: var(--couleur-principale);
+}
+
+h4 {
+  font-size: var(--taille-police-h4);
+  font-weight: var(--epaisseur-police-gras);
+  color: var(--couleur-principale);
+}
+
+/* --- Liste --- */
+li {
+  list-style-type: none;
+}
+
+/* --- Lien --- */
+a {
+  display: block;
+  align-items: center;
+  text-decoration: none;
+  color: var(--couleur-fonctionnalite-secondaire);
+  font-size: var(--taille-police-moyen);
+}
+
+/* --- Main --- */
+main {
+  margin: var(--espacement-espace);
+}
+
+.cache {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

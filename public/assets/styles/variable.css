@@ -1,0 +1,40 @@
+:root {
+  /* Couleurs principales du thème */
+  --couleur-principale: #233580;
+  --couleur-secondaire: #d4af37;
+  --couleur-texte: #384054;
+  --couleur-fond-accent: #f7f7f7;
+  --couleur-fond: #ffffff;
+  --couleur-fonctionnalite: #a52a2a;
+  --couleur-fonctionnalite-hover: #e8c5c5;
+  --couleur-fonctionnalite-secondaire: #2e5899;
+  --couleur-fonctionnalite-secondaire-hover: #a8c0e5;
+  /* --- Police --- */
+  --police-general: "Raleway", sans-serif;
+  --police-decorative: "EB Garamond", serif;
+  /* --- Taille de police --- */
+  --taille-police-normal: 0.9rem;
+  --taille-police-moyen: 1rem;
+  --taille-police-h4: 1.1rem;
+  --taille-police-h3: 1.3rem;
+  --taille-police-h2: 1.728rem;
+  --taille-police-h1: 2.986rem;
+  /* --- Epaisseur de police --- */
+  --epaisseur-police-normale: 400;
+  --epaisseur-police-gras: 500;
+  --epaisseur-police-tres-gras: 700;
+  /* --- Espacement --- */
+  --espacement-tres-serre: 5px;
+  --espacement-serre: 10px;
+  --espacement-base: 20px;
+  --espacement-espace: 40px;
+  --espacement-tres-espace: 80px;
+  /* Border-radius */
+  --arrondi-petit: 5px;
+  --arrondi-grand: 10px;
+  /* Points de rupture (ne peuvent pas être utilisés comme variables, mais sont indiqués à titre informatif). */
+  /*  --ecran-tres-petit: 900px;
+    --ecran-petit: 1150px;
+     --ecran-moyen: 1320px;
+     --ecran-large: 1500px; */
+}

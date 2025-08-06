@@ -1,0 +1,12 @@
+.catalogue-timbre__contenu {
+  display: flex;
+  flex-direction: row;
+  margin: var(--espacement-base) 0;
+  gap: var(--espacement-espace);
+}
+
+@media screen and (max-width: 1150px) {
+  .catalogue-timbre__contenu {
+    flex-direction: column;
+  }
+}

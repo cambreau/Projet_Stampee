@@ -1,0 +1,78 @@
+/* --- Carte timbre --- */
+
+/*Carte timbre conteneur*/
+.conteneur-timbres {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(250px, 1fr));
+  gap: var(--espacement-espace) var(--espacement-base);
+  align-items: center;
+  justify-content: center;
+}
+
+/*Carte timbre*/
+.conteneur-timbres__timbre {
+  display: grid;
+  border: 1px solid var(--couleur-secondaire);
+  border-radius: var(--arrondi-petit);
+  min-height: 420px;
+  align-items: start;
+}
+
+/*Carte timbre image*/
+.conteneur-timbres__timbre__image {
+  display: block;
+  height: 200px;
+  background-color: var(--couleur-fond-accent);
+  border-bottom: 1px solid var(--couleur-secondaire);
+}
+.conteneur-timbres__timbre__image img {
+  display: block;
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+/*Carte timbre titre*/
+.conteneur-timbres__timbre__titre {
+  margin: 0 var(--espacement-espace);
+  padding: var(--espacement-tres-serre) 0;
+  text-align: center;
+  align-content: center;
+  border-bottom: 1px solid var(--couleur-secondaire);
+}
+
+/*Carte timbre bas-carte*/
+.conteneur-timbres__timbre__bas-carte {
+  display: grid;
+  grid-template-rows: 2fr 1fr;
+  gap: var(--espacement-serre);
+  padding: var(--espacement-serre);
+  align-items: end;
+  justify-content: center;
+}
+
+.conteneur-timbres__timbre__bas-carte__info-enchere > * {
+  padding: var(--espacement-tres-serre);
+}
+
+/** Media **/
+@media screen and (max-width: 1500px) {
+  .conteneur-timbres {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(250px, 1fr));
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .conteneur-timbres {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(250px, 1fr));
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .conteneur-timbres {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(250px, 1fr));
+  }
+}
