@@ -5,7 +5,7 @@ namespace App\Models;
 abstract class CRUD extends \PDO{
 
     public function __construct(){
-        parent::__construct('mysql:host=localhost;dbname=ludrature;port=3306;charset=utf8', 'root', 'admin');
+        parent::__construct('mysql:host=localhost;dbname=stampee;port=3306;charset=utf8', 'root', 'admin');
     }
 
     public function select($champ = null, $order='asc'){
