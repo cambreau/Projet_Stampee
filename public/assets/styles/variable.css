@@ -23,6 +23,8 @@
   --epaisseur-police-normale: 400;
   --epaisseur-police-gras: 500;
   --epaisseur-police-tres-gras: 700;
+  /* --- Interligne --- */
+  --interligne-base: 1.5rem;
   /* --- Espacement --- */
   --espacement-tres-serre: 5px;
   --espacement-serre: 10px;

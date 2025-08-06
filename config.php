@@ -1,4 +1,4 @@
 <?php
 define('BASE', 'app');
-define('ASSET', 'public/assets');
+define('ASSET', '/public/assets');
 ?>

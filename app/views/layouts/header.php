@@ -26,7 +26,7 @@
   <body>
     <header class="entete">
       <div class="entete__principale">
-        <a href="##########COMPLETER######" class="logo"> 
+        <a href="{{base}}/accueil" class="logo"> 
           <img src="{{asset}}/images/logo-stampee.webp" alt="Logo de STAMPEE" />
         </a>
         <nav class="navigation-principale__responsive">
@@ -152,7 +152,7 @@
               </select>
               <button type="submit" class="cache">Changer</button>
             </form>
-            <a class="bouton bouton-fond" href="#"> Connexion </a>
+            <a class="bouton bouton-fond" href="{{accueil}}/connexion/page-connexion"> Connexion </a>
             <a href="#" class="bouton bouton-fond icon"
               ><img
                 class="img"

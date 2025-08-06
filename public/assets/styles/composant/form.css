@@ -1,0 +1,40 @@
+.form {
+  max-width: 600px;
+  margin: var(--espacement-espace) auto;
+  padding: var(--espacement-espace);
+  background-color: var(--couleur-fond);
+  border-radius: var(--arrondi-grand);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  line-height: var(--interligne-base);
+}
+
+.form__champ {
+  display: grid;
+  grid-template-columns: 210px 1fr;
+  gap: var(--espacement-serre);
+  align-items: center;
+  margin-bottom: var(--espacement-base);
+}
+
+.form__champ label {
+  font-weight: var(--epaisseur-police-gras);
+  font-size: var(--taille-police-normal);
+}
+
+.form__champ input,
+.form__champ select,
+.form__champ textarea {
+  padding: var(--espacement-serre);
+  font-size: var(--taille-police-normal);
+  border: 1px solid #ccc;
+  border-radius: var(--arrondi-petit);
+  background-color: white;
+  width: 100%;
+}
+
+.form__btn-conteneur {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--espacement-base);
+  margin-top: var(--espacement-espace);
+}

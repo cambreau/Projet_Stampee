@@ -3,3 +3,5 @@
 }) }}
 
 <h1> Hello</h1>
+
+{{ include('layouts/footer.php') }}
