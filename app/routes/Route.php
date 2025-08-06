@@ -30,12 +30,12 @@ class Route {
 
         foreach(self::$routes as $route){
             // Debug
-            // var_dump(BASE.$route['url']);
+            // var_dump($route['url']);
             // var_dump($route['method']);
             // echo ('<br>');
             //Fin Debug
         
-            if(BASE.$route['url'] == $urlPath && $route['method'] == $method){
+            if($route['url'] == $urlPath && $route['method'] == $method){
                 $controllerSegments = explode('@', $route['controller']);
 
                 $controllerName = 'App\\Controllers\\'.$controllerSegments[0];
