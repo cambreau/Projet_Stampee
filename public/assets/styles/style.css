@@ -1,3 +1,7 @@
+/* Importation variable et general */
+@import url("./variable.css");
+@import url("./general.css");
+
 /* Importation des composants */
 @import url("./composant/entete.css");
 @import url("./composant/logo.css");
@@ -16,7 +20,3 @@
 @import url("./composant/catalogue-timbre.css");
 @import url("./composant/img.css");
 @import url("./composant/pied-de-page.css");
-
-/* Importation variable et general */
-@import url("./variable.css");
-@import url("./general.css");

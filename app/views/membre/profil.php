@@ -16,8 +16,8 @@
             <p class="profil__information"><span>Adresse courriel :</span> {{ membre.email }}</p>
             <p class="profil__information"><span>Mot de passe :</span> ********</p>
             <div class="profil__conteneur-btn">
-            <a class="bouton bouton-classique" href="/utilisateurs/utilisateur-modifier?id={{ membre.id }}">Modifier</a>
-            <a class="bouton bouton-accent" href="/utilisateurs/supprimer?id={{ membre.id }}">Supprimer</a>
+            <a class="bouton bouton-classique" href="/membre/page-modifier?id={{ membre.id }}">Modifier</a>
+            <a class="bouton bouton-accent" href="/membre/supprimer?id={{ membre.id }}">Supprimer</a>
         </div>
         </div>
        

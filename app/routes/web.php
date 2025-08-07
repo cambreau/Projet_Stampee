@@ -18,6 +18,9 @@ Route::post('/connexion/deconnexion', 'ConnexionController@deconnexion');
 Route::get('/membre/page-inscription', 'MembreController@pageInscription');
 Route::post('/membre/page-inscription', 'MembreController@inscription');
 Route::get('/membre/profil', 'MembreController@pageProfil');
+Route::get('/membre/page-modifier', 'MembreController@pageModifier');
+Route::post('/membre/page-modifier', 'MembreController@modifier');
+Route::get('/membre/supprimer', 'MembreController@supprimer');
 
 Route::dispatch();
 
