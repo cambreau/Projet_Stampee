@@ -39,7 +39,7 @@
           </picture>
           <ul class="navigation-principale__menu">
             <li>
-              <a href="#" class="bouton bouton-accent"
+              <a href="#" class="bouton bouton-accent bouton-menu-responsive"
                 ><img
                   class="icon"
                   src="{{asset}}/images/icon/calendrier.webp"
@@ -48,6 +48,11 @@
                 Calendrier enchères
               </a>
             </li>
+            {% if session.membre_nomUtilisateur is not defined %}
+            <li>
+            <a class="bouton bouton-classique bouton-menu-responsive" href="{{base}}/connexion/page-connexion"> Connexion </a>
+            </li>
+            {%endif%}
             <li class="navigation-principale__menu__item">
               <form method="get">
                 <label for="devise_responsive" class="cache">Devise</label>
@@ -77,9 +82,14 @@
                 <button type="submit" class="cache">Changer</button>
               </form>
             </li>
+            {% if session.membre_nomUtilisateur is defined %}
+            <li class="navigation-principale__menu__item">
+              <a href="{{base}}/membre/profil">Profil</a>
+            </li>
             <li class="navigation-principale__menu__item">
               <a href="#">Mes alertes</a>
             </li>
+            {%endif%}
             <li class="navigation-principale__menu__item">
               <a href="#">Accueil</a>
             </li>
@@ -94,9 +104,6 @@
             </li>
             <li class="navigation-principale__menu__item">
               <a href="#">Nous contacter</a>
-            </li>
-            <li class="navigation-principale__menu__item">
-              <a href="#">Profil</a>
             </li>
           </ul>
         </nav>
@@ -152,13 +159,18 @@
               </select>
               <button type="submit" class="cache">Changer</button>
             </form>
-            <a class="bouton bouton-fond" href="{{base}}/connexion/page-connexion"> Connexion </a>
+            {% if session.membre_nomUtilisateur is defined %}
+            <a class="bouton bouton-fond" href="{{base}}/membre/profil"> Profil </a>
             <a href="#" class="bouton bouton-fond icon"
               ><img
                 class="img"
                 src="{{asset}}/images/icon/alerte.webp"
                 alt="Icône alerte"
             /></a>
+            {%endif%}
+            {% if session.membre_nomUtilisateur is not defined %}
+            <a class="bouton bouton-fond" href="{{base}}/connexion/page-connexion"> Connexion </a>
+            {%endif%}
           </div>
         </div>
       </div>
@@ -178,9 +190,6 @@
           </li>
           <li class="navigation-principale__menu__item">
             <a href="#">Nous contacter</a>
-          </li>
-          <li class="navigation-principale__menu__item">
-            <a href="#">Profil</a>
           </li>
         </ul>
       </nav>

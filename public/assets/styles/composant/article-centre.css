@@ -1,12 +1,13 @@
-.page-connexion {
+.atricle-centre {
   display: block;
   justify-items: center;
+  padding: var(--espacement-base);
 }
 
-.page-connexion__titre {
+.atricle-centre__titre {
   text-align: center;
 }
 
-.page-connexion__inscription {
+.atricle-centre__inscription {
   margin-bottom: var(--espacement-serre);
 }

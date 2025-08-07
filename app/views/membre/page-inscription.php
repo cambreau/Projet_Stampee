@@ -2,9 +2,9 @@
     title: "Inscription - Stampee : Site d'enchère de timbre",
 }) }}
 
-<div class="page-inscription">
+<div class="atricle-centre">
     <section>
-        <h1 class="page-inscription__titre">Inscription</h1>
+        <h1 class="atricle-centre__titre">Inscription</h1>
         <form class="form" method="post" action="">
             <div class="form__champ">
                 <label for="nomUtilisateur">Nom d'utilisateur :</label>

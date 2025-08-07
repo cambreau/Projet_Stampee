@@ -38,13 +38,12 @@ class Membre extends CRUD {
     }
 
     /** Fonction qui créer une session
-     * @param array $utilisateur
+     * @param array $membre
      */
-    public function creationSession($utilisateur){
+    public function creationSession($membre){
         session_regenerate_id();
-        $_SESSION['utilisateur_id'] = $utilisateur['id'];
-        $_SESSION['utilisateur_nomUtilisateur'] = $utilisateur['nomUtilisateur'];
-        $_SESSION['utilisateur_role'] = $utilisateur['role'];
+        $_SESSION['membre_id'] = $membre['id'];
+        $_SESSION['membre_nomUtilisateur'] = $membre['nomUtilisateur'];
         $_SESSION['fingerPrint'] = md5($_SERVER['HTTP_USER_AGENT'].$_SERVER['REMOTE_ADDR']);
         return $_SESSION;
     }

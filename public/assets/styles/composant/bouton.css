@@ -54,6 +54,11 @@
   background-color: var(--couleur-fonctionnalite-secondaire-hover);
 }
 
+/*** Bouton menu responsive ***/
+.bouton-menu-responsive {
+  border-radius: 0;
+}
+
 /*** Variant bouton plus grand ***/
 
 .bouton-medium {

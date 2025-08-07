@@ -26,17 +26,17 @@ class ConnexionController{
                $membre = $membreCrud->selectWhere($data['nomUtilisateur'],'nomUtilisateur');
                $membreSession = $membreCrud ->creationSession($membre[0]);
                $session = $_SESSION ?? null;
-               return View::render('timbre/catalogue-timbre', ['session'=>$session]);
+               return View::render('accueil', ['session'=>$session]);
             // Si le mot de passe n'est pas correct, on recupère les erreurs et on renvoie une message d'erreur.    
             }else{
                 $erreurs = $Validation->geterreurs();
                 $message = "Veuillez vérifier vos identifiants ";
-                return View::render('autorisations/se-connecter', ['erreurs'=>$erreurs, 'message'=>$message]);
+                return View::render('/connexion/page-connexion', ['erreurs'=>$erreurs, 'message'=>$message]);
             }
            // Si la validation des champs n'est pas correcte, on recupère les erreurs et on les renvoie.   
          }else{
             $erreurs = $Validation->geterreurs();
-            return View::render('autorisations/se-connecter', ['erreurs'=>$erreurs]);
+            return View::render('/connexion/page-connexion', ['erreurs'=>$erreurs]);
          }
       }
 

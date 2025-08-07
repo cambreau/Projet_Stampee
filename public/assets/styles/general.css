@@ -5,7 +5,14 @@
   font-size: var(--taille-police-normal);
 }
 
+html,
 body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
   font-family: var(--police-general);
   color: var(--couleur-texte);
   background-color: var(--couleur-fond);
@@ -57,6 +64,7 @@ a {
 /* --- Main --- */
 main {
   margin: var(--espacement-espace);
+  flex-grow: 1;
 }
 
 .cache {

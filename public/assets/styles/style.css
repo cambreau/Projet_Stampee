@@ -1,6 +1,3 @@
-/* Importation des pages */
-@import url("./page/page-connexion.css");
-
 /* Importation des composants */
 @import url("./composant/entete.css");
 @import url("./composant/logo.css");
@@ -12,6 +9,7 @@
 @import url("./composant/carrousel.css");
 @import url("./composant/icon.css");
 @import url("./composant/form.css");
+@import url("./composant/article-centre.css");
 @import url("./composant/message.css");
 @import url("./composant/conteneur-timbres.css");
 @import url("./composant/catalogue-timbre.css");

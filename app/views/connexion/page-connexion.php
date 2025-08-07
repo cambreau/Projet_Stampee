@@ -2,9 +2,9 @@
     title: "Connexion - Stampee : Site d'enchère de timbre",
 }) }}
 
-<div class="page-connexion">
+<div class="atricle-centre">
     <section >
-        <h1 class="page-connexion__titre">Connexion</h1>
+        <h1 class="atricle-centre__titre">Connexion</h1>
         <section class="message__conteneur">
             {% if msgSuppression is defined %}
                 <p class="message__succes">{{msgSuppression}}</p>
@@ -35,8 +35,8 @@
                 <label for="motPasse">Mot de passe :</label>
                 <input
                     type="password"
-                    id="motPasse"
-                    name="motPasse"
+                    id="motDePasse"
+                    name="motDePasse"
                     placeholder="Entrez votre mot de passe"
                     required
                 />
@@ -53,7 +53,7 @@
             </div>
         </form>
     </section>
-    <p class="page-connexion__inscription">Pas encore membre ?</p>
+    <p class="atricle-centre__inscription">Pas encore membre ?</p>
     <a class="bouton bouton-classique bouton-medium" href="{{base}}/membre/page-inscription">
                 S'inscrire
     </a>

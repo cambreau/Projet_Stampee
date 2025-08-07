@@ -19,6 +19,7 @@
 
 .navigation-principale__menu__item {
   padding: var(--espacement-base) var(--espacement-espace);
+  margin: var(--espacement-serre) 0;
 }
 .navigation-principale__menu__item:hover {
   color: var(--couleur-fonctionnalite-secondaire);
@@ -47,13 +48,15 @@
   .navigation-principale__menu {
     position: absolute;
     flex-direction: column;
-    gap: var(--espacement-serre);
     min-width: 300px;
     top: 235%;
-    background-color: var(--couleur-fond);
+    background-color: var(--couleur-fond-accent);
     border-radius: var(--arrondi-petit);
     border: 1px solid var(--couleur-secondaire);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  .navigation-principale__menu__item select {
+    background-color: var(--couleur-fond-accent);
   }
 }
 

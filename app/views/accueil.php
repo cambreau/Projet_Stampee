@@ -2,6 +2,6 @@
     title: "Stampee : Site d'enchère de timbre",
 }) }}
 
-<h1> Hello</h1>
+<h1>Bienvenue {{session.membre_nomUtilisateur}}</h1>
 
 {{ include('layouts/footer.php') }}
