@@ -1,0 +1,52 @@
+<?php
+namespace App\Models;
+
+class Membre extends CRUD {
+    protected $table = "membre";
+    protected $clePrimaire = "id";
+    protected $colonnes = ['id','nomUtilisateur', 'nom', 'prenom','email','motDePasse'];
+
+    /**  Fonction qui hash un mot de passe
+     * @param string mot de passe
+     * @param int cost (ou coût) détermine combien d’itérations l’algorithme BCRYPT va effectuer pour générer le hash.
+     * https://www.php.net/manual/fr/function.password-hash.php
+    */
+    public function hashMotDePasse($password, $cost = 10){
+        $options = [
+                'cost' => $cost 
+        ]; // Permet de choisir un autre cost en parametre.
+        return password_hash($password, PASSWORD_BCRYPT, $options); 
+    }
+
+    /**
+     * Fonction qui valide si le nom utilisateur du membre est unique et valide si le mot de passe est bon.
+     * @param string $nomUtilisateur
+     * @param string $motDePasse
+     * @return bool
+     */
+    public function checkUtilisateur($nomUtilisateur, $motDePasse){
+        $utilisateur = $this->unique('nomUtilisateur',$nomUtilisateur);
+        if($utilisateur){
+            if(password_verify($motDePasse, $utilisateur['motDePasse'])){
+                return true;
+            }else{
+                return false;   
+            }
+        }else{
+            return false; 
+        }
+    }
+
+    /** Fonction qui créer une session
+     * @param array $utilisateur
+     */
+    public function creationSession($utilisateur){
+        session_regenerate_id();
+        $_SESSION['utilisateur_id'] = $utilisateur['id'];
+        $_SESSION['utilisateur_nomUtilisateur'] = $utilisateur['nomUtilisateur'];
+        $_SESSION['utilisateur_role'] = $utilisateur['role'];
+        $_SESSION['fingerPrint'] = md5($_SERVER['HTTP_USER_AGENT'].$_SERVER['REMOTE_ADDR']);
+        return $_SESSION;
+    }
+};
+

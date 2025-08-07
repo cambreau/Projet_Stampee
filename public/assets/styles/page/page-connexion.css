@@ -1,0 +1,12 @@
+.page-connexion {
+  display: block;
+  justify-items: center;
+}
+
+.page-connexion__titre {
+  text-align: center;
+}
+
+.page-connexion__inscription {
+  margin-bottom: var(--espacement-serre);
+}

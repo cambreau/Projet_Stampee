@@ -7,4 +7,5 @@ class ConnexionController{
     public function pageConnexion(){
         return View::render('/connexion/page-connexion');
     }
+
 };

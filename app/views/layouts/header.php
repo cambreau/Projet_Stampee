@@ -152,7 +152,7 @@
               </select>
               <button type="submit" class="cache">Changer</button>
             </form>
-            <a class="bouton bouton-fond" href="{{accueil}}/connexion/page-connexion"> Connexion </a>
+            <a class="bouton bouton-fond" href="{{base}}/connexion/page-connexion"> Connexion </a>
             <a href="#" class="bouton bouton-fond icon"
               ><img
                 class="img"

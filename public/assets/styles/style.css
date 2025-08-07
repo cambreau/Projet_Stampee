@@ -1,3 +1,6 @@
+/* Importation des pages */
+@import url("./page/page-connexion.css");
+
 /* Importation des composants */
 @import url("./composant/entete.css");
 @import url("./composant/logo.css");

@@ -6,6 +6,7 @@
   border-radius: var(--arrondi-grand);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   line-height: var(--interligne-base);
+  background-color: var(--couleur-fond-accent);
 }
 
 .form__champ {
@@ -17,7 +18,7 @@
 }
 
 .form__champ label {
-  font-weight: var(--epaisseur-police-gras);
+  font-weight: var(--epaisseur-police-tres-gras);
   font-size: var(--taille-police-normal);
 }
 
