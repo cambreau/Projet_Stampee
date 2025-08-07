@@ -13,9 +13,15 @@
                     id="nomUtilisateur"
                     name="nomUtilisateur"
                     placeholder="Choisissez un nom d'utilisateur"
+                    {% if membre.nomUtilisateur is defined %}
+                        value="{{membre.nomUtilisateur}}"
+                    {%endif %}
                     required
                 />
             </div>
+            {% if erreurs.nomUtilisateur is defined %}
+                <p class="message__erreur">{{erreurs.nomUtilisateur}}</p>
+            {%endif %}
 
             <div class="form__champ">
                 <label for="nom">Nom :</label>
@@ -24,9 +30,15 @@
                     id="nom"
                     name="nom"
                     placeholder="Entrez votre nom"
+                    {% if membre.nom is defined %}
+                        value="{{membre.nom}}"
+                    {%endif %}
                     required
                 />
             </div>
+            {% if erreurs.nom is defined %}
+                <p class="message__erreur">{{erreurs.nom}}</p>
+            {%endif %}
 
             <div class="form__champ">
                 <label for="prenom">Prénom :</label>
@@ -35,9 +47,15 @@
                     id="prenom"
                     name="prenom"
                     placeholder="Entrez votre prénom"
+                    {% if membre.prenom is defined %}
+                        value="{{membre.prenom}}"
+                    {%endif %}
                     required
                 />
             </div>
+            {% if erreurs.prenom is defined %}
+                <p class="message__erreur">{{erreurs.prenom}}</p>
+            {%endif %}
 
             <div class="form__champ">
                 <label for="email">Adresse e-mail :</label>
@@ -46,9 +64,15 @@
                     id="email"
                     name="email"
                     placeholder="Entrez votre e-mail"
+                    {% if membre.email is defined %}
+                        value="{{membre.email}}"
+                    {%endif %}
                     required
                 />
             </div>
+            {% if erreurs.email is defined %}
+                <p class="message__erreur">{{erreurs.email}}</p>
+            {%endif %}
 
             <div class="form__champ">
                 <label for="motDePasse">Mot de passe :</label>
@@ -60,6 +84,9 @@
                     required
                 />
             </div>
+            {% if erreurs.motDePasse is defined %}
+                <p class="message__erreur">{{erreurs.motDePasse}}</p>
+            {%endif %}
 
             <div class="form__champ">
                 <label for="confirmationMotPasse">Confirmez le mot de passe :</label>
@@ -71,6 +98,9 @@
                     required
                 />
             </div>
+            {% if erreurs.confirmationMotPasse is defined %}
+                <p class="message__erreur">{{erreurs.confirmationMotPasse}}</p>
+            {%endif %}
 
             <div class="form__btn-conteneur">
                 <a class="bouton bouton-accent" href="{{base}}/accueil">

@@ -5,35 +5,52 @@
 <div class="page-connexion">
     <section >
         <h1 class="page-connexion__titre">Connexion</h1>
+        <section class="message__conteneur">
+            {% if msgSuppression is defined %}
+                <p class="message__succes">{{msgSuppression}}</p>
+            {%endif%}
+            {% if msgCreation is defined %}
+                <p class="message__succes">{{msgCreation}}</p>
+            {%endif%}
+            {% if message is defined %}
+                <p class="message__erreur">{{message}}</p>
+            {%endif%}
+        </section>
         <form class="form" method="post">
-                    <div class="form__champ">
-                    <label for="email">Adresse e-mail :</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="Veuillez entrer votre email"
-                        required
-                    />
-                    </div>
+            <div class="form__champ">
+                <label for="email">Nom d'utilisateur :</label>
+                <input
+                    type="text"
+                    id="nomUtilisateur"
+                    name="nomUtilisateur"
+                    placeholder="Votre nom d'utilisateur"
+                    required
+                />
+            </div>
+            {% if erreurs.nomUtilisateur is defined %}
+                <p class="message__erreur">{{erreurs.nomUtilisateur}}</p>
+            {%endif %}
 
-                    <div class="form__champ">
-                    <label for="motPasse">Mot de passe :</label>
-                    <input
-                        type="password"
-                        id="motPasse"
-                        name="motPasse"
-                        placeholder="Entrez votre mot de passe"
-                        required
-                    />
-                    </div>
+            <div class="form__champ">
+                <label for="motPasse">Mot de passe :</label>
+                <input
+                    type="password"
+                    id="motPasse"
+                    name="motPasse"
+                    placeholder="Entrez votre mot de passe"
+                    required
+                />
+            </div>
+            {% if erreurs.motDePasse is defined %}
+              <p class="message__erreur">{{erreurs.motDePasse}}</p>
+            {%endif %}
 
-                <div class="form__btn-conteneur">
-                    <a class="bouton bouton-accent" href="{{base}}/accueil">
+            <div class="form__btn-conteneur">
+                <a class="bouton bouton-accent" href="{{base}}/accueil">
                     Annuler
-                    </a>
-                    <input class="bouton bouton-classique" value="Se connecter" type="submit">
-                </div>
+                </a>
+                <input class="bouton bouton-classique" value="Se connecter" type="submit">
+            </div>
         </form>
     </section>
     <p class="page-connexion__inscription">Pas encore membre ?</p>

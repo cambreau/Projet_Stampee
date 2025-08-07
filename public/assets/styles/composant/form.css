@@ -14,7 +14,7 @@
   grid-template-columns: 210px 1fr;
   gap: var(--espacement-serre);
   align-items: center;
-  margin-bottom: var(--espacement-base);
+  margin-top: var(--espacement-base);
 }
 
 .form__champ label {

@@ -20,7 +20,7 @@ class MembreController{
             $Validation->field('nomUtilisateur',$data['nomUtilisateur'])->min(2)->max(45)->unique('Membre');
             $Validation->field('nom',$data['nom'])->min(2)->max(45);
             $Validation->field('prenom',$data['prenom'])->min(2)->max(45);
-            $Validation->field('email',$data['email'])->min(2)->max(45)->email();
+            $Validation->field('email',$data['email'])->min(2)->max(45)->email()->unique('Membre');
             $Validation->field('motDePasse',$data['motDePasse'])->formatMotDePasse();
             $Validation->field('confirmationMotPasse',$data['confirmationMotPasse'])->confirmationChampIdentique($data['motDePasse']);
             

@@ -1,0 +1,10 @@
+.message__succes {
+  color: var(--couleur-succes);
+  font-size: var(--taille-police-h4);
+  font-weight: var(--epaisseur-police-tres-gras);
+}
+
+.message__erreur {
+  color: var(--couleur-erreur);
+  font-weight: var(--epaisseur-police-tres-gras);
+}
