@@ -12,11 +12,12 @@ Route::get('/index.php', 'AccueilController@index');
 //Connexion
 Route::get('/connexion/page-connexion', 'ConnexionController@pageConnexion');
 Route::post('/connexion/page-connexion', 'ConnexionController@connexion');
+Route::post('/connexion/deconnexion', 'ConnexionController@deconnexion');
 
 //Membre
 Route::get('/membre/page-inscription', 'MembreController@pageInscription');
 Route::post('/membre/page-inscription', 'MembreController@inscription');
-
+Route::get('/membre/profil', 'MembreController@pageProfil');
 
 Route::dispatch();
 

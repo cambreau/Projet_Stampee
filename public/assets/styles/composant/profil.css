@@ -1,0 +1,38 @@
+.profil {
+  margin: var(--espacement-base) 0;
+}
+.profil__section {
+  margin: var(--espacement-espace) var(--espacement-base);
+}
+
+.profil__liste-informations {
+  background-color: var(--couleur-fond-accent);
+  padding: var(--espacement-base);
+  border-radius: var(--arrondi-grand);
+  margin: var(--espacement-base) 0;
+  max-width: 800px;
+}
+
+.profil__liste-informations .profil__information:first-child {
+  margin-top: 0;
+  border-top: 1px solid var(--couleur-secondaire);
+}
+
+.profil__information {
+  padding: var(--espacement-serre) 0;
+  margin: var(--espacement-serre) 0;
+  border-bottom: 1px solid var(--couleur-secondaire);
+  font-size: var(--taille-police-moyen);
+}
+
+.profil__information span {
+  font-weight: var(--epaisseur-police-gras);
+  min-width: 180px;
+  color: var(--couleur-principale);
+}
+
+.profil__conteneur-btn {
+  display: flex;
+  gap: var(--espacement-serre);
+  margin-top: var(--espacement-base);
+}

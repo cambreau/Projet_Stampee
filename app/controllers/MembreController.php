@@ -49,5 +49,19 @@ class MembreController{
         }
     }
 
-    
-};
+    public function pageProfil(){
+        if(isset($_SESSION['membre_id'])){
+          //** Récupérer les informations du membre. 
+          $membreCrud = new Membre();
+          $membre = $membreCrud ->selectId($_SESSION['utilisateur_id']);
+          //** Si $membre existe alors on renvoie vers le profil du membre
+          if($membre){
+            $session = $_SESSION ?? null;
+            return View::render('/membre/profil',['membre'=>$membre,'session'=>$session]);  
+          }
+          else{
+            return View::render('erreur404',['msg'=>"Erreur 404 - Une erreure s'est produite."]);  
+          }
+        }  
+    }
+}

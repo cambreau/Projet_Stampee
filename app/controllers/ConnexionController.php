@@ -40,4 +40,9 @@ class ConnexionController{
          }
       }
 
+    public function deconnexion (){
+        // On détruit la session et on renvoie à la page de connexion.
+        session_destroy();
+        return View::render('/connexion/page-connexion');
+    }
 };
