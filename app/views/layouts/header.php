@@ -91,7 +91,7 @@
             </li>
             {%endif%}
             <li class="navigation-principale__menu__item">
-              <a href="#">Accueil</a>
+              <a href="{{base}}/accueil">Accueil</a>
             </li>
             <li class="navigation-principale__menu__item">
               <a href="#">À propos du Lord Stampee</a>

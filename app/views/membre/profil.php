@@ -4,7 +4,7 @@
 
 <article>
     <h1>{{ membre.nomUtilisateur }}, bienvenue sur votre profil</h1>
-    <form method="POST" action="{{ base }}/connexion/deconnexion" style="display:inline;">
+    <form method="POST" action="{{ base }}/connexion/deconnexion">
         <input type="submit" value="Se deconnecter" class="bouton bouton-accent"/>
     </form>
     <section class="profil__section">

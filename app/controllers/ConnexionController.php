@@ -43,6 +43,8 @@ class ConnexionController{
     public function deconnexion (){
         // On détruit la session et on renvoie à la page de connexion.
         session_destroy();
-        return View::render('/connexion/page-connexion');
+        // On relance une nouvelle session vide
+        session_start(); 
+        return View::redirect('connexion/page-connexion');
     }
 };

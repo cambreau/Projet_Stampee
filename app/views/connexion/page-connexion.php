@@ -6,9 +6,6 @@
     <section >
         <h1 class="atricle-centre__titre">Connexion</h1>
         <section class="message__conteneur">
-            {% if msgSuppression is defined %}
-                <p class="message__succes">{{msgSuppression}}</p>
-            {%endif%}
             {% if msgCreation is defined %}
                 <p class="message__succes">{{msgCreation}}</p>
             {%endif%}

@@ -98,12 +98,13 @@ class MembreController{
                 //** On ajoute les données dans la table "membre".
                 $membreCrud = new Membre;
                 $data['motDePasse'] = $membreCrud ->hashMotDePasse($data['motDePasse']);
-                $membre = $membreCrud ->update($data,$_SESSION['membre_id']);
+                $membreAjour = $membreCrud ->update($data,$_SESSION['membre_id']);
              
                
                 // Si la modification du membre dans la base de données a fonctionné, on renvoie vers la page de profil avec un message de succès.
-                if($membre){
-                    return View::render('/membre/profil',['msgCreation'=>"Modifications réalisées avec succès!",'membre'=>$data]);
+                if($membreAjour){
+                    $membre= $membreCrud->selectId($_SESSION['membre_id']);
+                    return View::render('/membre/profil',['msgCreation'=>"Modifications réalisées avec succès!",'membre'=>$membre]);
                 // Si la modification a échoué, alors on renvoie vers la page 404, avec un message d'erreur.
                 }else{
                     return View::render('erreur404', ['message'=>"404 - Les modifications ont échoué"]);  
@@ -135,7 +136,7 @@ class MembreController{
             // Si la suppression a fonctionne on renvoie a la page de connexion avec un message de succes, sinon on redirige vers la page d'erreur.
               if($membreSupprime){
                 session_destroy();
-                return View::render('/connexion/page-connexion',['msgSuppression'=>' Profil supprimé avec succès!']);
+                return View::redirect('connexion/page-connexion');
               }
               else{
                 return View::render('erreur404', ['message'=>"404 - La suppresion a échoué"]);
