@@ -35,7 +35,7 @@ class Route {
             // echo ('<br>');
             //Fin Debug
         
-            if($route['url'] == $urlPath && $route['method'] == $method){
+            if(BASE.$route['url'] == $urlPath && $route['method'] == $method){
                 $controllerSegments = explode('@', $route['controller']);
 
                 $controllerName = 'App\\Controllers\\'.$controllerSegments[0];
