@@ -1,10 +1,21 @@
-.message__succes {
-  color: var(--couleur-succes);
+.message {
+  background-color: var(--couleur-fond-accent);
+  padding: var(--espacement-base);
+  border-radius: var(--arrondi-petit);
+}
+
+.message__contenu {
+  display: flex;
+  gap: var(--espacement-tres-serre);
+  align-items: center;
   font-size: var(--taille-police-h4);
   font-weight: var(--epaisseur-police-tres-gras);
 }
 
+.message__succes {
+  color: var(--couleur-succes);
+}
+
 .message__erreur {
   color: var(--couleur-erreur);
-  font-weight: var(--epaisseur-police-tres-gras);
 }

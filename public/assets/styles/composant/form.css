@@ -1,6 +1,5 @@
 .form {
-  max-width: 600px;
-  margin: var(--espacement-espace) auto;
+  margin: var(--espacement-base) auto;
   padding: var(--espacement-espace);
   background-color: var(--couleur-fond);
   border-radius: var(--arrondi-grand);
@@ -11,7 +10,7 @@
 
 .form__champ {
   display: grid;
-  grid-template-columns: 210px 1fr;
+  grid-template-columns: 190px 1fr;
   gap: var(--espacement-serre);
   align-items: center;
   margin-top: var(--espacement-base);
@@ -30,7 +29,7 @@
   border: 1px solid #ccc;
   border-radius: var(--arrondi-petit);
   background-color: white;
-  width: 100%;
+  min-width: 300px;
 }
 
 .form__btn-conteneur {

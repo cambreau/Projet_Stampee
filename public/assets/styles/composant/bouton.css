@@ -3,6 +3,7 @@
 /* Style pour les boutons */
 .bouton {
   display: flex;
+  width: fit-content;
   align-content: center;
   border: 1px solid var(--couleur-fond-accent);
   border-radius: var(--arrondi-grand);
@@ -56,6 +57,7 @@
 
 /*** Bouton menu responsive ***/
 .bouton-menu-responsive {
+  min-width: 250px;
   border-radius: 0;
 }
 

@@ -1,0 +1,48 @@
+/* Règles générales */
+.fond-image {
+  width: 100%;
+  height: 550px;
+  align-content: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: var(--rythme-espace);
+  margin: 0;
+}
+
+.fond-image .boite {
+  height: 100%;
+  max-width: 400px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 0 var(--arrondi-petit) var(--arrondi-petit) 0;
+  padding: var(--espacement-serre) var(--espacement-base);
+  align-content: center;
+}
+
+.fond-image h2,
+.fond-image p {
+  margin: var(--espacement-base) 0;
+}
+
+.fond-image h2 {
+  border: none;
+}
+
+/*Variant background */
+/** Page accueil - Publication principale - Accueil */
+[id="fond-image-accueil"] {
+  background-image: url("../../images/accueil.jpg");
+}
+
+/* Taille d'ecran inferieur a 768px */
+@media screen and (max-width: 900px) {
+  .fond-image {
+    text-align: center;
+    justify-items: center;
+  }
+
+  .fond-image h2,
+  .fond-image p {
+    margin: var(--rythme-base) auto;
+  }
+}

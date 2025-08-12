@@ -13,7 +13,7 @@ class View {
         '../views' = on remonte d’un dossier (app/) → puis on va dans views/
         Résultat : Twig charge les templates depuis app/views
 "*/
-        $loader = new FilesystemLoader(__DIR__ . '/../views');
+        $loader = new FilesystemLoader('app/views');
         /* Environment est la classe principale de Twig.
         Elle représente le moteur de rendu : c’est lui qui va prendre un fichier HTML + des variables, et produire la page finale. */
         $twig = new Environment($loader);

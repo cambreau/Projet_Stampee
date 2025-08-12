@@ -1,6 +1,19 @@
-.profil {
-  margin: var(--espacement-base) 0;
+.profil__entete {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacement-base);
+  align-items: baseline;
 }
+
+.profil__entete :nth-child(2) {
+  margin-left: auto;
+}
+
+.profil__division {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
 .profil__section {
   margin: var(--espacement-espace) var(--espacement-base);
 }
@@ -35,4 +48,26 @@
   display: flex;
   gap: var(--espacement-serre);
   margin-top: var(--espacement-base);
+}
+
+.profil__image {
+  display: block;
+  max-width: 400px;
+  height: auto;
+  margin: auto;
+}
+
+.profil__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media screen and (max-width: 900px) {
+  .profil__image {
+    display: none;
+  }
+  .profil {
+    display: block;
+  }
 }

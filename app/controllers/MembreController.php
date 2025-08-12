@@ -12,7 +12,7 @@ class MembreController{
     public function inscription($data){
         // Si la méthode est différente de POST, on renvoie à la page 404.
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            return View::render('erreur404', ['Erreur 404 - Page introuvable!']);
+            return View::render('erreur404', ['message'=>'Erreur 404 - Page introuvable!']);
         }
         else{
             // Validation des $data.
@@ -60,7 +60,7 @@ class MembreController{
             return View::render('/membre/profil',['membre'=>$membre,'session'=>$session]);  
           }
           else{
-            return View::render('erreur404',['msg'=>"Erreur 404 - Une erreure s'est produite."]);  
+            return View::render('erreur404',['message'=>"Erreur 404 - Une erreure s'est produite."]);  
           }
         }  
     }
@@ -81,7 +81,7 @@ class MembreController{
     public function modifier($data){
         // Si la méthode est différente de POST, on renvoie à la page 404.
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            return View::render('erreur404', ['Erreur 404 - Page introuvable!']);
+            return View::render('erreur404', ['message'=>'Erreur 404 - Page introuvable!']);
         }
         else{
             // Validation des $data.
@@ -104,7 +104,7 @@ class MembreController{
                 // Si la modification du membre dans la base de données a fonctionné, on renvoie vers la page de profil avec un message de succès.
                 if($membreAjour){
                     $membre= $membreCrud->selectId($_SESSION['membre_id']);
-                    return View::render('/membre/profil',['msgCreation'=>"Modifications réalisées avec succès!",'membre'=>$membre]);
+                    return View::render('/membre/profil',['membre'=>$membre]);
                 // Si la modification a échoué, alors on renvoie vers la page 404, avec un message d'erreur.
                 }else{
                     return View::render('erreur404', ['message'=>"404 - Les modifications ont échoué"]);  
@@ -126,7 +126,7 @@ class MembreController{
         else{
           // Validation que la requete soit arrive par GET
           if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
-            return View::render('erreur404', ['Erreur 404 - Page introuvable!']);
+            return View::render('erreur404', ['message'=>'Erreur 404 - Page introuvable!']);
           }
           else{
             // On recupere l'id et on supprime la ligne dans la table membre.

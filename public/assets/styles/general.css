@@ -63,8 +63,11 @@ a {
 
 /* --- Main --- */
 main {
-  margin: var(--espacement-espace);
   flex-grow: 1;
+}
+
+main > * {
+  padding: var(--espacement-espace);
 }
 
 .cache {
@@ -77,4 +80,10 @@ main {
   clip: rect(0 0 0 0);
   white-space: nowrap;
   border: 0;
+}
+
+.texte-accentuation {
+  font-size: var(--taille-police-moyen);
+  font-weight: var(--epaisseur-police-tres-gras);
+  color: var(--couleur-principale);
 }

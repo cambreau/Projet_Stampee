@@ -6,6 +6,7 @@
 @import url("./composant/entete.css");
 @import url("./composant/logo.css");
 @import url("./composant/navigation-principale.css");
+@import url("./composant/fond-image.css");
 @import url("./composant/bouton.css");
 @import url("./composant/recherche.css");
 @import url("./composant/filtres.css");
@@ -15,6 +16,7 @@
 @import url("./composant/form.css");
 @import url("./composant/profil.css");
 @import url("./composant/article-centre.css");
+@import url("./composant/erreur404.css");
 @import url("./composant/message.css");
 @import url("./composant/conteneur-timbres.css");
 @import url("./composant/catalogue-timbre.css");

@@ -8,7 +8,7 @@
 }
 
 /* Bouton Hamburger */
-.navigation-principale__bouton-hamburger {
+.navigation-principale__bouton-declencheur {
   display: none;
 }
 
@@ -41,15 +41,15 @@
     display: block;
     position: relative;
   }
-  .navigation-principale__bouton-hamburger {
+  .navigation-principale__bouton-declencheur {
     display: block;
   }
 
   .navigation-principale__menu {
     position: absolute;
     flex-direction: column;
-    min-width: 300px;
-    top: 235%;
+    min-width: 250px;
+    top: 260%;
     background-color: var(--couleur-fond-accent);
     border-radius: var(--arrondi-petit);
     border: 1px solid var(--couleur-secondaire);

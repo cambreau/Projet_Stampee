@@ -1,0 +1,27 @@
+.erreur404 {
+  display: block;
+  height: 100%;
+  margin: auto;
+  align-content: center;
+}
+
+.erreur404__titre,
+.erreur404__message {
+  text-align: center;
+  color: var(--couleur-erreur);
+}
+
+.erreur404__message {
+  font-size: var(--taille-police-h3);
+}
+
+.erreur404__illustration {
+  display: block;
+  align-self: center;
+}
+
+.erreur404__illustration img {
+  display: block;
+  margin: auto;
+  margin-top: var(--espacement-espace);
+}

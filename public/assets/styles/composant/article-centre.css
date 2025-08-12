@@ -1,7 +1,12 @@
 .atricle-centre {
+  height: 100%;
   display: block;
   justify-items: center;
+  align-content: center;
   padding: var(--espacement-base);
+  background-image: url("../../images/fond2.png");
+  background-repeat: no-repeat;
+  border-radius: var(--arrondi-petit);
 }
 
 .atricle-centre__titre {

@@ -21,7 +21,7 @@
     />
     <meta name="author" content="STAMPEE" />
     <link rel="stylesheet" href="{{asset}}/styles/style.css" />
-    <script type="module" src="{{asset}}/scripts/scripts.js"></script>
+    <script type="module" src="{{asset}}/scripts/index.js"></script>
   </head>
   <body>
     <header class="entete">
@@ -30,14 +30,14 @@
           <img src="{{asset}}/images/logo-stampee.webp" alt="Logo de STAMPEE" />
         </a>
         <nav class="navigation-principale__responsive">
-          <picture class="navigation-principale__bouton-hamburger">
+          <picture class="navigation-principale__bouton-declencheur">
             <img
               class="icon_petit"
               src="{{asset}}/images/icon/menu-hamburger.webp"
               alt="Menu Hamburger"
             />
           </picture>
-          <ul class="navigation-principale__menu">
+          <ul class="navigation-principale__menu cache">
             <li>
               <a href="#" class="bouton bouton-accent bouton-menu-responsive"
                 ><img
@@ -177,7 +177,7 @@
       <nav class="navigation-principale">
         <ul class="navigation-principale__menu">
           <li class="navigation-principale__menu__item">
-            <a href="./index.html">Accueil</a>
+            <a href="{{base}}/accueil">Accueil</a>
           </li>
           <li class="navigation-principale__menu__item">
             <a href="#">À propos du Lord Stampee</a>
