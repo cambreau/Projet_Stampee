@@ -86,10 +86,10 @@ class MembreController{
         else{
             // Validation des $data.
             $Validation = new Validation;
-            $Validation->field('nomUtilisateur',$data['nomUtilisateur'])->min(2)->max(45);
+            $Validation->field('nomUtilisateur',$data['nomUtilisateur'])->min(2)->max(45)->estDejaUtilise('Membre',$_SESSION['membre_id']);
             $Validation->field('nom',$data['nom'])->min(2)->max(45);
             $Validation->field('prenom',$data['prenom'])->min(2)->max(45);
-            $Validation->field('email',$data['email'])->min(2)->max(45)->email();
+            $Validation->field('email',$data['email'])->min(2)->max(45)->email()->estDejaUtilise('Membre',$_SESSION['membre_id']);;
             $Validation->field('motDePasse',$data['motDePasse'])->formatMotDePasse();
             $Validation->field('confirmationMotPasse',$data['confirmationMotPasse'])->confirmationChampIdentique($data['motDePasse']);
             

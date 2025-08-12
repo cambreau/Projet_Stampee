@@ -97,6 +97,22 @@ class Validation {
         }
     }
 
+
+    public function estDejaUtilise($model, $id){
+        //On recupere la liste des enregistrement qui ont la meme valeur
+        $model = 'App\\Models\\'.$model;
+        $model = new $model;
+        $resultats = $model->selectWhere($this->valeur,$this->cle);
+        //On valide si la valeur existe pour un autre id.
+        foreach ($resultats as $resultat) {
+            if ($resultat['id'] != $id) {
+                if ($resultat[$this->cle] === $this->valeur) {
+                    $this->erreurs[$this->cle]="La valeur '{$this->valeur}' est déjà utilisée.";
+                }
+            }
+        }
+    }
+
     /**
      * Si il n'y a aucune erreur retourne vrai.
      */

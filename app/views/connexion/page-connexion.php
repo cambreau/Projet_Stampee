@@ -5,12 +5,12 @@
 <div class="atricle-centre">
     <section >
         <h1 class="atricle-centre__titre">Connexion</h1>
-        <section class="message">
+        <section>
             {% if msgCreation is defined %}
-                <p class="message__contenu message__succes"><img class="icon" src="{{asset}}/images/icon/succes.png" alt="logo succes">{{msgCreation}}</p>
+                <p class="  message message__contenu message__succes"><img class="icon" src="{{asset}}/images/icon/succes.png" alt="logo succes">{{msgCreation}}</p>
             {%endif%}
             {% if message is defined %}
-                <p class="message__contenu message__erreur"><img class="icon" src="{{asset}}/images/icon/erreur.png" alt="logo erreur">{{message}}</p>
+                <p class=" message message__contenu message__erreur"><img class="icon" src="{{asset}}/images/icon/erreur.png" alt="logo erreur">{{message}}</p>
             {%endif%}
         </section>
         <form class="form" method="post" action="/connexion/page-connexion">
