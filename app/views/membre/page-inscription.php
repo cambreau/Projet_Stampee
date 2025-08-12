@@ -5,7 +5,7 @@
 <div class="atricle-centre">
     <section>
         <h1 class="atricle-centre__titre">Inscription</h1>
-        <form class="form" method="post" action="">
+        <form class="form" method="post">
             <div class="form__champ">
                 <label for="nomUtilisateur">Nom d'utilisateur :</label>
                 <input

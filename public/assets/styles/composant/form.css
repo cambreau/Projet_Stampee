@@ -38,3 +38,11 @@
   gap: var(--espacement-base);
   margin-top: var(--espacement-espace);
 }
+
+@media screen and (max-width: 900px) {
+  .form__champ input,
+  .form__champ select,
+  .form__champ textarea {
+    min-width: auto;
+  }
+}

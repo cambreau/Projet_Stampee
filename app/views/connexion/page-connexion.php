@@ -13,7 +13,7 @@
                 <p class=" message message__contenu message__erreur"><img class="icon" src="{{asset}}/images/icon/erreur.png" alt="logo erreur">{{message}}</p>
             {%endif%}
         </section>
-        <form class="form" method="post" action="/connexion/page-connexion">
+        <form class="form" method="post" action="{{base}}/connexion/page-connexion">
             <div class="form__champ">
                 <label for="email">Nom d'utilisateur :</label>
                 <input

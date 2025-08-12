@@ -1,4 +1,4 @@
-import { menuDeroulant } from "/public/assets/scripts/composant/menu-deroulant.js";
+import { menuDeroulant } from "/stampee/public/assets/scripts/composant/menu-deroulant.js";
 
 /**
  * Menu deroulant pour la naviguation principal du header.
