@@ -45,4 +45,8 @@
   .form__champ textarea {
     min-width: auto;
   }
+
+  .form__champ {
+    grid-template-columns: 1fr;
+  }
 }
