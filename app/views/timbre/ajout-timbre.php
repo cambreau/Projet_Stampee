@@ -143,6 +143,13 @@
         {% endif %}
 
         <input type="file" id="images" name="images[]" accept="image/*" multiple />
+        {% if erreursImage is defined %}
+            {% for erreur in erreursImage %}
+            <p class="message__erreur">{{ erreur }}</p>
+            {% endfor %}
+        {% endif %}
+
+
 
         <div class="form__btn-conteneur">
             <a class="bouton bouton-accent" href="{{ base }}/accueil">
@@ -152,3 +159,5 @@
         </div>
     </form>
 </section>
+
+{{ include('layouts/footer.php') }}

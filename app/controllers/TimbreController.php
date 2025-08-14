@@ -27,19 +27,21 @@ class TimbreController{
         //Pays:
         $paysCrud = new Pays;
         $pays = $paysCrud->select();
-
+        $session = $_SESSION ?? null;
         // On renvoie à la page du formulaire.
-        return View::render('/timbre/ajout-timbre',['couleurs'=>$couleurs, 'etats'=>$etats,'pays'=>$pays]);
+        return View::render('/timbre/ajout-timbre',['couleurs'=>$couleurs, 'etats'=>$etats,'pays'=>$pays,'session'=>$session]);
     }
     }
 
     public function ajouterTimbre($data){
         if(!isset($_SESSION['membre_id'])){
+            
             return View::render('/connexion/page-connexion', ['message'=>'Veuillez vous connecter pour ajouter un timbre!']);
         }
         else{
+            $session = $_SESSION ?? null;
             if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-                return View::render('erreur404', ['message'=>'Erreur 404 - Page introuvable!']);
+                return View::render('erreur404', ['message'=>'Erreur 404 - Page introuvable!','session'=>$session]);
             }
             else{
                 // Validation des $data.
@@ -51,35 +53,46 @@ class TimbreController{
                 $Validation->field('couleursId',$data['couleursId'])->obligatoire();
                 $Validation->field('paysId',$data['paysId'])->obligatoire();
                 $Validation->field('etatId',$data['etatId'])->obligatoire();
+                
                 // Validation des images
                 $imagesCrud = new Images;
                 $validationImages = $imagesCrud->validationImage($_FILES['images']);
-
+                
                 if($Validation->estUnSucces() && $validationImages === true){
-                    $timbreCrud = New Timbre;
-                    $data['membreId']=$_SESSION['membre_id'];
-                    $ajoutTimbre = $timbreCrud->insert($data);
-                    if($ajoutTimbre){
-                        $erreursImage=[];
-                        $imagesImport = $imagesCrud->formatterImage($_FILES,$ajoutTimbre);
-                        for ($i = 0; $i < count($imagesImport); $i++) {
-                            $image=['lien'=>$imagesImport[$i],'principale'=>'Non','timbreId'=>$ajoutTimbre];
-                            if($i === 0){
-                                $image=['principale'=>'Oui'];
+                        $timbreCrud = New Timbre;
+                        $data['membreId']=$_SESSION['membre_id'];
+                        $ajoutTimbre = $timbreCrud->insert($data);
+                        if($ajoutTimbre){
+                            $erreursImage=[];
+                            $imagesImport = $imagesCrud->formatterImage($_FILES['images'],$ajoutTimbre);
+                            for ($i = 0; $i < count($imagesImport); $i++) {
+                                $image=['lien'=>$imagesImport[$i],'principale'=>0,'timbreId'=>$ajoutTimbre];
+                                if($i === 0){
+                                    $image=['lien'=>$imagesImport[$i],'principale'=>1,'timbreId'=>$ajoutTimbre];
+                                }
+                                $importationImage = $imagesCrud->insert($image);
+                                if(!$importationImage){
+                                    array_push($erreursImage, $i);
+                                }  
+                                else{
+                                    $timbre=$timbreCrud->selectId($ajoutTimbre);
+                                    $imageTimbre=$imagesCrud->selectId($ajoutTimbre);
+                                    foreach ($imageTimbre as $image) {
+                                        if ($image['principale'] == 1) {
+                                            $imagePrincipale = $image;
+                                            unset($imageTimbre[$image]); // Retire l'image principale de la liste
+                                            break; // On arrête après la première trouvée
+                                        }
+                                    }
+                                    return View::render('timbre/fiche-detail-timbre',['timbre'=>$timbre,'imageTimbre'=>$imageTimbre,'imagePrincipale'=>$imagePrincipale,'session'=>$session]);
+                                }
                             }
-                            $importationImage = $imagesCrud->insert($image);
-                            if(!$importationImage){
-                                array_push($erreursImage, $i);
-                            }  
-                        }
-                        print_r($erreursImage);
-                    }    
+                        }    
                 }
                 else{
                     $erreurs = $Validation->geterreurs();
-                    if($validationImages !== true){
-                        array_push($erreurs, $validationImages);
-                    }
+                    $erreursImage = $validationImages;
+                       
                     // On récupère les informations nécessaires pour le formulaire.
                     //Couleurs:
                     $couleursCrud = new Couleurs;
@@ -90,12 +103,11 @@ class TimbreController{
                     //Pays:
                     $paysCrud = new Pays;
                     $pays = $paysCrud->select();
-
                     // On renvoie à la page du formulaire.
-                    return View::render('/timbre/ajout-timbre',['couleurs'=>$couleurs, 'etats'=>$etats,'pays'=>$pays, 'erreurs'=>$erreurs]);
-                }  
+                    return View::render('/timbre/ajout-timbre',['couleurs'=>$couleurs, 'etats'=>$etats,'pays'=>$pays,'timbre'=>$data, 'images'=>$_FILES['images'],'erreurs'=>$erreurs,'erreursImage'=>$erreursImage,'session'=>$session]);
+                } 
+            } 
 
-        }
         }
     }
 }

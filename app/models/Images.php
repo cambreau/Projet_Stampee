@@ -18,15 +18,31 @@ class Images extends CRUD {
         $erreursImage=[];
 
         //Logique 
-        print_r($images);
         $nbImages = count($images['name']);
         for ($i = 0; $i < $nbImages; $i++) {
-            //Recuperer l'extension Ref: https://www.php.net/manual/en/function.image-type-to-extension.php
-            //Ref: https://www.php.net/manual/fr/function.strtolower
-            $extension = pathinfo( strtolower($images['name'][$i]), PATHINFO_EXTENSION );
-            //Comparer avec les extensions acceptées Ref: https://www.php.net/manual/fr/function.in-array.php
-            if(!in_array($extension, $extensionsAcceptees)){
-                array_push($erreursImage, $i);
+            // Validation taille:
+            if ($images['error'][$i] !== UPLOAD_ERR_OK) {
+                // Gestion des erreurs selon le code
+                switch ($images['error'][$i]) {
+                    case UPLOAD_ERR_INI_SIZE:
+                    case UPLOAD_ERR_FORM_SIZE:
+                        $message = "Le fichier " . $images['name'][$i] . " est trop volumineux.";
+                        array_push($erreursImage, $message);
+                    case UPLOAD_ERR_NO_FILE:
+                        $message = "Aucun fichier sélectionné pour l'upload.";
+                        array_push($erreursImage, $message);
+                }
+            }
+            else{
+                //Validation de l'extension:
+                //Recuperer l'extension Ref: https://www.php.net/manual/en/function.image-type-to-extension.php
+                //Ref: https://www.php.net/manual/fr/function.strtolower
+                $extension = pathinfo( strtolower($images['name'][$i]), PATHINFO_EXTENSION );
+                //Comparer avec les extensions acceptées Ref: https://www.php.net/manual/fr/function.in-array.php
+                if(!in_array($extension, $extensionsAcceptees)){
+                    $message = "Le type d'extension de l'image " . $i . " n'est pas supportées par le système.";
+                    array_push($erreursImage, $message);
+                }
             }
         }
 
@@ -35,18 +51,15 @@ class Images extends CRUD {
             return true;
         }
         else{
-            return "Les images " . implode(', ', $erreursImage) . " ne sont pas supportées par le système.";
+            return $erreursImage;
         }
     }
-
     public function formatterImage($images, $id){
         // Driver = le moteur qui fait le travail réel sur les images, ic gd.
         $manager = new ImageManager(new Driver());
         // Déclaration de la variable qui contiendra les images finales.
         $imagesWebp = [];
-        $nbImages = count($images['name']);
-    
-        for ($i = 0; $i < $nbImages; $i++) {
+        for ($i = 0; $i < count($images['name']); $i++) {
             // Crée l'image avec Intervention\Image\ImageManager;
             $image = $manager->read($images['tmp_name'][$i]);
 
@@ -65,3 +78,4 @@ class Images extends CRUD {
         return $imagesWebp;
     }
 }
+
