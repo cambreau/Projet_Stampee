@@ -22,8 +22,16 @@
   margin: var(--espacement-serre) 0;
 }
 .navigation-principale__menu__item:hover {
-  color: var(--couleur-fonctionnalite-secondaire);
   background-color: var(--couleur-fonctionnalite-secondaire-hover);
+}
+
+.navigation-principale__menu .menu__item__rouge > a {
+  color: var(--couleur-fonctionnalite);
+  font-weight: var(--epaisseur-police-gras);
+}
+
+.navigation-principale__menu .menu__item__rouge:hover {
+  background-color: var(--couleur-fonctionnalite-hover);
 }
 
 /* Media */

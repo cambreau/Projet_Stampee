@@ -22,6 +22,10 @@ Route::get('/membre/page-modifier', 'MembreController@pageModifier');
 Route::post('/membre/page-modifier', 'MembreController@modifier');
 Route::get('/membre/supprimer', 'MembreController@supprimer');
 
+//Timbre 
+Route::get('/timbre/ajout-timbre', 'TimbreController@pageAjoutTimbre');
+Route::post('/timbre/ajout-timbre','TimbreController@ajouterTimbre' );
+
 Route::dispatch();
 
 

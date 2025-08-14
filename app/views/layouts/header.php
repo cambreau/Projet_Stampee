@@ -97,14 +97,17 @@
               <a href="#">À propos du Lord Stampee</a>
             </li>
             <li class="navigation-principale__menu__item">
-              <a href="#">Nos timbres</a>
-            </li>
-            <li class="navigation-principale__menu__item">
-              <a href="#">Demander une expertise</a>
+              <a href="#">Nos enchères</a>
             </li>
             <li class="navigation-principale__menu__item">
               <a href="#">Nous contacter</a>
             </li>
+            {% if session.membre_nomUtilisateur is defined %}
+              <li class="navigation-principale__menu__item menu__item__rouge">
+                <a href="{{base}}/timbre/ajout-timbre">Ajouter un timbre</a>
+              </li>
+            {%endif%}
+            
           </ul>
         </nav>
         <form class="recherche" method="get">
@@ -183,14 +186,16 @@
             <a href="#">À propos du Lord Stampee</a>
           </li>
           <li class="navigation-principale__menu__item">
-            <a href="#">Nos timbres</a>
-          </li>
-          <li class="navigation-principale__menu__item">
-            <a href="#">Demander une expertise</a>
-          </li>
-          <li class="navigation-principale__menu__item">
-            <a href="#">Nous contacter</a>
-          </li>
+              <a href="#">Nos enchères</a>
+            </li>
+            <li class="navigation-principale__menu__item">
+              <a href="#">Nous contacter</a>
+            </li>
+            {% if session.membre_nomUtilisateur is defined %}
+              <li class="navigation-principale__menu__item menu__item__rouge">
+                <a href="{{base}}/timbre/ajout-timbre">Ajouter un timbre</a>
+              </li>
+            {%endif%}
         </ul>
       </nav>
     </header>
