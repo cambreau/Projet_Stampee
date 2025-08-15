@@ -64,10 +64,8 @@ class Images extends CRUD {
             $image = $manager->read($images['tmp_name'][$i]);
 
             // Mise en forme.
-            $image->coverDown(800, 800);
-            $image->pad(800, 800, '#f7f7f7', position: 'center');
+            $image->resize(800, 800)->pad(800, 800, '#f7f7f7', position: 'center');
 
-            
             // Generer un nom unique. Ref = https://www.php.net/manual/fr/function.uniqid
             $nomWebp = "img__" . $id . "__" . uniqid() . ".webp";
             // Enregistrer en WebP

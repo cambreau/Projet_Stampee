@@ -21,6 +21,7 @@
     />
     <meta name="author" content="STAMPEE" />
     <link rel="stylesheet" href="{{asset}}/styles/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script type="module" src="{{asset}}/scripts/index.js"></script>
   </head>
   <body>

@@ -1,8 +1,13 @@
 <?php
 namespace App\Controllers;
+
+use App\Models\Enchere;
+use App\Models\Images;
 use App\Models\Membre;
+use App\Models\Timbre;
 use App\Providers\View;
 use App\Providers\Validation;
+use Intervention\Image\Image;
 
 class MembreController{
     public function pageInscription(){
@@ -52,7 +57,7 @@ class MembreController{
     public function pageProfil(){
         if(isset($_SESSION['membre_id'])){
           //** Récupérer les informations du membre. 
-          $membreCrud = new Membre();
+          $membreCrud = new Membre;
           $membre = $membreCrud ->selectId($_SESSION['membre_id']);
           //** Si $membre existe alors on renvoie vers le profil du membre
           if($membre){
@@ -144,4 +149,5 @@ class MembreController{
           }
         }
       }
+
 }

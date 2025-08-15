@@ -2,7 +2,7 @@
     title: "Profil - Stampee : Site d'enchère de timbre",
 }) }}
 
-<article>
+<article  class="page" id="profil">
     <div class="profil__entete">
         <h1>{{ membre.nomUtilisateur }}, bienvenue sur votre profil</h1>
         <form method="POST" action="{{ base }}/connexion/deconnexion">
@@ -23,11 +23,17 @@
                 <a class="bouton bouton-accent" href="{{base}}/membre/supprimer?id={{ membre.id }}">Supprimer</a>
             </div>
             </div>
-        
         </section>
         <picture class="profil__image">
             <img src="{{asset}}/images/image-profil.png">
         </picture>
+        <section class="profil__section">
+            <h2>Mes timbres</h2>
+            <div class="conteneur-timbres">
+                
+            </div>
+        </section>
+      
 </div>
 </article>
 

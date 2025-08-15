@@ -39,7 +39,7 @@ abstract class CRUD extends \PDO{
         $stmt = $this->prepare($sql);
         $stmt->bindValue(":$champ", $value);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function insert($data){
