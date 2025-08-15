@@ -67,12 +67,15 @@ class Images extends CRUD {
             $image->coverDown(800, 800);
             $image->pad(800, 800, '#f7f7f7', position: 'center');
 
-
+            
             // Generer un nom unique. Ref = https://www.php.net/manual/fr/function.uniqid
             $nomWebp = "img__" . $id . "__" . uniqid() . ".webp";
             // Enregistrer en WebP
             $image->encode(new \Intervention\Image\Encoders\WebpEncoder(80));
+            // On enregistre localement l'image.
+            $cheminImage = 'C:\Users\breau\Documents\AEC\Projet1\Camille-Breau-Projet1\public\assets\images\images-timbre\\' . $nomWebp ;
             array_push($imagesWebp, $nomWebp);
+            $image->save($cheminImage);
             }
              
         return $imagesWebp;

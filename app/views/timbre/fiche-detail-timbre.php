@@ -9,7 +9,7 @@
             <picture class="detail-timbre__image-principale">
               <img
                 class="img img-bordure"
-                src="{{imagePrincipale.lien}}"
+                src="{{asset}}/images/images-timbre/{{imagePrincipale.lien}}"
                 alt="Image principale du timbre {{timbre.nom}}"
               />
             </picture>
@@ -18,10 +18,10 @@
               <picture class="detail-timbre__galerie__miniature">
                 <img
                   class="img img-bordure"
-                  src="{{imageTimbre.lien}}"
+                  src="{{asset}}/images/images-timbre/{{image.lien}}"
                   alt="Image miniature du timbre {{timbre.nom}}"
               /></picture>
-            {%enfor%}
+            {%endfor%}
             </div>
           </div>
           <form class="form-offre">
@@ -45,7 +45,7 @@
           <header class="detail-timbre__entete">
             <div class="detail-timbre__premiere-ligne">
               <h2 class="detail-timbre__titre">
-                {timbre.nom}
+              {{timbre.nom}}
               </h2>
               <a href="#"
                 ><img
@@ -69,19 +69,19 @@
               <ul class="detail-timbre__details__liste">
                 <li class="detail-timbre__details__detail">
                   <span class="detail-timbre__details__intitule">Pays :</span>
-                  {timbre.paysId}
+                  {{timbre.paysId}}
                 </li>
                 <li class="detail-timbre__details__detail">
                   <span class="detail-timbre__details__intitule"
                     >Date d’émission :</span
                   >
-                  {timbre.dateEmission}
+                  {{timbre.dateEmission}}
                 </li>
                 <li class="detail-timbre__details__detail">
                   <span class="detail-timbre__details__intitule"
                     >Condition :</span
                   >
-                  {timbre.etatId}
+                  {{timbre.etatId}}
                 </li>
                 <li class="detail-timbre__details__detail">
                   <span class="detail-timbre__details__intitule"
@@ -91,19 +91,19 @@
                 </li>
                 <li class="detail-timbre__details__detail">
                   <span class="detail-timbre__details__intitule">Tirage :</span>
-                  {timbre.tirage}
+                  {{timbre.tirage}}
                 </li>
                 <li class="detail-timbre__details__detail">
                   <span class="detail-timbre__details__intitule"
                     >Couleurs :</span
                   >
-                  {timbre.couleurs}
+                  {{timbre.couleurs}}
                 </li>
                 <li class="detail-timbre__details__detail">
                   <span class="detail-timbre__details__intitule"
                     >Dimensions :</span
                   >
-                  {timbre.dimensions}
+                  {{timbre.dimensions}}
                 </li>
               </ul>
             </section>

@@ -14,32 +14,33 @@ class TimbreController{
     public function pageAjoutTimbre(){
        // Il faut être connecté pour accéder à la page d’ajout des timbres. On valide si $_SESSION['membre_id'] existe.
        if(!isset($_SESSION['membre_id'])){
-        return View::render('erreur404', ['message'=>"Erreur - Vous devez être connecté pour ajouter un timbre!"]);
+            return View::render('erreur404', ['message'=>"Erreur - Vous devez être connecté pour ajouter un timbre!"]);
        }
        else{
-        // On récupère les informations nécessaires pour le formulaire.
-        //Couleurs:
-        $couleursCrud = new Couleurs;
-        $couleurs = $couleursCrud->select();
-        //Etat:
-        $etatCrud = new Etat;
-        $etats = $etatCrud->select();
-        //Pays:
-        $paysCrud = new Pays;
-        $pays = $paysCrud->select();
-        $session = $_SESSION ?? null;
-        // On renvoie à la page du formulaire.
-        return View::render('/timbre/ajout-timbre',['couleurs'=>$couleurs, 'etats'=>$etats,'pays'=>$pays,'session'=>$session]);
-    }
+            // On récupère les informations nécessaires pour le formulaire.
+            //Couleurs:
+            $couleursCrud = new Couleurs;
+            $couleurs = $couleursCrud->select();
+            //Etat:
+            $etatCrud = new Etat;
+            $etats = $etatCrud->select();
+            //Pays:
+            $paysCrud = new Pays;
+            $pays = $paysCrud->select();
+            $session = $_SESSION ?? null;
+            // On renvoie à la page du formulaire.
+            return View::render('/timbre/ajout-timbre',['couleurs'=>$couleurs, 'etats'=>$etats,'pays'=>$pays,'session'=>$session]);
+        }
     }
 
     public function ajouterTimbre($data){
+        // Il faut être connecté pour ajouter des timbres. On valide si $_SESSION['membre_id'] existe.
         if(!isset($_SESSION['membre_id'])){
-            
             return View::render('/connexion/page-connexion', ['message'=>'Veuillez vous connecter pour ajouter un timbre!']);
         }
         else{
             $session = $_SESSION ?? null;
+            // Il faut que la requête soit de type POST, sinon on renvoie à la page d’erreur.
             if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                 return View::render('erreur404', ['message'=>'Erreur 404 - Page introuvable!','session'=>$session]);
             }
@@ -58,12 +59,15 @@ class TimbreController{
                 $imagesCrud = new Images;
                 $validationImages = $imagesCrud->validationImage($_FILES['images']);
                 
+                // Si la validation des $data et la validation des images.
                 if($Validation->estUnSucces() && $validationImages === true){
                         $timbreCrud = New Timbre;
                         $data['membreId']=$_SESSION['membre_id'];
                         $ajoutTimbre = $timbreCrud->insert($data);
+                        // Si l'ajout du timbre à fonctionné, on ajoute les images.
                         if($ajoutTimbre){
                             $erreursImage=[];
+                            // On prépare les images pour l'import.
                             $imagesImport = $imagesCrud->formatterImage($_FILES['images'],$ajoutTimbre);
                             for ($i = 0; $i < count($imagesImport); $i++) {
                                 $image=['lien'=>$imagesImport[$i],'principale'=>0,'timbreId'=>$ajoutTimbre];
@@ -71,24 +75,30 @@ class TimbreController{
                                     $image=['lien'=>$imagesImport[$i],'principale'=>1,'timbreId'=>$ajoutTimbre];
                                 }
                                 $importationImage = $imagesCrud->insert($image);
+                                // Si l'importation d'image ne fonctionne pas, on enregistre l'erreur dans la variable $erreursImage.
                                 if(!$importationImage){
                                     array_push($erreursImage, $i);
                                 }  
-                                else{
-                                    $timbre=$timbreCrud->selectId($ajoutTimbre);
-                                    $imageTimbre=$imagesCrud->selectId($ajoutTimbre);
-                                    foreach ($imageTimbre as $image) {
-                                        if ($image['principale'] == 1) {
-                                            $imagePrincipale = $image;
-                                            unset($imageTimbre[$image]); // Retire l'image principale de la liste
+                            }   
+                            // S'il n'y a pas d'erreur d'importation d'image, on recupère toutes les informations importées.
+                            if(empty($erreursImage))
+                            {
+                                $timbre=$timbreCrud->selectId($ajoutTimbre);
+                                $imageTimbre=$imagesCrud->selectWhere($ajoutTimbre,'timbreId');
+                                for ($i = 0; $i < count($imageTimbre); $i++) {
+                                        if ($imageTimbre[$i]['principale'] == 1) {
+                                            $imagePrincipale = $imageTimbre[$i];
+                                            unset($imageTimbre[$i]); // Retire l'image principale de la liste
                                             break; // On arrête après la première trouvée
                                         }
-                                    }
-                                    return View::render('timbre/fiche-detail-timbre',['timbre'=>$timbre,'imageTimbre'=>$imageTimbre,'imagePrincipale'=>$imagePrincipale,'session'=>$session]);
                                 }
+                                return View::render('timbre/fiche-detail-timbre',['timbre'=>$timbre,'imageTimbre'=>$imageTimbre,'imagePrincipale'=>$imagePrincipale,'session'=>$session]);
                             }
-                        }    
-                }
+                            else{
+                                var_dump($erreursImage);
+                            }
+                        }
+                }    
                 else{
                     $erreurs = $Validation->geterreurs();
                     $erreursImage = $validationImages;
