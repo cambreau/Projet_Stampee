@@ -11,17 +11,3 @@ export const timbresParMembreId = async () => {
       console.error(err);
     });
 };
-
-/**
- * Fonction qui appelle la fonction recupererInfoSession du Controller Membre pour recuperer toutes les informations
- * de la session.
- * @returns promesse
- */
-export const session = async () => {
-  return axios
-    .get("/app/controllers/TimbreController.php?action=recupererInfoSession")
-    .then((res) => res.data)
-    .catch((err) => {
-      console.error(err);
-    });
-};

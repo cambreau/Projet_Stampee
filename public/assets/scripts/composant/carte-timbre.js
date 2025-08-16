@@ -11,7 +11,7 @@ export const affichageTimbres = async (listeTimbres, parent) => {
     // Création des elements de la carte
     imageTimbre(timbre["principale"]["lien"], timbre["nom"], sectionTimbre);
     titreTimbre(timbre["nom"], sectionTimbre);
-    basTimbre(timbre, sectionTimbre);
+    basTimbreProfil(timbre, sectionTimbre);
   });
 };
 
@@ -46,25 +46,30 @@ const titreTimbre = (timbreNom, section) => {
  * @param {Object} timbre
  * @param {HTMLElement} section
  */
-const basTimbre = (timbre, section) => {
+const basTimbreProfil = (timbre, section) => {
   // Création conteneur footer de la carte
   const footer = document.createElement("footer");
-  footer.classList.add("conteneur-timbres__timbre__bas-carte");
-  section.appendChild(footer);
+  footer.classList.add("conteneur-timbres__timbre__bas-carte-profil");
+
   // Création du statut de l'enchere.
   const statutValeur = statutEnchere(
     timbre["encheres"]["dateDebut"],
     timbre["encheres"]["dateFin"]
   );
   const statut = document.createElement("p");
+  statut.classList.add("conteneur-timbres__timbre__bas-carte-profil__statut");
   statut.textContent = statutValeur;
   statut.style.color = "#ffffff";
-  footer.appendChild(statut);
-  if (statut === "À venir") {
+
+  // Appliquer le style de fond selon le statut
+  if (statutValeur === "À venir") {
     footer.style.background = "#10974b";
-  } else if (statut === "En cours") {
+  } else if (statutValeur === "En cours") {
     footer.style.background = "#a52a2a";
-  } else if (statut === "Terminée - Non vendu") {
-    footer.style.background = "#1a1b1e";
+  } else if (statutValeur === "Terminée - Non vendu") {
+    footer.style.background = "#4d4f54";
   }
+
+  section.appendChild(footer);
+  footer.appendChild(statut);
 };

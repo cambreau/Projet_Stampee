@@ -10,6 +10,7 @@
   align-items: center;
   font-size: var(--taille-police-h4);
   font-weight: var(--epaisseur-police-tres-gras);
+  color: var(--couleur-principale);
 }
 
 .message__succes {
@@ -18,4 +19,19 @@
 
 .message__erreur {
   color: var(--couleur-erreur);
+}
+
+.message__information__conteneur {
+  display: flex;
+  align-items: center;
+}
+
+.message__information__image {
+  display: block;
+  max-width: 200px;
+}
+
+.message__information__image img {
+  width: 100%;
+  object-fit: contain;
 }
