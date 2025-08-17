@@ -15,6 +15,11 @@
   border: 1px solid var(--couleur-secondaire);
   border-radius: var(--arrondi-petit);
   align-items: start;
+  position: relative;
+}
+
+.conteneur-timbres__timbre:hover .conteneur-timbres__conteneur-btn-modifSuppr {
+  display: flex;
 }
 /*-------------------------------------------------------------------------*/
 /*Carte timbre image*/
@@ -63,6 +68,46 @@
 .conteneur-timbres__timbre__bas-carte__info-enchere > * {
   padding: var(--espacement-tres-serre);
 }
+
+/*-------------------------------------------------------------------------*/
+/* Conteneur des boutons */
+.conteneur-timbres__conteneur-btn-modifSuppr {
+  display: none;
+  gap: var(--espacement-serre);
+  background-color: var(--couleur-fond);
+  border: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 1px solid var(--couleur-secondaire);
+  border-radius: 0 0 0 var(--arrondi-petit);
+}
+
+/* Bouton */
+.conteneur-timbres__conteneur-btn-modifSuppr__bouton {
+  display: block;
+  width: 45px;
+  background-color: var(--couleur-fond);
+  padding: var(--espacement-serre);
+  border: none;
+  border-radius: 0 0 0 var(--arrondi-petit);
+}
+
+.conteneur-timbres__conteneur-btn-modifSuppr__bouton img {
+  width: 100%;
+  object-fit: contain;
+}
+
+.conteneur-timbres__conteneur-btn-modifSuppr__bouton.modifier:hover {
+  background-color: var(--couleur-fonctionnalite-secondaire-hover);
+  border-radius: 50%;
+}
+
+.conteneur-timbres__conteneur-btn-modifSuppr__bouton.supprimer:hover {
+  background-color: var(--couleur-fonctionnalite-hover);
+  border-radius: 50%;
+}
+/*-------------------------------------------------------------------------*/
 
 /** Media **/
 @media screen and (max-width: 1500px) {

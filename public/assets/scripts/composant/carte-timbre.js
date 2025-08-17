@@ -12,6 +12,7 @@ export const affichageTimbres = async (listeTimbres, parent) => {
     imageTimbre(timbre["principale"]["lien"], timbre["nom"], sectionTimbre);
     titreTimbre(timbre["nom"], sectionTimbre);
     basTimbreProfil(timbre, sectionTimbre);
+    boutonModifSuppriner(timbre, sectionTimbre);
   });
 };
 
@@ -72,4 +73,37 @@ const basTimbreProfil = (timbre, section) => {
 
   section.appendChild(footer);
   footer.appendChild(statut);
+};
+
+/** Fonction qui créer le conteneur et les boutons modifier et supprimer
+ * @param {HTMLElement}
+ */
+const boutonModifSuppriner = (timbre, parent) => {
+  const btnConteneur = document.createElement("div");
+  btnConteneur.classList.add("conteneur-timbres__conteneur-btn-modifSuppr");
+  parent.appendChild(btnConteneur);
+
+  const btnModifierLien = document.createElement("a");
+  btnModifierLien.href = `/timbre/page-modifier?id=${timbre["id"]}`;
+  btnModifierLien.classList.add(
+    "conteneur-timbres__conteneur-btn-modifSuppr__bouton"
+  );
+  btnModifierLien.classList.add("modifier");
+  btnConteneur.appendChild(btnModifierLien);
+  const btnModifier = document.createElement("img");
+  btnModifier.src = `/public/assets/images/icon/modifier.png`;
+  btnModifier.alt = `Icon modifier`;
+  btnModifierLien.appendChild(btnModifier);
+
+  const btnSupprimerLien = document.createElement("a");
+  btnSupprimerLien.href = `/timbres/supprimer?id=${timbre["id"]}`;
+  btnConteneur.appendChild(btnSupprimerLien);
+  btnSupprimerLien.classList.add(
+    "conteneur-timbres__conteneur-btn-modifSuppr__bouton"
+  );
+  btnSupprimerLien.classList.add("supprimer");
+  const btnSupprimer = document.createElement("img");
+  btnSupprimer.src = `/public/assets/images/icon/supprimer.png`;
+  btnSupprimer.alt = `Icon supprimer`;
+  btnSupprimerLien.appendChild(btnSupprimer);
 };

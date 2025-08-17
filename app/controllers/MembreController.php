@@ -78,8 +78,9 @@ class MembreController{
              //Récupérer les informations du membre.
             $membreCrud= new Membre();
             $membre= $membreCrud->selectId($_SESSION['membre_id']);
+            $session = $_SESSION ?? null;
             //Renvoyer vers la view de modification des utilisateurs.
-            return View::render('/membre/page-modifier',['membre'=>$membre]);
+            return View::render('/membre/page-modifier',['membre'=>$membre, 'session'=>$session]);
           }
     }
 

@@ -122,6 +122,31 @@ class TimbreController{
         }
     }
 
+    public function pageModifierTimbre(){
+        // Valider que l'utilisateur est bien le proprietaire du timbre.
+        $timbreCrud = new Timbre;
+        $timbre = $timbreCrud->selectId($_GET['id']);
+        if($_SESSION['membre_id'] != $timbre['membreId']){
+            return View::render('erreur404', ['message'=>"Erreur - Vous n'avez pas les droits!"]);
+        }
+        else{
+             // On récupère les informations nécessaires pour le formulaire.
+            //Couleurs:
+            $couleursCrud = new Couleurs;
+            $couleurs = $couleursCrud->select();
+            //Etat:
+            $etatCrud = new Etat;
+            $etats = $etatCrud->select();
+            //Pays:
+            $paysCrud = new Pays;
+            $pays = $paysCrud->select();
+            $session = $_SESSION ?? null;
+            return View::render('/timbre/page-modifier-timbre', ['couleurs'=>$couleurs, 'etats'=>$etats,'pays'=>$pays,'timbre'=>$timbre,'session'=>$session]);
+        }
+
+
+    }
+    /* Communication data avec front-end timbre */
     public function recupererTimbresMembreID(){
         // ** Il faut être connecté pour recuperer les informations sur les timbres. On valide si $_SESSION['membre_id'] existe.
         if(!isset($_SESSION['membre_id'])){

@@ -26,6 +26,8 @@ Route::get('/membre/supprimer', 'MembreController@supprimer');
 Route::get('/timbre/ajout-timbre', 'TimbreController@pageAjoutTimbre');
 Route::post('/timbre/ajout-timbre','TimbreController@ajouterTimbre' );
 Route::get('/timbres/membre','TimbreController@recupererTimbresMembreID' );
+Route::get('/timbre/page-modifier','TimbreController@pageModifierTimbre');
+Route::get('/timbre/supprimer','TimbreController@supprimerTimbre');
 
 Route::dispatch();
 
