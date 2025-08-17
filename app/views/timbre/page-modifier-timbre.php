@@ -3,8 +3,8 @@
 }) }}
 <section>
     <h1>Modification du timbre :</h1>
-    <h2>{{timbre.nom}}</h2>
-    <form class="form" method="post" enctype="multipart/form-data">  
+    <h2 >{{timbre.nom}}</h2>
+    <form class="form form__gauche" method="post" enctype="multipart/form-data">  
         <div class="form__champ">
             <label for="dateEmission">Date d'émission :</label>
             <input

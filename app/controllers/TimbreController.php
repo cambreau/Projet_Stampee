@@ -85,6 +85,16 @@ class TimbreController{
                             if(empty($erreursImage))
                             {
                                 $timbre=$timbreCrud->selectId($ajoutTimbre);
+                                //Couleur:
+                                $couleursCrud = new Couleurs;
+                                $timbre['couleur']= $couleursCrud->selectId($timbre['couleurId']);
+                                //Etat:
+                                $etatCrud = new Etat;
+                                $timbre['etat']= $etatCrud->selectId($timbre['etatId']);
+                                //Pays:
+                                $paysCrud = new Pays;
+                                $$timbre['pays']= $paysCrud->selectId($timbre['paysId']);
+
                                 $imageTimbre=$imagesCrud->selectWhere($ajoutTimbre,'timbreId');
                                 for ($i = 0; $i < count($imageTimbre); $i++) {
                                         if ($imageTimbre[$i]['principale'] == 1) {
@@ -143,9 +153,8 @@ class TimbreController{
             $session = $_SESSION ?? null;
             return View::render('/timbre/page-modifier-timbre', ['couleurs'=>$couleurs, 'etats'=>$etats,'pays'=>$pays,'timbre'=>$timbre,'session'=>$session]);
         }
-
-
     }
+
     /* Communication data avec front-end timbre */
     public function recupererTimbresMembreID(){
         // ** Il faut être connecté pour recuperer les informations sur les timbres. On valide si $_SESSION['membre_id'] existe.

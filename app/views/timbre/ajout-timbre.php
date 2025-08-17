@@ -3,7 +3,7 @@
 }) }}
 <section>
     <h1 >Ajouter un timbre</h1>
-    <form class="form" method="post" enctype="multipart/form-data">  
+    <form class="form form__gauche" method="post" enctype="multipart/form-data">  
         <div class="form__champ">
             <label for="nom">Nom :</label>
             <input

@@ -69,7 +69,7 @@
               <ul class="detail-timbre__details__liste">
                 <li class="detail-timbre__details__detail">
                   <span class="detail-timbre__details__intitule">Pays :</span>
-                  {{timbre.paysId}}
+                  {{timbre.pays}}
                 </li>
                 <li class="detail-timbre__details__detail">
                   <span class="detail-timbre__details__intitule"
@@ -81,7 +81,7 @@
                   <span class="detail-timbre__details__intitule"
                     >Condition :</span
                   >
-                  {{timbre.etatId}}
+                  {{timbre.etat}}
                 </li>
                 <li class="detail-timbre__details__detail">
                   <span class="detail-timbre__details__intitule"
@@ -97,7 +97,7 @@
                   <span class="detail-timbre__details__intitule"
                     >Couleurs :</span
                   >
-                  {{timbre.couleurs}}
+                  {{timbre.couleur}}
                 </li>
                 <li class="detail-timbre__details__detail">
                   <span class="detail-timbre__details__intitule"
