@@ -1,18 +1,18 @@
-import { statutEnchere } from "./encheres.js";
-
 /** Fonction qui gere l'affichage des timbres */
-export const affichageTimbres = async (listeTimbres, parent) => {
+export const affichageTimbres = async (
+  listeTimbres,
+  parent,
+  particularitesTimbre
+) => {
   // 1. Création de la carte pour chaque timbre
   listeTimbres.forEach((timbre) => {
-    const sectionTimbre = document.createElement("a");
+    const sectionTimbre = document.createElement("section");
     sectionTimbre.classList.add("conteneur-timbres__timbre");
-    sectionTimbre.href = `{{base}}/timbre/fiche-detail-timbreid={{ timbre.id }}`;
     parent.appendChild(sectionTimbre);
     // Création des elements de la carte
     imageTimbre(timbre["principale"]["lien"], timbre["nom"], sectionTimbre);
     titreTimbre(timbre["nom"], sectionTimbre);
-    basTimbreProfil(timbre, sectionTimbre);
-    boutonModifSuppriner(timbre, sectionTimbre);
+    particularitesTimbre(timbre, sectionTimbre);
   });
 };
 
@@ -40,70 +40,4 @@ const titreTimbre = (timbreNom, section) => {
   titre.textContent = `${timbreNom}`;
   titre.classList.add("conteneur-timbres__timbre__titre");
   section.appendChild(titre);
-};
-
-/**
- * Fonction pour créer le bas de la carte timbre
- * @param {Object} timbre
- * @param {HTMLElement} section
- */
-const basTimbreProfil = (timbre, section) => {
-  // Création conteneur footer de la carte
-  const footer = document.createElement("footer");
-  footer.classList.add("conteneur-timbres__timbre__bas-carte-profil");
-
-  // Création du statut de l'enchere.
-  const statutValeur = statutEnchere(
-    timbre["encheres"]["dateDebut"],
-    timbre["encheres"]["dateFin"]
-  );
-  const statut = document.createElement("p");
-  statut.classList.add("conteneur-timbres__timbre__bas-carte-profil__statut");
-  statut.textContent = statutValeur;
-  statut.style.color = "#ffffff";
-
-  // Appliquer le style de fond selon le statut
-  if (statutValeur === "À venir") {
-    footer.style.background = "#10974b";
-  } else if (statutValeur === "En cours") {
-    footer.style.background = "#a52a2a";
-  } else if (statutValeur === "Terminée - Non vendu") {
-    footer.style.background = "#4d4f54";
-  }
-
-  section.appendChild(footer);
-  footer.appendChild(statut);
-};
-
-/** Fonction qui créer le conteneur et les boutons modifier et supprimer
- * @param {HTMLElement}
- */
-const boutonModifSuppriner = (timbre, parent) => {
-  const btnConteneur = document.createElement("div");
-  btnConteneur.classList.add("conteneur-timbres__conteneur-btn-modifSuppr");
-  parent.appendChild(btnConteneur);
-
-  const btnModifierLien = document.createElement("a");
-  btnModifierLien.href = `/timbre/page-modifier?id=${timbre["id"]}`;
-  btnModifierLien.classList.add(
-    "conteneur-timbres__conteneur-btn-modifSuppr__bouton"
-  );
-  btnModifierLien.classList.add("modifier");
-  btnConteneur.appendChild(btnModifierLien);
-  const btnModifier = document.createElement("img");
-  btnModifier.src = `/public/assets/images/icon/modifier.png`;
-  btnModifier.alt = `Icon modifier`;
-  btnModifierLien.appendChild(btnModifier);
-
-  const btnSupprimerLien = document.createElement("a");
-  btnSupprimerLien.href = `/timbres/supprimer?id=${timbre["id"]}`;
-  btnConteneur.appendChild(btnSupprimerLien);
-  btnSupprimerLien.classList.add(
-    "conteneur-timbres__conteneur-btn-modifSuppr__bouton"
-  );
-  btnSupprimerLien.classList.add("supprimer");
-  const btnSupprimer = document.createElement("img");
-  btnSupprimer.src = `/public/assets/images/icon/supprimer.png`;
-  btnSupprimer.alt = `Icon supprimer`;
-  btnSupprimerLien.appendChild(btnSupprimer);
 };
