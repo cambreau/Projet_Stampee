@@ -1,13 +1,9 @@
 <?php
 namespace App\Controllers;
 
-use App\Models\Enchere;
-use App\Models\Images;
 use App\Models\Membre;
-use App\Models\Timbre;
 use App\Providers\View;
 use App\Providers\Validation;
-use Intervention\Image\Image;
 
 class MembreController{
     public function pageInscription(){

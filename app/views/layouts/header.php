@@ -98,7 +98,7 @@
               <a href="#">À propos du Lord Stampee</a>
             </li>
             <li class="navigation-principale__menu__item">
-              <a href="#">Nos enchères</a>
+              <a href="{{base}}/enchere/catalogue-encheres">Nos enchères</a>
             </li>
             <li class="navigation-principale__menu__item">
               <a href="#">Nous contacter</a>
@@ -187,7 +187,7 @@
             <a href="#">À propos du Lord Stampee</a>
           </li>
           <li class="navigation-principale__menu__item">
-              <a href="#">Nos enchères</a>
+              <a href="{{base}}/enchere/catalogue-encheres">Nos enchères</a>
             </li>
             <li class="navigation-principale__menu__item">
               <a href="#">Nous contacter</a>

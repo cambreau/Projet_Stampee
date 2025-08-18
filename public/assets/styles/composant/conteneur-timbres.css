@@ -3,7 +3,7 @@
 /*Carte timbre conteneur*/
 .conteneur-timbres {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   padding-top: var(--espacement-base);
   gap: var(--espacement-espace) var(--espacement-base);
   align-items: center;
@@ -13,9 +13,12 @@
 /*Carte timbre*/
 .conteneur-timbres__timbre {
   border: 1px solid var(--couleur-secondaire);
+  display: grid;
+  grid-template-rows: 4fr 2fr 2fr;
   border-radius: var(--arrondi-petit);
   align-items: start;
   position: relative;
+  height: 375px;
 }
 
 .conteneur-timbres__timbre:hover .conteneur-timbres__conteneur-btn-modifSuppr {
@@ -38,31 +41,26 @@
 /*-------------------------------------------------------------------------*/
 /*Carte timbre titre*/
 .conteneur-timbres__timbre__titre {
-  margin: var(--espacement-base) var(--espacement-espace);
-  padding: var(--espacement-tres-serre) 0;
+  padding: var(--espacement-tres-serre) var(--espacement-base);
   text-align: center;
   align-content: center;
   border-bottom: 1px solid var(--couleur-secondaire);
-}
-/*-------------------------------------------------------------------------*/
-/*Carte timbre bas-carte-profil*/
-.conteneur-timbres__timbre__bas-carte-profil {
-  padding: var(--espacement-serre);
-  text-align: center;
+  height: 100%;
 }
 
-.conteneur-timbres__timbre__bas-carte-profil__statut {
-  font-size: var(--taille-police-moyen);
-}
 /*-------------------------------------------------------------------------*/
 /*Carte timbre bas-carte*/
 .conteneur-timbres__timbre__bas-carte {
-  display: grid;
-  grid-template-rows: 2fr 1fr;
-  gap: var(--espacement-serre);
+  display: flex;
+  flex-direction: column;
   padding: var(--espacement-serre);
-  align-items: end;
-  justify-content: center;
+  margin: auto 0;
+  align-items: center;
+}
+
+.conteneur-timbres__timbre__bas-carte__statut {
+  font-size: var(--taille-police-moyen);
+  font-weight: var(--epaisseur-police-tres-gras);
 }
 
 .conteneur-timbres__timbre__bas-carte__info-enchere > * {

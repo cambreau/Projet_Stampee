@@ -1,11 +1,25 @@
 /**
- * Fonction qui appelle la fonction recupererTimbresMembreID du Controller Timbre pour recuperer toutes les informations
+ * Fonction qui appelle la fonction recupererTimbresMembreID pour recuperer toutes les informations
  * des timbres d'un membre.
  * @returns promesse
  */
 export const timbresParMembreId = async () => {
   return axios
-    .get("/timbres/membre")
+    .get("/requete/timbreMembreID")
+    .then((res) => res.data)
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+/**
+ * Fonction qui appelle la fonction recupererToutesEncheres pour recuperer toutes les informations
+ * des encheres.
+ * @returns promesse
+ */
+export const tousTimbres = async () => {
+  return axios
+    .get("/requete/tousTimbres")
     .then((res) => res.data)
     .catch((err) => {
       console.error(err);

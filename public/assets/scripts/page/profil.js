@@ -57,32 +57,36 @@ const basCarteTimbreProfil = (timbre, parent) => {
   // Création conteneur footer de la carte
   const footer = document.createElement("footer");
   parent.appendChild(footer);
-  footer.classList.add("conteneur-timbres__timbre__bas-carte-profil");
+  footer.classList.add("conteneur-timbres__timbre__bas-carte");
 
   // Création du statut de l'enchere.
-  const statutValeur = statutEnchere(
-    timbre["encheres"]["dateDebut"],
-    timbre["encheres"]["dateFin"]
-  );
+  let statutValeur;
+  if (timbre.encheres.length > 0) {
+    statutValeur = statutEnchere(
+      timbre["encheres"][0]["dateDebut"],
+      timbre["encheres"][0]["dateFin"]
+    );
+  } else {
+    statutValeur = "Aucune enchère";
+  }
 
   if (statutValeur == "En cours") {
     const btnEnchere = document.createElement("a");
     footer.appendChild(btnEnchere);
     btnEnchere.textContent = "Voir l’enchère";
-    btnEnchere.add.classList = "bouton";
-    btnEnchere.add.classList = "bouton-accent";
+    btnEnchere.classList.add("bouton");
+    btnEnchere.classList.add("bouton-accent");
     btnEnchere.href = `{{base}}/timbre/fiche-detail-timbreid={{ timbre.id }}`;
   } else {
     const statut = document.createElement("p");
     footer.appendChild(statut);
-    statut.classList.add("conteneur-timbres__timbre__bas-carte-profil__statut");
+    statut.classList.add("conteneur-timbres__timbre__bas-carte__statut");
     statut.textContent = statutValeur;
-    statut.style.color = "#ffffff";
     // Appliquer le style de fond selon le statut
     if (statutValeur === "À venir") {
-      footer.style.background = "#10974b";
-    } else if (statutValeur === "Terminée - Non vendu") {
-      footer.style.background = "#4d4f54";
+      footer.style.background = "#b3ddc5";
+    } else {
+      footer.style.background = " #adb2bd";
     }
   }
 };

@@ -7,6 +7,8 @@ const page = document.querySelector(".page")?.id;
 // Quelle logique de code ?  ---- En fonction de l'id
 if (page === "profil") {
   import("./page/profil.js");
+} else if (page === "catalogue-encheres") {
+  import("./page/catalogue-encheres.js");
 }
 
 /*----------------------------------------------------------------- */

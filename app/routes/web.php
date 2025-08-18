@@ -25,9 +25,15 @@ Route::get('/membre/supprimer', 'MembreController@supprimer');
 //Timbre 
 Route::get('/timbre/ajout-timbre', 'TimbreController@pageAjoutTimbre');
 Route::post('/timbre/ajout-timbre','TimbreController@ajouterTimbre' );
-Route::get('/timbres/membre','TimbreController@recupererTimbresMembreID' );
 Route::get('/timbre/page-modifier','TimbreController@pageModifierTimbre');
 Route::get('/timbre/supprimer','TimbreController@supprimerTimbre');
+
+//Encheres
+Route::get('/enchere/catalogue-encheres', 'EnchereController@pageCatalogueEncheres');
+
+//Requetes front vers back-end 
+Route::get('/requete/timbreMembreID','RequetesFrontController@recupererTimbresMembreID' );
+Route::get('/requete/tousTimbres','RequetesFrontController@recupererTousTimbres' );
 
 Route::dispatch();
 
