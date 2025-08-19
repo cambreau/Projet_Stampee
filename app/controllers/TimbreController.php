@@ -2,7 +2,6 @@
 namespace App\Controllers;
 use App\Models\Couleurs;
 use App\Models\Etat;
-use App\Models\Enchere;
 use App\Models\Pays;
 use App\Models\Timbre;
 use App\Providers\View;
@@ -101,23 +100,22 @@ class TimbreController{
                         $timbre=$timbreCrud->selectId($ajoutTimbre);
                         //Couleur:
                         $couleursCrud = new Couleurs;
-                        $timbre['couleur']= $couleursCrud->selectId($timbre['couleurId']);
+                        $timbre['couleur']= $couleursCrud->selectId($timbre['couleursId']);
                         //Etat:
                         $etatCrud = new Etat;
                         $timbre['etat']= $etatCrud->selectId($timbre['etatId']);
                         //Pays:
                         $paysCrud = new Pays;
                         $timbre['pays']= $paysCrud->selectId($timbre['paysId']);
-
+                        //Images:
                         $imageTimbre=$imagesCrud->selectWhere($ajoutTimbre,'timbreId');
                             for ($i = 0; $i < count($imageTimbre); $i++) {
                                 if ($imageTimbre[$i]['principale'] == 1) {
-                                    $imagePrincipale = $imageTimbre[$i];
                                     unset($imageTimbre[$i]); // Retire l'image principale de la liste
                                     break; // On arrête après la première trouvée
                                 }
                             }
-                        return View::render('timbre/fiche-detail-timbre',['timbre'=>$timbre,'imageTimbre'=>$imageTimbre,'imagePrincipale'=>$imagePrincipale,'session'=>$session]); 
+                        return View::render('enchere/fiche-detail-enchere',['timbre'=>$timbre,'imageTimbre'=>$imageTimbre,'imagePrincipale'=>$imagePrincipale,'session'=>$session]); 
                     }
                     else{
                         return View::render('erreur404', ['message'=>"Erreur 404 - Erreur lors de l'ajout du timbre!",'session'=>$session]);   
@@ -190,7 +188,8 @@ class TimbreController{
                 return View::render('erreur404', ['message'=>'Erreur 404 - Page introuvable!','session'=>$session]);
             }
             else{
-                // Validation des $data.
+                // VALIDATION
+                // ** Validation timbre
                 $Validation = new Validation;
                 $Validation->field('dateEmission',$data['dateEmission'])->obligatoire();
                 $Validation->field('tirage',$data['tirage'])->min(1);
@@ -198,24 +197,13 @@ class TimbreController{
                 $Validation->field('couleursId',$data['couleursId'])->obligatoire();
                 $Validation->field('paysId',$data['paysId'])->obligatoire();
                 $Validation->field('etatId',$data['etatId'])->obligatoire();
-
-                 // Validation des images
+                 // ** Validation image principale
                  $imageCrud = new Images;
-                 //Si l'utilisateur a choisi une nouvelle image principale, on supprime l'image existante et on ajoute la nouvelle.
-                 $validationImagePrincipale = $_FILES['principale']['error'][0] !== UPLOAD_ERR_NO_FILE ?$imageCrud->validationImage($_FILES['principale']) : true;
-                 if(!empty($_FILES['principale']) ){
-                    $images = $imageCrud->selectWhere($data['id'],'timbreId');
-                    for ($i = 0; $i < count($images); $i++) {
-                        if ($images[$i]['principale'] == 1) {
-                            $SupprimerancienneImagePrincipale = $imageCrud->delete($images[$i]['id']);
-                            unset($images); // Retire les autres images.
-                            break; // On arrête après la première trouvée
-                            }
-                        }
-                 }
-                  // Initialisation d'un variable erreur Image
+                 $validationImagePrincipale = $_FILES['principale']['error'] !== UPLOAD_ERR_NO_FILE ?$imageCrud->validationImage($_FILES['principale']) : true;
+                // ** Validation autres images
+                // Initialisation d'un variable erreur Image
                 $erreursImage=[];
-                if($_FILES['images']['error'][0] !== UPLOAD_ERR_NO_FILE){
+                if($_FILES['images']['error'] !== UPLOAD_ERR_NO_FILE){
                     foreach($_FILES['images']['tmp_name'] as $key => $tmpName) {
                         $image = [
                             'name' => $_FILES['images']['name'][$key],
@@ -228,45 +216,60 @@ class TimbreController{
                         }
                     }
                 }
-                // Si la validation des $data et la validation des images.
+
+                // IMPORT
                 if($Validation->estUnSucces() && empty($erreursImage) && $validationImagePrincipale === true){
+                    // ** Import timbre
                     $timbreCrud = New Timbre;
                     $data['membreId']=$_SESSION['membre_id'];
-
                     $modifTimbre = $timbreCrud->update($data, $data['id'] );
-                        // Si l'ajout du timbre à fonctionné, on ajoute les images.
-                        if($modifTimbre){
-                            // On prépare les images pour l'import.
-                            if($_FILES['principale']['error'][0] !== UPLOAD_ERR_NO_FILE ){
-                                $imagePrincipaleImport = $imageCrud->formatterImage($_FILES['principale'],$modifTimbre);
-                                $imagePrincipale = ['lien'=>$imagePrincipaleImport,'principale'=>1,'timbreId'=>$modifTimbre];
-                                $importationImagePrincipale = $imageCrud->insert($imagePrincipale);
-                            }
-                            if($_FILES['images']['error'][0] !== UPLOAD_ERR_NO_FILE ){
-                                foreach($_FILES['images']['tmp_name'] as $key => $tmpName) {
-                                    $image = [
-                                        'name' => $_FILES['images']['name'][$key],
-                                        'tmp_name' => $tmpName,
-                                        'error' => $_FILES['images']['error'][$key]
-                                    ];
-                                    $imageFormatter = $imageCrud->formatterImage($image,$modifTimbre);
-                                    $imageImport=['lien'=>$imageFormatter,'principale'=>0,'timbreId'=>$modifTimbre];
-                                    $importationImage = $imageCrud->insert($imageImport); 
+                    // Si l'ajout du timbre à fonctionné, on ajoute les images.
+                    if($modifTimbre){
+                        // ** Import image principale.
+                        //Si l'utilisateur a choisi une nouvelle image principale:
+                        if($_FILES['principale']['error'] !== UPLOAD_ERR_NO_FILE) {
+                            $images = $imageCrud->selectWhere( $data['id'],'timbreId');
+                            // 1- On supprime l'image existante.
+                            for ($i = 0; $i < count($images); $i++) {
+                                if ($images[$i]['principale'] == 1) {
+                                    $SupprimerancienneImagePrincipale = $imageCrud->delete($images[$i]['id']);
+                                    $imageCrud->suppressionImage($images[$i]);
+                                    unset($images); // Retire les autres images.
+                                    break; // On arrête après la première trouvée
                                 }
-                            }   
+                            }
+                            // 2- On importe la nouvelle image.
+                            $imagePrincipaleImport = $imageCrud->formatterImage($_FILES['principale'],$modifTimbre);
+                            $imagePrincipale = ['lien'=>$imagePrincipaleImport,'principale'=>1,'timbreId'=>$data['id']];
+                            $importationImagePrincipale = $imageCrud->insert($imagePrincipale);
+                        }
+                        // ** Import des autres images. 
+                        if($_FILES['images']['error'][0] !== UPLOAD_ERR_NO_FILE ){
+                            foreach($_FILES['images']['tmp_name'] as $key => $tmpName) {
+                                $image = [
+                                    'name' => $_FILES['images']['name'][$key],
+                                    'tmp_name' => $tmpName,
+                                    'error' => $_FILES['images']['error'][$key]
+                                ];
+                                $imageFormatter = $imageCrud->formatterImage($image,$data['id']);
+                                $imageImport=['lien'=>$imageFormatter,'principale'=>0,'timbreId'=>$data['id']];
+                                $importationImage = $imageCrud->insert($imageImport); 
+                            }
+                        }   
                             //On recupere les infos.
-                            $timbre=$timbreCrud->selectId($modifTimbre);
+                            $timbre=$timbreCrud->selectId($data['id']);
                             //Couleur:
                             $couleursCrud = new Couleurs;
-                            $timbre['couleur']= $couleursCrud->selectId($timbre['couleurId']);
+                            $timbre['couleur']= $couleursCrud->selectId($timbre['couleursId']);
                             //Etat:
                             $etatCrud = new Etat;
                             $timbre['etat']= $etatCrud->selectId($timbre['etatId']);
                             //Pays:
                             $paysCrud = new Pays;
                             $timbre['pays']= $paysCrud->selectId($timbre['paysId']);
-
-                            $imageTimbre=$imageCrud->selectWhere($modifTimbre,'timbreId');
+                            //Image principale:
+                            $imagePrincipale; //Initialisation de l`image principale pour le renvoie.
+                            $imageTimbre=$imageCrud->selectWhere($data['id'],'timbreId');
                             for ($i = 0; $i < count($imageTimbre); $i++) {
                                     if ($imageTimbre[$i]['principale'] == 1) {
                                         $imagePrincipale = $imageTimbre[$i];
@@ -299,5 +302,6 @@ class TimbreController{
                 } 
             }
         } 
-    }     
+    }    
+    
 }    

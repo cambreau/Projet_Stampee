@@ -25,7 +25,7 @@ export const statutEnchere = (dateDebut, dateFin) => {
  * @param {Date} dateFin
  * @returns string
  */
-export const tempsRestant = (dateFin) => {
+export const calculTempsRestant = (dateFin) => {
   const maintenant = new Date();
   const fin = new Date(dateFin);
 

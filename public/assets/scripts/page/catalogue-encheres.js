@@ -1,6 +1,6 @@
 import { tousTimbres } from "../requetes-backend.js";
 import { affichageTimbres } from "../composant/carte-timbre.js";
-import { statutEnchere } from "../composant/encheres.js";
+import { statutEnchere, calculTempsRestant } from "../composant/encheres.js";
 
 async function CatalogueInit() {
   // **** Variables **** //
@@ -19,38 +19,55 @@ async function CatalogueInit() {
 const basCarteEnchere = (timbre, parent) => {
   // Création conteneur footer de la carte
   const footer = document.createElement("footer");
-  footer.classList.add("conteneur-timbres__timbre__bas-carte-enchere");
+  footer.classList.add("conteneur-timbres__timbre__bas-carte");
   parent.appendChild(footer);
   // Statut de l'enchere et temps restant:
+  console.log(timbre);
   const statutValeur = statutEnchere(
-    timbre["encheres"]["dateDebut"],
-    timbre["encheres"]["dateFin"]
+    timbre["enchere"]["dateDebut"],
+    timbre["enchere"]["dateFin"]
   );
-  const tempsRestant =
-    statutValeur == "En cours" ?? tempsRestant(timbre["encheres"]["dateFin"]);
   const statut = document.createElement("p");
   footer.appendChild(statut);
+  statut.classList.add("detail-timbre__compteur");
   const statutEnchereLabel = document.createElement("span");
   statut.appendChild(statutEnchereLabel);
-  statutEnchereLabel.textContent =
-    statutValeur == "En cours" ? "Temps restant :" : "Statut :";
-  statut.textContent = statutValeur == "En cours" ? tempsRestant : statutValeur;
+  if (statutValeur === "En cours") {
+    // affichage immédiat
+    statut.textContent = `Temps restant: ${calculTempsRestant(
+      timbre["enchere"]["dateFin"]
+    )}`;
+    // Mise à jour toutes les secondes
+    const chrono = setInterval(() => {
+      statut.textContent = `Temps restant : ${calculTempsRestant(
+        timbre["enchere"]["dateFin"]
+      )}`;
+    }, 1000);
+  } else {
+    statut.textContent = statutValeur;
+  }
 
   const prixEnchere = document.createElement("p");
   footer.appendChild(prixEnchere);
+  prixEnchere.classList.add(
+    "conteneur-timbres__timbre__bas-carte-enchere__prix"
+  );
   const prixEnchereLabel = document.createElement("span");
   prixEnchere.appendChild(prixEnchereLabel);
   prixEnchereLabel.textContent =
-    statutValeur != "Terminée" ?? "Prix plancher :";
-  prixEnchere.textContent = `${timbre["prix"]} CAD`;
+    statutValeur !== "Terminée" ? "Prix plancher :" : null;
+  const prixEnchereValeur = document.createTextNode(
+    ` ${timbre["enchere"]["prixPlancher"]} CAD`
+  );
+  prixEnchere.appendChild(prixEnchereValeur);
 
   if (statutValeur == "En cours") {
     const btnEnchere = document.createElement("a");
-    footer.appendChild(btnEnchere);
     btnEnchere.textContent = "Voir l’enchère";
-    btnEnchere.add.classList = "bouton";
-    btnEnchere.add.classList = "bouton-accent";
-    btnEnchere.href = `{{base}}/timbre/fiche-detail-timbreid={{ timbre.id }}`;
+    btnEnchere.classList.add("bouton");
+    btnEnchere.classList.add("bouton-accent");
+    btnEnchere.href = `/enchere/fiche-detail-enchere?id=${timbre["id"]}`;
+    footer.appendChild(btnEnchere);
   }
 };
 

@@ -4,6 +4,7 @@
   display: block;
   max-width: 45px;
   padding: var(--espacement-serre);
+  margin: auto;
 }
 
 .icon:hover {

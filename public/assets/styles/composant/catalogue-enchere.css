@@ -1,0 +1,16 @@
+.catalogue-enchere__contenu {
+  display: flex;
+  flex-direction: row;
+  margin: var(--espacement-espace) 0;
+  gap: var(--espacement-espace);
+}
+
+.catalogue-enchere__contenu .conteneur-timbres__timbre {
+  height: 430px;
+}
+
+@media screen and (max-width: 1150px) {
+  .catalogue-enchere__contenu {
+    flex-direction: column;
+  }
+}

@@ -76,7 +76,7 @@ const basCarteTimbreProfil = (timbre, parent) => {
     btnEnchere.textContent = "Voir l’enchère";
     btnEnchere.classList.add("bouton");
     btnEnchere.classList.add("bouton-accent");
-    btnEnchere.href = `{{base}}/timbre/fiche-detail-timbreid={{ timbre.id }}`;
+    btnEnchere.href = `/enchere/fiche-detail-enchere?id=${timbre["id"]}`;
   } else {
     const statut = document.createElement("p");
     footer.appendChild(statut);

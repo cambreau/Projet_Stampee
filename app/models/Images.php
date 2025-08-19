@@ -64,4 +64,9 @@ class Images extends CRUD {
         $image->save($cheminImage);  
         return $nomWebp;
     }
+
+    public function suppressionImage($image){
+        $cheminImage = 'C:\Users\breau\Documents\AEC\Projet1\Camille-Breau-Projet1\public\assets\images\images-timbre\\' . $image["lien"];
+        unlink($cheminImage);
+    }
 }

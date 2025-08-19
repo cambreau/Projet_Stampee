@@ -29,4 +29,4 @@ Camille Breau
 ## Suivi :
 
 - Header faire les liens des sites de naviguation
-- Connexion lorsque la page catalogue-timbre sera créé, rediriger les utilisateurs vers cette dernière avec un message de succès.
+- Connexion lorsque la page catalogue-enchere sera créé, rediriger les utilisateurs vers cette dernière avec un message de succès.

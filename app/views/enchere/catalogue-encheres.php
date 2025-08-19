@@ -3,9 +3,9 @@
 }) }}
 
 <article  class="page" id="catalogue-encheres">
-    <h1 class="catalogue-timbre__titre">Notre catalogue de timbres</h1>
-      <div class="catalogue-timbre">
-        <div class="catalogue-timbre__contenu">
+    <h1 class="catalogue-enchere__titre">Notre catalogue des enchères</h1>
+      <div class="catalogue-enchere">
+        <div class="catalogue-enchere__contenu">
           <section class="filtres">
             <h2 class="filtres__titre">Filtres</h2>
             <div class="filtres__categories">

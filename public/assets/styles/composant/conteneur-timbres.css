@@ -4,7 +4,6 @@
 .conteneur-timbres {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  padding-top: var(--espacement-base);
   gap: var(--espacement-espace) var(--espacement-base);
   align-items: center;
   justify-content: center;
@@ -24,6 +23,7 @@
 .conteneur-timbres__timbre:hover .bouton-haut-droite__conteneur {
   display: flex;
 }
+
 /*-------------------------------------------------------------------------*/
 /*Carte timbre image*/
 .conteneur-timbres__timbre__image {
@@ -44,7 +44,6 @@
   padding: var(--espacement-tres-serre) var(--espacement-base);
   text-align: center;
   align-content: center;
-  border-bottom: 1px solid var(--couleur-secondaire);
   height: 100%;
 }
 
@@ -62,9 +61,14 @@
   font-size: var(--taille-police-moyen);
   font-weight: var(--epaisseur-police-tres-gras);
 }
-
-.conteneur-timbres__timbre__bas-carte__info-enchere > * {
-  padding: var(--espacement-tres-serre);
+.conteneur-timbres__timbre__bas-carte-enchere__prix {
+  font-size: var(--taille-police-moyen);
+  font-weight: var(--epaisseur-police-tres-gras);
+  color: var(--couleur-principale);
+  margin: var(--espacement-base) 0;
+}
+.conteneur-timbres__timbre__bas-carte-enchere__prix > span {
+  font-size: var(--taille-police-moyen);
 }
 
 /*-------------------------------------------------------------------------*/

@@ -19,6 +19,10 @@
   margin: var(--espacement-espace) var(--espacement-base);
 }
 
+.profil__section > .bouton {
+  margin-bottom: var(--espacement-base);
+}
+
 .profil__titre {
   margin-bottom: var(--espacement-base);
 }

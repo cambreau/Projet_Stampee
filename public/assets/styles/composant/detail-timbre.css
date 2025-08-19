@@ -6,6 +6,8 @@
   padding: var(--espacement-base);
   border: 1px solid var(--couleur-secondaire);
   border-radius: var(--arrondi-petit);
+  margin: var(--espacement-espace);
+  margin-top: 0;
 }
 
 /* Les images du timbre */
@@ -62,20 +64,11 @@
 .detail-timbre__premiere-ligne {
   display: grid;
   grid-template-columns: 6fr 0.5fr;
-  align-items: first baseline;
-}
-
-.detail-timbre__sous-titre {
-  margin: var(--espacement-serre) 0 var(--espacement-espace)
-    var(--espacement-tres-serre);
-  font-size: var(--taille-police-moyen);
-  font-style: italic;
+  align-items: center;
+  margin-bottom: var(--espacement-espace);
 }
 
 /* Contenu detail-timbre */
-.detail-timbre__infos__contenu {
-  margin-left: var(--espacement-tres-serre);
-}
 
 /** Info */
 .detail-timbre__prix {
@@ -100,7 +93,6 @@
   border: thick double var(--couleur-secondaire);
   border-radius: var(--arrondi-petit);
   padding: var(--espacement-serre);
-  margin-bottom: var(--espacement-espace);
 }
 .detail-timbre__temps {
   font-weight: var(--epaisseur-police-tres-gras);

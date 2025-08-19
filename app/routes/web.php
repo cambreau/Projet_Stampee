@@ -29,8 +29,10 @@ Route::get('/timbre/page-modifier','TimbreController@pageModifierTimbre');
 Route::post('/timbre/page-modifier','TimbreController@modifierTimbre');
 Route::get('/timbre/supprimer','TimbreController@supprimerTimbre');
 
+
 //Encheres
 Route::get('/enchere/catalogue-encheres', 'EnchereController@pageCatalogueEncheres');
+Route::get('/enchere/fiche-detail-enchere','EnchereController@pageFicheDetailEncheres');
 
 //Requetes front vers back-end 
 Route::get('/requete/timbreMembreID','RequetesFrontController@recupererTimbresMembreID' );

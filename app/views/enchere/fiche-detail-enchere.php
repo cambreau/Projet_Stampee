@@ -24,6 +24,7 @@
             {%endfor%}
             </div>
           </div>
+          {%if enchere is defined %}
           <form class="form-offre">
             <label for="offre" class="cache">Offre</label>
             <input
@@ -40,6 +41,7 @@
               Faire une offre
             </button>
           </form>
+          {%endif%}
         </div>
         <div class="detail-timbre__infos">
           <header class="detail-timbre__entete">
@@ -56,20 +58,22 @@
             </div>
           </header>
           <div class="detail-timbre__infos__contenu">
+            {%if enchere is defined %}
             <div class="detail-timbre__prix">
               <span class="detail-timbre__prix-label">Prix :</span>
-              <span class="detail-timbre__prix-valeur">75 CAD CAD</span>
+              <span class="detail-timbre__prix-valeur">{{enchere.prix}} CAD</span>
             </div>
             <div class="detail-timbre__compteur">
               Enchère se termine dans :
               <span class="detail-timbre__temps">⏳ 2j : 1h : 39 m</span>
             </div>
+            {%endif%}
             <section class="detail-timbre__details">
               <h3>Les caractéristiques du timbre</h3>
               <ul class="detail-timbre__details__liste">
                 <li class="detail-timbre__details__detail">
                   <span class="detail-timbre__details__intitule">Pays :</span>
-                  {{timbre.pays}}
+                  {{timbre.pays.nom}}
                 </li>
                 <li class="detail-timbre__details__detail">
                   <span class="detail-timbre__details__intitule"
@@ -81,7 +85,7 @@
                   <span class="detail-timbre__details__intitule"
                     >Condition :</span
                   >
-                  {{timbre.etat}}
+                  {{timbre.etat.nom}}
                 </li>
                 <li class="detail-timbre__details__detail">
                   <span class="detail-timbre__details__intitule"
@@ -97,13 +101,13 @@
                   <span class="detail-timbre__details__intitule"
                     >Couleurs :</span
                   >
-                  {{timbre.couleur}}
+                  {{timbre.couleur.nom}}
                 </li>
                 <li class="detail-timbre__details__detail">
                   <span class="detail-timbre__details__intitule"
                     >Dimensions :</span
                   >
-                  {{timbre.dimensions}}
+                  {{timbre.dimension}}
                 </li>
               </ul>
             </section>

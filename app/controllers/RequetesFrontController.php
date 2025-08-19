@@ -73,7 +73,8 @@ class RequetesFrontController{
                 }
             }
             // 2. Récupérer les informartions encheres pour chaque timbre.
-            $timbre['encheres'] = $enchereCrud-> selectWhere($timbre['id'],'timbreId'); 
+            $enchere = $enchereCrud-> selectWhere($timbre['id'],'timbreId'); 
+            $timbre["enchere"] = $enchere[0];
         } 
          
         // ** Transformer les informations en JSON.

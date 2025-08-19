@@ -11,13 +11,18 @@
   display: flex;
   flex-direction: column;
   gap: var(--espacement-base);
+  min-width: 200px;
+}
+
+.filtres h2 {
+  margin-bottom: var(--espacement-base);
 }
 
 .filtres__categorie {
   display: flex;
   flex-direction: column;
 }
-.filtres__categorie select {
+.filtres__categorie button {
   padding: var(--espacement-tres-serre);
 }
 
