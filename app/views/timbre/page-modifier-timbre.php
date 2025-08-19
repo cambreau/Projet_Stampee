@@ -140,9 +140,6 @@
                 <picture class="form__image">
                     <img src="{{ asset }}/images/images-timbre/{{imagePrincipale.lien}}" alt="Timbre">
                 </picture>
-                <div class="bouton-haut-droite__conteneur">
-                    <button type="button" class="bouton-haut-droite classique"><img src="{{asset}}\images\icon\menu-ferme.webp"></button>
-                </div> 
             </div>    
 
             <div class="form__champ">

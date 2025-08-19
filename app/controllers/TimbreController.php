@@ -58,29 +58,45 @@ class TimbreController{
                 
                 // Validation des images
                 $imagesCrud = new Images;
-                $validationImagePrincipale = $imagesCrud->validationImagePrincipale($_FILES['principale']);
-                $validationImages = $_FILES['images']['error'][0] !== UPLOAD_ERR_NO_FILE ? $imagesCrud->validationImage($_FILES['images']) : true;  
-                
+                $validationImagePrincipale = $_FILES['principale']['error'] !== UPLOAD_ERR_NO_FILE ? $imagesCrud->validationImage($_FILES['principale']) : ["L'image principale est obligatoire"];
+                // Initialisation d'un variable erreur Image
+                $erreursImage=[];
+                if($_FILES['images']['error'][0] !== UPLOAD_ERR_NO_FILE){
+                    foreach($_FILES['images']['tmp_name'] as $key => $tmpName) {
+                        $image = [
+                            'name' => $_FILES['images']['name'][$key],
+                            'tmp_name' => $tmpName,
+                            'error' => $_FILES['images']['error'][$key]
+                        ];
+                        $validationImage = $imagesCrud->validationImage($image); 
+                        if($validationImage !== true){
+                            array_push($erreursImage, $validationImage); 
+                        }
+                    }
+                }
                 // Si la validation des $data et la validation des images.
-                if($Validation->estUnSucces() && $validationImages === true && $validationImagePrincipale === true){
+                if($Validation->estUnSucces() && empty($erreursImage) && $validationImagePrincipale === true){
                     $timbreCrud = New Timbre;
                     $data['membreId']=$_SESSION['membre_id'];
                     $ajoutTimbre = $timbreCrud->insert($data);
                     // Si l'ajout du timbre à fonctionné, on ajoute les images.
                     if($ajoutTimbre){
-                        $erreursImage=[];
                         // On prépare les images pour l'import.
                         $imagePrincipaleImport = $imagesCrud->formatterImage($_FILES['principale'],$ajoutTimbre);
                         $imagePrincipale = ['lien'=>$imagePrincipaleImport,'principale'=>1,'timbreId'=>$ajoutTimbre];
                         $importationImagePrincipale = $imagesCrud->insert($imagePrincipale);
                         if($_FILES['images']['error'][0] !== UPLOAD_ERR_NO_FILE){
-                            for ($i = 0; $i < count($_FILES['images']); $i++) {
-                                $imagesImport = $imagesCrud->formatterImage($_FILES['images'][$i],$ajoutTimbre);
-                                $image=['lien'=>$imagesImport[$i],'principale'=>0,'timbreId'=>$ajoutTimbre];
-                                $importationImage = $imagesCrud->insert($image); 
-                            }
-                        }   
-
+                                foreach($_FILES['images']['tmp_name'] as $key => $tmpName) {
+                                    $image = [
+                                        'name' => $_FILES['images']['name'][$key],
+                                        'tmp_name' => $tmpName,
+                                        'error' => $_FILES['images']['error'][$key]
+                                    ];
+                                    $imageFormatter = $imagesCrud->formatterImage($image,$ajoutTimbre);
+                                    $imageImport=['lien'=>$imageFormatter,'principale'=>0,'timbreId'=>$ajoutTimbre];
+                                    $importationImage = $imagesCrud->insert($imageImport); 
+                                }
+                        }
                         //On recupere les infos.
                         $timbre=$timbreCrud->selectId($ajoutTimbre);
                         //Couleur:
@@ -109,7 +125,6 @@ class TimbreController{
                 }   
                 else{
                     $erreurs = $Validation->geterreurs();
-                    $erreursImage = $validationImages;
                     $erreursImagePrincipale=$validationImagePrincipale;
 
                     // On récupère les informations nécessaires pour le formulaire.
@@ -185,23 +200,36 @@ class TimbreController{
                 $Validation->field('etatId',$data['etatId'])->obligatoire();
 
                  // Validation des images
-                 $imagesCrud = new Images;
+                 $imageCrud = new Images;
                  //Si l'utilisateur a choisi une nouvelle image principale, on supprime l'image existante et on ajoute la nouvelle.
-                 $validationImagePrincipale = $_FILES['principale']['error'][0] !== UPLOAD_ERR_NO_FILE ?$imagesCrud->validationImagePrincipale($_FILES['principale']) : true;
+                 $validationImagePrincipale = $_FILES['principale']['error'][0] !== UPLOAD_ERR_NO_FILE ?$imageCrud->validationImage($_FILES['principale']) : true;
                  if(!empty($_FILES['principale']) ){
                     $images = $imageCrud->selectWhere($data['id'],'timbreId');
                     for ($i = 0; $i < count($images); $i++) {
                         if ($images[$i]['principale'] == 1) {
-                            $SupprimerancienneImagePrincipale = delete($images[$i]['id']);
+                            $SupprimerancienneImagePrincipale = $imageCrud->delete($images[$i]['id']);
                             unset($images); // Retire les autres images.
                             break; // On arrête après la première trouvée
                             }
                         }
                  }
-                 $validationImages = $_FILES['images']['error'][0] !== UPLOAD_ERR_NO_FILE ? $imagesCrud->validationImage($_FILES['images']) : true;  
-                
+                  // Initialisation d'un variable erreur Image
+                $erreursImage=[];
+                if($_FILES['images']['error'][0] !== UPLOAD_ERR_NO_FILE){
+                    foreach($_FILES['images']['tmp_name'] as $key => $tmpName) {
+                        $image = [
+                            'name' => $_FILES['images']['name'][$key],
+                            'tmp_name' => $tmpName,
+                            'error' => $_FILES['images']['error'][$key]
+                        ];
+                        $validationImage = $imageCrud->validationImage($image); 
+                        if($validationImage !== true){
+                            array_push($erreursImage, $validationImage); 
+                        }
+                    }
+                }
                 // Si la validation des $data et la validation des images.
-                if($Validation->estUnSucces() && $validationImages === true && $validationImagePrincipale === true){
+                if($Validation->estUnSucces() && empty($erreursImage) && $validationImagePrincipale === true){
                     $timbreCrud = New Timbre;
                     $data['membreId']=$_SESSION['membre_id'];
 
@@ -210,15 +238,20 @@ class TimbreController{
                         if($modifTimbre){
                             // On prépare les images pour l'import.
                             if($_FILES['principale']['error'][0] !== UPLOAD_ERR_NO_FILE ){
-                                $imagePrincipaleImport = $imagesCrud->formatterImage($_FILES['principale'],$ajoutTimbre);
-                                $imagePrincipale = ['lien'=>$imagePrincipaleImport,'principale'=>1,'timbreId'=>$ajoutTimbre];
-                                $importationImagePrincipale = $imagesCrud->insert($imagePrincipale);
+                                $imagePrincipaleImport = $imageCrud->formatterImage($_FILES['principale'],$modifTimbre);
+                                $imagePrincipale = ['lien'=>$imagePrincipaleImport,'principale'=>1,'timbreId'=>$modifTimbre];
+                                $importationImagePrincipale = $imageCrud->insert($imagePrincipale);
                             }
                             if($_FILES['images']['error'][0] !== UPLOAD_ERR_NO_FILE ){
-                                for ($i = 0; $i < count($_FILES['images']); $i++) {
-                                    $imagesImport = $imagesCrud->formatterImage($_FILES['images'][$i],$ajoutTimbre);
-                                    $image=['lien'=>$imagesImport[$i],'principale'=>0,'timbreId'=>$ajoutTimbre];
-                                    $importationImage = $imagesCrud->insert($image); 
+                                foreach($_FILES['images']['tmp_name'] as $key => $tmpName) {
+                                    $image = [
+                                        'name' => $_FILES['images']['name'][$key],
+                                        'tmp_name' => $tmpName,
+                                        'error' => $_FILES['images']['error'][$key]
+                                    ];
+                                    $imageFormatter = $imageCrud->formatterImage($image,$modifTimbre);
+                                    $imageImport=['lien'=>$imageFormatter,'principale'=>0,'timbreId'=>$modifTimbre];
+                                    $importationImage = $imageCrud->insert($imageImport); 
                                 }
                             }   
                             //On recupere les infos.
@@ -233,7 +266,7 @@ class TimbreController{
                             $paysCrud = new Pays;
                             $timbre['pays']= $paysCrud->selectId($timbre['paysId']);
 
-                            $imageTimbre=$imagesCrud->selectWhere($modifTimbre,'timbreId');
+                            $imageTimbre=$imageCrud->selectWhere($modifTimbre,'timbreId');
                             for ($i = 0; $i < count($imageTimbre); $i++) {
                                     if ($imageTimbre[$i]['principale'] == 1) {
                                         $imagePrincipale = $imageTimbre[$i];
@@ -249,7 +282,6 @@ class TimbreController{
                 }
                 else{
                     $erreurs = $Validation->geterreurs();
-                    $erreursImage = $validationImages;
                     $erreursImagePrincipale=$validationImagePrincipale;
 
                     // On récupère les informations nécessaires pour le formulaire.

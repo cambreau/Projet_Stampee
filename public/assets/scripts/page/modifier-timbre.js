@@ -17,7 +17,6 @@ function modifierTimbreInit() {
 const supprimerImageTimbreBD = (evenement) => {
   const idImage = evenement.currentTarget.dataset.imageId;
   const imageHTML = evenement.currentTarget.closest(".form__visuel-image");
-  console.log(idImage);
   supprimerImageBD(idImage, imageHTML);
 };
 
