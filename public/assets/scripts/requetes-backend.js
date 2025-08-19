@@ -25,3 +25,15 @@ export const tousTimbres = async () => {
       console.error(err);
     });
 };
+
+export const supprimerImageBD = async (idImage, imageHTML) => {
+  axios
+    .delete(`/requete/supprimerImageBD?id=${idImage}`)
+    .then((reponse) => {
+      alert(`L'image a été  supprimée !`);
+      imageHTML.remove();
+    })
+    .catch((error) => {
+      console.error("Erreur suppression :", error);
+    });
+};

@@ -26,6 +26,7 @@ Route::get('/membre/supprimer', 'MembreController@supprimer');
 Route::get('/timbre/ajout-timbre', 'TimbreController@pageAjoutTimbre');
 Route::post('/timbre/ajout-timbre','TimbreController@ajouterTimbre' );
 Route::get('/timbre/page-modifier','TimbreController@pageModifierTimbre');
+Route::post('/timbre/page-modifier','TimbreController@modifierTimbre');
 Route::get('/timbre/supprimer','TimbreController@supprimerTimbre');
 
 //Encheres
@@ -34,6 +35,7 @@ Route::get('/enchere/catalogue-encheres', 'EnchereController@pageCatalogueEncher
 //Requetes front vers back-end 
 Route::get('/requete/timbreMembreID','RequetesFrontController@recupererTimbresMembreID' );
 Route::get('/requete/tousTimbres','RequetesFrontController@recupererTousTimbres' );
+Route::delete('/requete/supprimerImageBD','RequetesFrontController@supprimerImageBD' );
 
 Route::dispatch();
 

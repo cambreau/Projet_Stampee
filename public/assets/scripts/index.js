@@ -9,6 +9,8 @@ if (page === "profil") {
   import("./page/profil.js");
 } else if (page === "catalogue-encheres") {
   import("./page/catalogue-encheres.js");
+} else if (page === "modifier-timbre") {
+  import("./page/modifier-timbre.js");
 }
 
 /*----------------------------------------------------------------- */

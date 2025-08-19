@@ -80,7 +80,12 @@ class RequetesFrontController{
         header('Content-Type: application/json'); // Indique au navigateur que la réponse renvoyée est du JSON, pas du HTML ou du texte brut.
         $jsonTimbres = json_encode($timbres); // Transforme en JSON.
         echo  $jsonTimbres; // Envoie au front-end les informations
-    }    
+    }   
+    
+    public function supprimerImageBD($id){
+        $imageCrud = New Images;
+        $imageSupprimer =  $imageCrud->delete($id);
+    }
 }
 
 

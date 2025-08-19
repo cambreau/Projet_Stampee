@@ -58,7 +58,46 @@ input[type="checkbox"]:checked {
   gap: var(--espacement-base);
   margin-top: var(--espacement-espace);
 }
+/*** form__fieldset ***/
+.form__fieldset {
+  padding: var(--espacement-base);
+  margin-top: var(--espacement-base);
+  border: var(--couleur-secondaire) 2px solid;
+}
 
+.form__fieldset legend {
+  font-size: var(--taille-police-h4);
+  font-weight: var(--epaisseur-police-tres-gras);
+  padding: 0 var(--espacement-serre);
+}
+
+/*** Visuel image ***/
+.form__visuel-image {
+  position: relative;
+  width: fit-content;
+  margin-top: var(--espacement-base);
+}
+.form__visuel-image:hover .bouton-haut-droite__conteneur {
+  display: flex;
+}
+
+.form__images {
+  display: flex;
+  gap: var(--espacement-base);
+}
+
+.form__image {
+  display: block;
+  max-width: 200px;
+  height: fit-content;
+}
+
+.form__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+/*** Media ***/
 @media screen and (max-width: 900px) {
   .form__champ input,
   .form__champ select,

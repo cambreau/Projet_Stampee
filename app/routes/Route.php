@@ -14,6 +14,10 @@ class Route {
         self::$routes[] = ['url' => $url, 'controller' => $controller, 'method' => 'POST'];
     }
 
+    public static function delete($url, $controller){
+        self::$routes[] = ['url' => $url, 'controller' => $controller, 'method' => 'DELETE'];
+    }
+
    public static function dispatch(){
         $url = $_SERVER['REQUEST_URI'];
         $method = $_SERVER['REQUEST_METHOD'];
@@ -55,6 +59,14 @@ class Route {
                         $controllerInstance->$methodName($_POST, $queryParams);
                     }else{
                          $controllerInstance->$methodName($_POST);
+                    }
+                }else if($method == 'DELETE'){
+                    $deleteData = $_GET["id"];
+                    if(isset($urlSegments[1])){
+                        parse_str($urlSegments[1], $queryParams);
+                        $controllerInstance->$methodName($deleteData, $queryParams);
+                    }else{
+                        $controllerInstance->$methodName($deleteData);
                     }
                 }
                 

@@ -96,15 +96,13 @@ const basCarteTimbreProfil = (timbre, parent) => {
  */
 const boutonModifSupprimer = (timbre, parent) => {
   const btnConteneur = document.createElement("div");
-  btnConteneur.classList.add("conteneur-timbres__conteneur-btn-modifSuppr");
+  btnConteneur.classList.add("bouton-haut-droite__conteneur");
   parent.appendChild(btnConteneur);
 
   const btnModifierLien = document.createElement("a");
   btnModifierLien.href = `/timbre/page-modifier?id=${timbre["id"]}`;
-  btnModifierLien.classList.add(
-    "conteneur-timbres__conteneur-btn-modifSuppr__bouton"
-  );
-  btnModifierLien.classList.add("modifier");
+  btnModifierLien.classList.add("bouton-haut-droite");
+  btnModifierLien.classList.add("classique");
   btnConteneur.appendChild(btnModifierLien);
   const btnModifier = document.createElement("img");
   btnModifier.src = `/public/assets/images/icon/modifier.png`;
@@ -114,10 +112,8 @@ const boutonModifSupprimer = (timbre, parent) => {
   const btnSupprimerLien = document.createElement("a");
   btnSupprimerLien.href = `/timbres/supprimer?id=${timbre["id"]}`;
   btnConteneur.appendChild(btnSupprimerLien);
-  btnSupprimerLien.classList.add(
-    "conteneur-timbres__conteneur-btn-modifSuppr__bouton"
-  );
-  btnSupprimerLien.classList.add("supprimer");
+  btnSupprimerLien.classList.add("bouton-haut-droite");
+  btnSupprimerLien.classList.add("accent");
   const btnSupprimer = document.createElement("img");
   btnSupprimer.src = `/public/assets/images/icon/supprimer.png`;
   btnSupprimer.alt = `Icon supprimer`;

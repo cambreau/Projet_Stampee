@@ -4,6 +4,8 @@
 <section>
     <h1 >Ajouter un timbre</h1>
     <form class="form form__gauche" method="post" enctype="multipart/form-data">  
+    <fieldset class="form__fieldset">
+        <legend>Informations du timbre</legend>
         <div class="form__champ">
             <label for="nom">Nom :</label>
             <input
@@ -122,7 +124,6 @@
             <p class="message__erreur">{{ erreurs.paysId }}</p>
         {% endif %}
 
-    
         <div class="form__champ">
             <label for="etatId">État :</label>
             <select id="etatId" name="etatId">
@@ -141,14 +142,30 @@
         {% if erreurs.etatId is defined %}
             <p class="message__erreur">{{ erreurs.etatId }}</p>
         {% endif %}
+    </fieldset>
 
-        <input type="file" id="images" name="images[]" accept="image/*" multiple />
-        {% if erreursImage is defined %}
-            {% for erreur in erreursImage %}
-            <p class="message__erreur">{{ erreur }}</p>
-            {% endfor %}
-        {% endif %}
+    <fieldset class="form__fieldset">
+        <legend>Images du timbre</legend>
+            <div class="form__champ">
+                <label for="principale">Image principale : </label>
+                <input type="file" id="principale" name="principale" accept=".png, .jpg, .jpeg, .gif, .webp"/>
+            </div>
+            {% if erreursImagePrincipale is defined %}
+                {% for erreur in erreursImagePrincipale %}
+                <p class="message__erreur">{{ erreur }}</p>
+                {% endfor %}
+            {% endif %}
 
+            <div class="form__champ">
+                <label for="images">Images secondaires : </label>
+                <input type="file" id="images" name="images[]" accept=".png, .jpg, .jpeg, .gif, .webp" multiple/>
+            </div>
+            {% if erreursImage is defined %}
+                {% for erreur in erreursImage %}
+                <p class="message__erreur">{{ erreur }}</p>
+                {% endfor %}
+            {% endif %}
+    </fieldset>
 
 
         <div class="form__btn-conteneur">
