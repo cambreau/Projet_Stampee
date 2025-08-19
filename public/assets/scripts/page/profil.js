@@ -110,7 +110,7 @@ const boutonModifSupprimer = (timbre, parent) => {
   btnModifierLien.appendChild(btnModifier);
 
   const btnSupprimerLien = document.createElement("a");
-  btnSupprimerLien.href = `/timbres/supprimer?id=${timbre["id"]}`;
+  btnSupprimerLien.href = `/timbre/supprimer?id=${timbre["id"]}`;
   btnConteneur.appendChild(btnSupprimerLien);
   btnSupprimerLien.classList.add("bouton-haut-droite");
   btnSupprimerLien.classList.add("accent");

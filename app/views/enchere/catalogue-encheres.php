@@ -9,10 +9,10 @@
           <section class="filtres">
             <h2 class="filtres__titre">Filtres</h2>
             <div class="filtres__categories">
-                <buton class="bouton bouton-classique">Par Prix</buton>
-                <buton class="bouton bouton-classique">Par Date d'émission </buton>
-                <buton class="bouton bouton-classique">Par Pays d'origine</buton>
-                <buton class="bouton bouton-classique">Par Statut</buton>
+                <buton class="bouton bouton-classique">Par prix</buton>
+                <buton class="bouton bouton-classique">Par date d'émission </buton>
+                <buton class="bouton bouton-classique">Par pays d'origine</buton>
+                <buton class="bouton bouton-classique">Par statut</buton>
             </div>
           </section>
           <div class="conteneur-timbres">

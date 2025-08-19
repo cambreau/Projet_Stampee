@@ -1,7 +1,9 @@
 <?php
 namespace App\Controllers;
 use App\Models\Couleurs;
+use App\Models\Enchere;
 use App\Models\Etat;
+use App\Models\Membre;
 use App\Models\Pays;
 use App\Models\Timbre;
 use App\Providers\View;
@@ -124,7 +126,6 @@ class TimbreController{
                 else{
                     $erreurs = $Validation->geterreurs();
                     $erreursImagePrincipale=$validationImagePrincipale;
-
                     // On récupère les informations nécessaires pour le formulaire.
                     //Couleurs:
                     $couleursCrud = new Couleurs;
@@ -239,7 +240,7 @@ class TimbreController{
                                 }
                             }
                             // 2- On importe la nouvelle image.
-                            $imagePrincipaleImport = $imageCrud->formatterImage($_FILES['principale'],$modifTimbre);
+                            $imagePrincipaleImport = $imageCrud->formatterImage($_FILES['principale'],$data['id']);
                             $imagePrincipale = ['lien'=>$imagePrincipaleImport,'principale'=>1,'timbreId'=>$data['id']];
                             $importationImagePrincipale = $imageCrud->insert($imagePrincipale);
                         }
@@ -277,7 +278,7 @@ class TimbreController{
                                         break; // On arrête après la première trouvée
                                     }
                             }
-                            return View::render('timbre/fiche-detail-timbre',['timbre'=>$timbre,'imageTimbre'=>$imageTimbre,'imagePrincipale'=>$imagePrincipale,'session'=>$session]);        
+                            return View::render('enchere/fiche-detail-enchere',['timbre'=>$timbre,'imageTimbre'=>$imageTimbre,'imagePrincipale'=>$imagePrincipale,'session'=>$session]);        
                         }
                         else{
                             return View::render('erreur404', ['message'=>'Erreur 404 - Erreur lors de la modification!','session'=>$session]);   
@@ -304,4 +305,32 @@ class TimbreController{
         } 
     }    
     
+    public function supprimerTimbre(){
+        //Supprimer Image
+        $idTimbre = $_GET["id"];
+        $imageCrud = New Images;
+        $images =  $imageCrud->selectWhere($idTimbre, "timbreId");
+        foreach($images as $image){
+            $imageCrud->suppressionImage($image);
+            $imageCrud->delete($image["id"]);
+        }
+       //Supprimer Enchere
+       $enchereCrud = New Enchere;
+       $encheres = $enchereCrud->selectWhere($idTimbre,"timbreId");
+       foreach($encheres as $enchere){
+            $enchereCrud->delete($enchere["id"]);
+        }
+       //Supprimer le timbre
+       $timbreCrud = New Timbre;
+       $timbreSupprimer = $timbreCrud->delete($idTimbre);
+       if($timbreSupprimer){
+            $membreCrud = new Membre;
+            $membre = $membreCrud->selectId($_SESSION['membre_id']);
+            $session = $_SESSION ?? null;
+            return View::render('/membre/profil',['membre'=>$membre,'session'=>$session]);  
+        }
+        else{
+            return View::render('erreur404',['message'=>"Erreur 404 - Une erreure s'est produite."]);  
+        }
+    }
 }    

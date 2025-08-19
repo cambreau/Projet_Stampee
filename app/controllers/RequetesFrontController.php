@@ -85,7 +85,9 @@ class RequetesFrontController{
     
     public function supprimerImageBD($id){
         $imageCrud = New Images;
-        $imageSupprimer =  $imageCrud->delete($id);
+        $imageASupprimer =  $imageCrud->selectId($id);
+        $imageCrud->suppressionImage($imageASupprimer);
+        $imageSupprimee =  $imageCrud->delete($id);
     }
 }
 

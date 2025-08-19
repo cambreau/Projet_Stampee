@@ -2,17 +2,19 @@
     title: "Timbre - Stampee : Site d'enchère de timbre",
 }) }}
 
+<article class="page" id="fiche-detail-enchere">
       <h1>Fiche détaillée du timbre</h1>
       <section class="detail-timbre">
         <div class="detail-timbre__images-btn">
           <div class="detail-timbre__images">
-            <picture class="detail-timbre__image-principale">
+            <picture class="detail-timbre__image-principale img-zoom-container">
               <img
-                class="img img-bordure"
+                class="img img-bordure" id="myimage";
                 src="{{asset}}/images/images-timbre/{{imagePrincipale.lien}}"
                 alt="Image principale du timbre {{timbre.nom}}"
               />
             </picture>
+            <!-- <div id="myresult" class="img-zoom-result"></div> -->
             <div class="detail-timbre__galerie">
             {%for image in imageTimbre %}
               <picture class="detail-timbre__galerie__miniature">
@@ -114,5 +116,6 @@
           </div>
         </div>
       </section>
+</article>
 
 {{ include('layouts/footer.php') }}

@@ -11,6 +11,8 @@ if (page === "profil") {
   import("./page/catalogue-encheres.js");
 } else if (page === "modifier-timbre") {
   import("./page/modifier-timbre.js");
+} else if (page === "fiche-detail-enchere") {
+  import("./page/fiche-detail-enchere.js");
 }
 
 /*----------------------------------------------------------------- */

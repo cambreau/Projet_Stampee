@@ -25,7 +25,6 @@ const imageTimbre = (timbreLien, timbreNom, section) => {
   picture.classList.add("conteneur-timbres__timbre__image");
   section.appendChild(picture);
   const img = document.createElement("img");
-  console.log(timbreLien);
   img.src = `/public/assets/images/images-timbre/${timbreLien}`;
   img.alt = `Image principale du timbre : ${timbreNom}`;
   picture.appendChild(img);
