@@ -1,19 +1,18 @@
 /** Fonction qui gere l'affichage des timbres */
-export const affichageTimbres = async (
-  listeTimbres,
+export const affichageTimbre = async (
+  timbre,
+  enchere = null,
   parent,
   particularitesTimbre
 ) => {
   // 1. Création de la carte pour chaque timbre
-  listeTimbres.forEach((timbre) => {
-    const sectionTimbre = document.createElement("section");
-    sectionTimbre.classList.add("conteneur-timbres__timbre");
-    parent.appendChild(sectionTimbre);
-    // Création des elements de la carte
-    imageTimbre(timbre["principale"]["lien"], timbre["nom"], sectionTimbre);
-    titreTimbre(timbre["nom"], sectionTimbre);
-    particularitesTimbre(timbre, sectionTimbre);
-  });
+  const sectionTimbre = document.createElement("section");
+  sectionTimbre.classList.add("conteneur-timbres__timbre");
+  parent.appendChild(sectionTimbre);
+  // Création des elements de la carte
+  imageTimbre(timbre["principale"]["lien"], timbre["nom"], sectionTimbre);
+  titreTimbre(timbre["nom"], sectionTimbre);
+  particularitesTimbre(timbre, enchere, sectionTimbre);
 };
 
 /** Fonction pour créer l'image du timbre

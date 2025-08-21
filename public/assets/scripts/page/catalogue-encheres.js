@@ -1,14 +1,21 @@
-import { tousTimbres } from "../requetes-backend.js";
-import { affichageTimbres } from "../composant/carte-timbre.js";
+import { tousEncheres } from "../requetes-backend.js";
+import { affichageTimbre } from "../composant/carte-timbre.js";
 import { statutEnchere, calculTempsRestant } from "../composant/encheres.js";
 
 async function CatalogueInit() {
   // **** Variables **** //
-  const timbres = await tousTimbres();
+  const encheres = await tousEncheres();
   const conteneurTimbre = document.querySelector(".conteneur-timbres");
   // **** Logique **** //
   // Console.log montre timbres =[] lorsqu'il n'y a rien dans la BD.
-  affichageTimbres(timbres, conteneurTimbre, basCarteEnchere);
+  encheres.forEach((enchere) => {
+    affichageTimbre(
+      enchere["timbre"],
+      enchere,
+      conteneurTimbre,
+      basCarteEnchere
+    );
+  });
 }
 
 /**
@@ -16,17 +23,15 @@ async function CatalogueInit() {
  * @param {Object} timbre
  * @param {HTMLElement} parent
  */
-const basCarteEnchere = (timbre, parent) => {
+const basCarteEnchere = (timbre, enchere, parent) => {
   // Création conteneur footer de la carte
   const footer = document.createElement("footer");
   footer.classList.add("conteneur-timbres__timbre__bas-carte");
   parent.appendChild(footer);
   // Statut de l'enchere et temps restant:
-  console.log(timbre);
-  const statutValeur = statutEnchere(
-    timbre["enchere"]["dateDebut"],
-    timbre["enchere"]["dateFin"]
-  );
+  const dates = document.createElement("p");
+  dates.textContent = `${enchere["dateDebut"]} - ${enchere["dateFin"]}`;
+  const statutValeur = statutEnchere(enchere["dateDebut"], enchere["dateFin"]);
   const statut = document.createElement("p");
   footer.appendChild(statut);
   statut.classList.add("detail-timbre__compteur");
@@ -35,12 +40,12 @@ const basCarteEnchere = (timbre, parent) => {
   if (statutValeur === "En cours") {
     // affichage immédiat
     statut.textContent = `Temps restant: ${calculTempsRestant(
-      timbre["enchere"]["dateFin"]
+      enchere["dateFin"]
     )}`;
     // Mise à jour toutes les secondes
     const chrono = setInterval(() => {
       statut.textContent = `Temps restant : ${calculTempsRestant(
-        timbre["enchere"]["dateFin"]
+        enchere["dateFin"]
       )}`;
     }, 1000);
   } else {
@@ -57,7 +62,7 @@ const basCarteEnchere = (timbre, parent) => {
   prixEnchereLabel.textContent =
     statutValeur !== "Terminée" ? "Prix plancher :" : null;
   const prixEnchereValeur = document.createTextNode(
-    ` ${timbre["enchere"]["prixPlancher"]} CAD`
+    ` ${enchere["prixPlancher"]} CAD`
   );
   prixEnchere.appendChild(prixEnchereValeur);
 

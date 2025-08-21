@@ -1,20 +1,31 @@
 /* --- Detail timbre --- */
 .detail-timbre {
   display: grid;
-  grid-template-columns: 0.5fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: var(--espacement-espace);
   padding: var(--espacement-base);
   border: 1px solid var(--couleur-secondaire);
   border-radius: var(--arrondi-petit);
-  margin: var(--espacement-espace);
+  margin: var(--espacement-base);
   margin-top: 0;
+}
+
+.detail-timbre__partie {
+  display: grid;
+  grid-template-rows: 1fr 0.5fr;
 }
 
 /* Les images du timbre */
 /** Image principale */
 .detail-timbre__image-principale {
+  display: flex;
+  align-items: center;
+  gap: var(--espacement-base);
+}
+
+.detail-timbre__image-principale__image {
   display: block;
-  height: 400px;
+  max-width: 400px;
 }
 
 /** Galerie photos */
@@ -22,14 +33,18 @@
   display: flex;
   gap: var(--espacement-base);
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   margin-top: var(--espacement-serre);
+  background-color: var(--couleur-fond-accent);
 }
 
 .detail-timbre__galerie__miniature {
-  background-color: var(--couleur-fond-accent);
+  flex-wrap: wrap;
   border-radius: var(--arrondi-petit);
-  width: 130px;
+  border: 1px solid var(--couleur-secondaire);
+  max-width: 150px;
+  height: fit-content;
   cursor: pointer;
   transition: transform 0.2s ease;
 }
@@ -137,30 +152,21 @@
     flex-direction: column;
   }
 
+  .detail-timbre__image-principale {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
   .detail-timbre__images {
     display: flex;
     gap: var(--espacement-base);
   }
 
-  .detail-timbre__galerie {
-    flex-direction: column;
-    justify-content: start;
-    align-items: start;
-    gap: var(--espacement-serre);
-    margin-top: 0;
-  }
-
-  .detail-timbre__image-principale {
-    display: block;
-    width: 70%;
-  }
   .detail-timbre__boutons {
     min-width: auto;
     max-width: 70%;
   }
-}
 
-@media screen and (max-width: 1320px) {
   .detail-timbre__details__detail {
     grid-template-columns: 1fr 2fr;
   }
@@ -168,5 +174,13 @@
   .detail-timbre__boutons {
     min-width: auto;
     max-width: unset;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .detail-timbre__image-principale {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
   }
 }

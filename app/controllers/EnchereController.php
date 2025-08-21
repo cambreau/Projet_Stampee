@@ -5,6 +5,7 @@ use App\Models\Couleurs;
 use App\Models\Etat;
 use App\Models\Pays;
 use App\Models\Timbre;
+use App\Models\Enchere;
 use App\Models\Images;
 
 
@@ -40,6 +41,10 @@ class EnchereController{
               }
           }
 
-         return View::render('/enchere/fiche-detail-enchere',['session'=>$session, 'timbre'=>$timbre, 'imageTimbre'=>$imageTimbre,'imagePrincipale'=>$imagePrincipale]);
+        //Encheres:
+        $encheresCrud = new Enchere;
+        $enchere = $encheresCrud->selectWhere($_GET['id'],'timbreId');
+        $enchere = $enchere[0];
+         return View::render('/enchere/fiche-detail-enchere',['session'=>$session, 'timbre'=>$timbre, 'imageTimbre'=>$imageTimbre,'imagePrincipale'=>$imagePrincipale, 'enchere'=>$enchere]);
     }
 }

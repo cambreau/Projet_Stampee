@@ -1,5 +1,5 @@
 import { timbresParMembreId } from "../requetes-backend.js";
-import { affichageTimbres } from "../composant/carte-timbre.js";
+import { affichageTimbre } from "../composant/carte-timbre.js";
 import { statutEnchere } from "../composant/encheres.js";
 
 async function profilInit() {
@@ -10,7 +10,14 @@ async function profilInit() {
   // **** Logique **** //
   if (timbres.length !== 0) {
     // Console.log montre timbres =[] lorsqu'il n'y a rien dans la BD.
-    affichageTimbres(timbres, conteneurTimbre, particularitesTimbreProfil);
+    timbres.forEach((timbre) => {
+      affichageTimbre(
+        timbre,
+        null,
+        conteneurTimbre,
+        particularitesTimbreProfil
+      );
+    });
   } else {
     messageInformation(conteneurTimbre);
   }
@@ -43,7 +50,7 @@ const messageInformation = (conteneurTimbre) => {
  * @param {Array} infoTimbre
  * @param {HTMLElement} parent
  */
-const particularitesTimbreProfil = (infoTimbre, parent) => {
+const particularitesTimbreProfil = (infoTimbre, enchere = null, parent) => {
   basCarteTimbreProfil(infoTimbre, parent);
   boutonModifSupprimer(infoTimbre, parent);
 };

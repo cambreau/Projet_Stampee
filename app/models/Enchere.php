@@ -7,8 +7,4 @@ class Enchere extends CRUD {
     protected $clePrimaire = "id";
     protected $colonnes = ['id', 'dateDebut', 'dateFin', 'prixPlancher', 'coupCoeurLord', 'timbreId'];
 
-    public function statutEnchere($enchere){
-        
-
-    }
 }

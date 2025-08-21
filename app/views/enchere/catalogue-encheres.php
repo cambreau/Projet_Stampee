@@ -16,7 +16,7 @@
             </div>
           </section>
           <div class="conteneur-timbres">
-
+            <!-- Genere par JavaScript -->
           </div>
         </div>
       </div>

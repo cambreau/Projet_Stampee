@@ -35,9 +35,13 @@ Route::get('/enchere/catalogue-encheres', 'EnchereController@pageCatalogueEncher
 Route::get('/enchere/fiche-detail-enchere','EnchereController@pageFicheDetailEncheres');
 
 //Requetes front vers back-end 
+Route::get('/requete/recupererSession','RequetesFrontController@recupererSession');
 Route::get('/requete/timbreMembreID','RequetesFrontController@recupererTimbresMembreID' );
 Route::get('/requete/tousTimbres','RequetesFrontController@recupererTousTimbres' );
+Route::get("/requete/tousEncheres", 'RequetesFrontController@recupererToutesEncheres');
 Route::delete('/requete/supprimerImageBD','RequetesFrontController@supprimerImageBD' );
+Route::get('/requete/ajouterMisesParId','RequetesFrontController@ajouterMisesParId');
+Route::get('/requete/recupererMisesParId','RequetesFrontController@recupererMisesParId');
 
 Route::dispatch();
 

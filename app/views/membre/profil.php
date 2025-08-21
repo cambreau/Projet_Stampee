@@ -34,7 +34,7 @@
             <h2 class="profil__titre">Mes timbres</h2>
             <a class="bouton bouton-classique" href="{{base}}/timbre/ajout-timbre">Ajouter un timbre</a>
             <div class="conteneur-timbres">
-                <!-- Generer par JavaScript -->
+                <!-- Genere par JavaScript -->
             </div>
         </section>
       
