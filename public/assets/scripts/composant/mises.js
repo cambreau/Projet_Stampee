@@ -1,12 +1,17 @@
 import { filtreDate } from "./filtres.js";
 import { recupererSession } from "../requetes-backend.js";
+import { calculTempsRestant } from "../composant/encheres.js";
+import { formatDateTime } from "../composant/date.js";
 
 export const affichageMises = (mises, parent, nbr) => {
-  console.log(mises);
   const misesTrierDatePlusRecent = filtreDate(mises, "date");
   creationTableMises(parent);
-  for (let i = 0; i < nbr; i++) {
-    creationHTMLMises(misesTrierDatePlusRecent[i]);
+  for (let i = nbr - 1; i < 0; i--) {
+    if (i === 0) {
+      creationHTMLMises(misesTrierDatePlusRecent[i], true);
+    } else {
+      creationHTMLMises(misesTrierDatePlusRecent[i], false);
+    }
   }
 };
 
@@ -43,8 +48,12 @@ const creationTableMises = (parent) => {
  * Fonction qui genere la ligne de mise.
  * @param {array} mise
  */
-const creationHTMLMises = (mise) => {
+const creationHTMLMises = (mise, derniere) => {
   const tr = document.createElement("tr");
+  if (derniere) {
+    tr.id = "derniere";
+  }
+  tr.dataset.id = mise["id"];
   const utilisateur = utilisateurDeLaMise(mise["membreId"]);
   // Mise en forme selon le statut
   if (utilisateur.statut === "utilisateur") {
@@ -55,6 +64,7 @@ const creationHTMLMises = (mise) => {
   // Nom de l'utilisateur
   const tdNom = document.createElement("td");
   tdNom.textContent = utilisateur.nom;
+  tdNom.dataset.idMembre = mise["membreId"];
   tr.appendChild(tdNom);
 
   // Montant de la mise
@@ -65,6 +75,11 @@ const creationHTMLMises = (mise) => {
   tbody.appendChild(tr);
 };
 
+/**
+ * Fonction qui retourne un objet avec les informations de l'utilisateur a l'origine de la mise.
+ * @param {int} idMembre
+ * @returns {Objet} Information utilisateur
+ */
 const utilisateurDeLaMise = async (idMembre) => {
   const session = await recupererSession();
   let utilisateur = {
@@ -90,6 +105,10 @@ export const messageAucuneMise = (parent) => {
   parent.appendChild(message);
 };
 
+/**
+ * Fonction qui creer le bouton html pour placer une mise.
+ * @param {HTMLElement} parent
+ */
 export const creationHTMLBoutonMise = (parent) => {
   // Création du formulaire
   const form = document.createElement("form");
@@ -115,11 +134,53 @@ export const creationHTMLBoutonMise = (parent) => {
   const button = document.createElement("button");
   button.type = "button";
   button.classList.add("bouton", "bouton-accent", "bouton-grand", "btn-mise");
-  // Data set
-  button.dataset.enchereId = enchere.id;
-  button.dataset.membreId = session.membre_id;
   button.textContent = "Placer une mise";
   form.appendChild(button);
 
   parent.appendChild(form);
 };
+
+/**
+ * Fonction qui creer la partie HTML relative au statut et aux date et chrono de l'enchere.
+ * @param {HTMLElement} parent
+ * @param {string} statut
+ * @param {Date} dateFin
+ * @param {Date} dateDebut
+ */
+export const creationHTMLStatutTemps = (parent, statut, dateFin, dateDebut) => {
+  if (statut === "En cours") {
+    // 1. Date de fin:
+    const dateFinHTML = document.createElement("p");
+    dateFinHTML.classList.add("detail-timbre__temps__date");
+    const labelDateFin = document.createElement("span");
+    labelDateFin.textContent = "Date de fin : ";
+    dateFinHTML.appendChild(labelDateFin);
+    const valeurDateFin = document.createTextNode(formatDateTime(dateFin));
+    dateFinHTML.appendChild(valeurDateFin);
+    parent.appendChild(dateFinHTML);
+    // 2.  Chrono:
+    const chronoHTML = document.createElement("p");
+    chronoHTML.classList.add("detail-timbre__compteur");
+    // affichage immédiat
+    chronoHTML.textContent = `Temps restant: ${calculTempsRestant(dateFin)}`;
+    // Mise à jour toutes les secondes
+    const chrono = setInterval(() => {
+      chronoHTML.textContent = `Temps restant : ${calculTempsRestant(dateFin)}`;
+    }, 1000);
+    parent.appendChild(chronoHTML);
+  } else {
+    const dateHTML = document.createElement("p");
+    dateHTML.classList.add("detail-timbre__temps__date");
+    const labelDate = document.createElement("span");
+    labelDate.textContent = statut;
+    dateHTML.appendChild(labelDate);
+    const valeurDate =
+      statut === "À venir"
+        ? document.createTextNode(formatDateTime(dateDebut))
+        : document.createTextNode(formatDateTime(dateFin));
+    dateHTML.appendChild(valeurDate);
+    parent.appendChild(dateHTML);
+  }
+};
+
+export const ajouterMise = (evenement) => {};

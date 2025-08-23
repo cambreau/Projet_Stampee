@@ -57,7 +57,7 @@
 .detail-timbre .form-offre {
   display: flex;
   flex-direction: column;
-  margin-top: var(--espacement-tres-espace);
+  margin: var(--espacement-base);
   align-items: center;
   justify-items: center;
   gap: var(--espacement-serre);
@@ -86,7 +86,8 @@
 /* Contenu detail-timbre */
 
 /** Info */
-.detail-timbre__prix {
+.detail-timbre__prix,
+.detail-timbre__temps__date {
   background-color: var(--couleur-fond-accent);
   padding: var(--espacement-serre);
   margin-bottom: var(--espacement-base);
@@ -94,7 +95,8 @@
   border-radius: var(--arrondi-petit) 0 0 var(--arrondi-petit);
 }
 
-.detail-timbre__prix > * {
+.detail-timbre__prix > *,
+.detail-timbre__temps__date > * {
   font-size: var(--taille-police-moyen);
   font-weight: var(--epaisseur-police-tres-gras);
   color: var(--couleur-principale);
@@ -108,6 +110,7 @@
   border: thick double var(--couleur-secondaire);
   border-radius: var(--arrondi-petit);
   padding: var(--espacement-serre);
+  margin: auto;
 }
 .detail-timbre__temps {
   font-weight: var(--epaisseur-police-tres-gras);

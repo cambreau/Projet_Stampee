@@ -109,7 +109,7 @@ class RequetesFrontController{
          header('Content-Type: application/json'); // Indique au navigateur que la réponse renvoyée est du JSON, pas du HTML ou du texte brut.
          $jsonEncheres = json_encode($encheres); // Transforme en JSON.
          echo  $jsonEncheres; // Envoie au front-end les informations
-     }   
+    }   
 
     public function supprimerImageBD($id){
         $imageCrud = New Images;
@@ -119,11 +119,6 @@ class RequetesFrontController{
     }
 
     public function recupererMisesParId(){
-       // ** Il faut être connecté pour recuperer les informations sur les mises On valide si $_SESSION['membre_id'] existe.
-       if(!isset($_SESSION['membre_id'])){
-        return View::render('/connexion/page-connexion', ['message'=>'Veuillez vous connecter pour faire une mise!']);
-        } 
-       else{
          $miseCrud = new Mise;
          $mises = $miseCrud->selectWhere($_GET['id'], 'enchereId');
           // ** Transformer les informations en JSON.
@@ -131,7 +126,7 @@ class RequetesFrontController{
           $jsonMises = json_encode($mises); // Transforme en JSON.
           echo  $jsonMises; // Envoie au front-end les informations
        } 
-    }
+    
 
     public function ajouterMisesParId(){
 

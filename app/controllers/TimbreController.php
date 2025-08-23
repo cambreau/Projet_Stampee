@@ -117,6 +117,10 @@ class TimbreController{
                                     break; // On arrête après la première trouvée
                                 }
                             }
+                        if(count($imageTimbre) === 0){
+                            $imageTimbre = null;
+                            
+                        }    
                         return View::render('enchere/fiche-detail-enchere',['timbre'=>$timbre,'imageTimbre'=>$imageTimbre,'imagePrincipale'=>$imagePrincipale,'session'=>$session]); 
                     }
                     else{

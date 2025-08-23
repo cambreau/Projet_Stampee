@@ -15,7 +15,8 @@
                 alt="Image principale du timbre {{timbre.nom}}"
               />
             </picture>
-          </div>  
+          </div> 
+          {%if imageTimbre %} 
           <div class="detail-timbre__galerie">
             {%for image in imageTimbre %}
               <picture class="detail-timbre__galerie__miniature">
@@ -26,6 +27,7 @@
               /></picture>
             {%endfor%}
           </div>
+          {% endif %}
         </div>  
         <section class="detail-timbre__partie"> 
           <div>
@@ -51,26 +53,10 @@
                 <div class="detail-timbre__temps" data-date-fin="{{enchere.dateFin}}" data-date-debut="{{enchere.dateDebut}}">
                   
                 </div>
-                <div class="detail-timbre__mises">
-                  <div class="detail-timbre__conteneur-mises">
+                <div class="detail-timbre__mises" data-enchere-id="{{enchere.id}}" data-membre-id="{{session.membre_id}}">
+                  <div class="conteneur-mises">
                     <!-- Genere par JavaScript -->
                   </div>
-                  <form class="form-offre">
-                    <label for="offre" class="cache">Offre</label>
-                    <input
-                      class="bouton-grand"
-                      type="number"
-                      id="offre"
-                      name="offre"
-                      placeholder="Votre offre en CAD"
-                      min="1"
-                      step="0.01"
-                      required
-                    />
-                    <button type="button" class="bouton bouton-accent bouton-grand btn-mise" data-enchere-id="{{enchere.id}}" data-membre-id="{{session.membre_id}}" >
-                      Placer une mise
-                    </button>
-                  </form>
                 </div> 
               </div>  
             {%endif%}
