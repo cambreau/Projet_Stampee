@@ -16,6 +16,7 @@ async function CatalogueInit() {
       basCarteEnchere
     );
   });
+  const boutonsFiltres = document.querySelectorAll("");
 }
 
 /**

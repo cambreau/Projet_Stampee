@@ -34,7 +34,7 @@ abstract class CRUD extends \PDO{
         } 
     }
 
-       public function selectWhere($value, $champ, $columns = '*'){
+       public function selectWhere($value, $champ, $columns = '*', $order='asc'){
         $sql = "SELECT $columns FROM $this->table WHERE $champ = :$champ";
         $stmt = $this->prepare($sql);
         $stmt->bindValue(":$champ", $value);

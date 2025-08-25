@@ -1,5 +1,6 @@
 <?php
 namespace App\Controllers;
+use App\Models\Mise;
 use App\Providers\View;
 use App\Models\Couleurs;
 use App\Models\Etat;
@@ -59,8 +60,61 @@ class EnchereController{
                 return View::render('erreur404', ['message'=>'Erreur 404 - Page introuvable!','session'=>$session]);
             }
             else{
+                //Validation
+                $miseCrud = new Mise;
+                $misesExistantes = $miseCrud->selectWhere($data["enchereId"], "enchereId", 'prix');
+                $taillemisesExistantes = count($misesExistantes);
+                $validationPrix = false;
+                if($taillemisesExistantes === 0){
+                    $validationPrix = true;
+                }else{
+                    $validationPrix= $misesExistantes[$taillemisesExistantes-1]['prix'] < $data['prix'] ? true : false;
+                }
+                
+                // Recuperation des informations pour la view.
+                $session = $_SESSION ?? null;
+                //On recupere les infos du timbre.
+                $timbreCrud = new Timbre;
+                $timbre=$timbreCrud->selectId($data["timbreId"]);
+                //Couleur:
+                $couleursCrud = new Couleurs;
+                $timbre['couleur']= $couleursCrud->selectId($timbre['couleursId']);
+                //Etat:
+                $etatCrud = new Etat;
+                $timbre['etat']= $etatCrud->selectId($timbre['etatId']);
+                //Pays:
+                $paysCrud = new Pays;
+                $timbre['pays']= $paysCrud->selectId($timbre['paysId']);
+                //Images:
+                $imagesCrud = new Images;
+                $imagePrincipale = null;
+                 $imageTimbre=$imagesCrud->selectWhere($data["timbreId"],'timbreId');
+                 for ($i = 0; $i < count($imageTimbre); $i++) {
+                     if ($imageTimbre[$i]['principale'] == 1) {
+                         $imagePrincipale = $imageTimbre[$i];
+                         unset($imageTimbre[$i]); // Retire l'image principale de la liste
+                         break; // On arrête après la première trouvée
+                     }
+                 }
+               //Encheres:
+               $encheresCrud = new Enchere;
+               $enchere = $encheresCrud->selectWhere($data["timbreId"],'timbreId');
+               $enchere = $enchere[0];
 
+                if(!$validationPrix){
+                    $msgErreur = "Votre offre doit être obligatoirement supérieure au montant de la dernière mise.";
+                    return View::render('/enchere/fiche-detail-enchere',['session'=>$session, 'timbre'=>$timbre, 'imageTimbre'=>$imageTimbre,'imagePrincipale'=>$imagePrincipale, 'enchere'=>$enchere, "msgErreur"=>$msgErreur]);
+                }else{
+                    $mise = $miseCrud->insert($data); 
+                    if($mise){
+                        $msgSucces = "Votre offre a été placée avec succès.";
+                        return View::render('/enchere/fiche-detail-enchere',['session'=>$session, 'timbre'=>$timbre, 'imageTimbre'=>$imageTimbre,'imagePrincipale'=>$imagePrincipale, 'enchere'=>$enchere, "msgSucces"=>$msgSucces]);
+                    }
+                    else{
+                        return View::render('erreur404', ['message'=>"Erreur 404 - Oups ! Une erreur est survenue lors de l’enregistrement de votre mise!",'session'=>$session]);
+                    }
+                } 
             }
         }
-}
+    }
 }

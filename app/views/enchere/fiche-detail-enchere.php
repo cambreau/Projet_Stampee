@@ -2,7 +2,7 @@
     title: "Timbre - Stampee : Site d'enchère de timbre",
 }) }}
 
-<article class="page" id="fiche-detail-enchere">
+<article class="page" id="fiche-detail-enchere" data-timbre-id="{{timbre.id}}" data-proprietaire-id="{{timbre.membreId}}">
       <h1>Fiche détaillée du timbre</h1>
       <section class="detail-timbre">
         <div class="detail-timbre__partie">
@@ -53,10 +53,16 @@
                 <div class="detail-timbre__temps" data-date-fin="{{enchere.dateFin}}" data-date-debut="{{enchere.dateDebut}}">
                   
                 </div>
-                <div class="detail-timbre__mises">
+                <div class="detail-timbre__mises" data-enchere-id="{{enchere.id}}">
                   <div class="conteneur-mises">
                     <!-- Genere par JavaScript -->
                   </div>
+                  {%if msgSucces is defined %}
+                    <p class="message message__succes">{{msgSucces}}</p>
+                  {%endif%}
+                  {%if msgErreur is defined %}
+                    <p class="message message__erreur-accent">{{msgErreur}}</p>
+                  {%endif%}
                 </div> 
               </div>  
             {%endif%}

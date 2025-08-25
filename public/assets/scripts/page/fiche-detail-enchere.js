@@ -7,7 +7,7 @@ import { btnEncherir } from "../composant/btn-encherir.js";
 async function ficheDetailEnchere() {
   // **** Variables **** //
   // FAV const boutonsFavoris = document.querySelectorAll(".alerte-ajout");
-  //Les mises et l'enchere:
+  //Les mises et l'enchere :
   const idEnchere = document.querySelector(".detail-timbre__mises").dataset
     .enchereId;
   const dateDebut = document.querySelector(".detail-timbre__temps").dataset
@@ -17,8 +17,13 @@ async function ficheDetailEnchere() {
   const statut = statutEnchere(dateDebut, dateFin);
   let mises = await recupererMisesParId(idEnchere);
   const conteneurMises = document.querySelector(".conteneur-mises");
-  // L'utilisateur:
+  // L'utilisateur :
   const session = await recupererSession();
+  // Timbre :
+  const idTimbre = document.getElementById("fiche-detail-enchere").dataset
+    .timbreId;
+  const proprietaiteId = document.getElementById("fiche-detail-enchere").dataset
+    .proprietaireId;
 
   // **** Logique **** //
   const tabMises = new tableauMises(mises, conteneurMises, 3, session);
@@ -31,8 +36,15 @@ async function ficheDetailEnchere() {
     }
     //Bout mises:
     const sectionMiseHTML = document.querySelector(".detail-timbre__mises");
-    const btnPlacerMise = new btnEncherir(mises, sectionMiseHTML, session);
-    btnPlacerMise.creationHTMLBoutonMise();
+    const btnPlacerMise = new btnEncherir(
+      sectionMiseHTML,
+      session,
+      idTimbre,
+      idEnchere
+    );
+    if (proprietaiteId != session["membre_id"]) {
+      btnPlacerMise.creationHTMLBoutonMise();
+    }
   }
   //Mise a jour du compteur:
   const sectionTempsHTML = document.querySelector(".detail-timbre__temps");

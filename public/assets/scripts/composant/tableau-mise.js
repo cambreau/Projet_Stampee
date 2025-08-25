@@ -1,4 +1,4 @@
-import { filtreDate } from "./filtres.js";
+import { trierMisesDatePrix } from "./filtres.js";
 import { calculTempsRestant } from "../composant/encheres.js";
 import { formatDateTime } from "../composant/date.js";
 
@@ -19,7 +19,7 @@ export class tableauMises {
    * Etape 3: Creation des lignes mises dans le tableau : creationHTMLMises().
    */
   affichageMises() {
-    const misesTrierDatePlusRecent = filtreDate(this.mises, "date");
+    const misesTrierDatePlusRecent = trierMisesDatePrix(this.mises, true, true);
 
     this.creationTableMises();
 
@@ -74,12 +74,12 @@ export class tableauMises {
   /**
    * Création d’une ligne de mise
    */
-  creationHTMLMises(mise, derniere) {
+  creationHTMLMise(mise, derniere) {
     const tr = document.createElement("tr");
     if (derniere) {
       tr.id = "derniere";
+      tr.dataset.prixMise = mise["prix"];
     }
-    tr.dataset.id = mise["id"];
 
     const utilisateur = this.utilisateurDeLaMise(
       mise["membreId"],
@@ -88,9 +88,9 @@ export class tableauMises {
 
     // Mise en forme selon statut
     if (utilisateur.statut === "utilisateur") {
-      tr.style.background = "rgb(162, 210, 183)";
+      tr.style.background = "rgb(200, 224, 210)";
     } else {
-      tr.style.background = "#e8c5c5";
+      tr.style.background = "#f3dede";
     }
 
     // Nom utilisateur
@@ -101,7 +101,7 @@ export class tableauMises {
 
     // Montant
     const tdMontant = document.createElement("td");
-    tdMontant.textContent = mise["prix"];
+    tdMontant.textContent = `${mise["prix"]} $`;
     tr.appendChild(tdMontant);
 
     this.tbody.appendChild(tr);
@@ -114,7 +114,7 @@ export class tableauMises {
     let utilisateur = { nom: undefined, statut: undefined };
     utilisateur.nom =
       idMembre == this.session["membre_id"]
-        ? this.session["nomUtilisateur"]
+        ? this.session["membre_nomUtilisateur"]
         : "Autre utilisateur";
     utilisateur.statut =
       idMembre == this.session["membre_id"] ? "utilisateur" : "Autre";
