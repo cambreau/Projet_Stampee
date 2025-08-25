@@ -150,7 +150,8 @@
 }
 
 @media screen and (max-width: 1320px) {
-  .detail-timbre {
+  .detail-timbre,
+  .detail-timbre__partie {
     display: flex;
     flex-direction: column;
   }

@@ -3,5 +3,5 @@
   border: 1px solid var(--couleur-secondaire);
   border-radius: var(--arrondi-grand);
   padding: var(--espacement-base);
-  margin: var(--espacement-base);
+  margin: var(--espacement-base) 0;
 }
