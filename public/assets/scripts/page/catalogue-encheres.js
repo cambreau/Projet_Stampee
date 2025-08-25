@@ -1,6 +1,12 @@
 import { tousEncheres } from "../requetes-backend.js";
 import { affichageTimbre } from "../composant/carte-timbre.js";
 import { statutEnchere, calculTempsRestant } from "../composant/encheres.js";
+import {
+  retirerStyleFiltre,
+  trierMisesDatePrix,
+  filtreParPrix,
+  filtrerPar,
+} from "../composant/filtres.js";
 
 async function CatalogueInit() {
   // **** Variables **** //
@@ -16,7 +22,7 @@ async function CatalogueInit() {
       basCarteEnchere
     );
   });
-  const boutonsFiltres = document.querySelectorAll("");
+  gestionFiltre(encheres);
 }
 
 /**
@@ -75,6 +81,72 @@ const basCarteEnchere = (timbre, enchere, parent) => {
     btnEnchere.href = `/enchere/fiche-detail-enchere?id=${timbre["id"]}`;
     footer.appendChild(btnEnchere);
   }
+};
+
+const gestionFiltre = (arrayEncheres) => {
+  //Filtre sur index associatif:
+  const boutonsFiltres = document.querySelectorAll(".TriIndexAssociatif");
+  boutonsFiltres.forEach((btn) => {
+    btn.addEventListener("change", () => {
+      retirerStyleFiltre();
+      const nomAssociatifIndex = btn.closest("select").id;
+      const encheresFiltrees = filtrerPar(
+        arrayEncheres,
+        nomAssociatifIndex,
+        btn.value
+      );
+      encheresFiltrees.forEach((enchere) => {
+        affichageTimbre(
+          enchere["timbre"],
+          enchere,
+          conteneurTimbre,
+          basCarteEnchere
+        );
+      });
+    });
+  });
+  //Filtre sur prix:
+  const boutonsPrix = document.querySelectorAll(".filtre-prix");
+  console.log(boutonsPrix);
+  boutonsPrix.forEach((btn) => {
+    btn.addEventListener("change", () => {
+      retirerStyleFiltre();
+      console.log("Je suis dans le event");
+      const nomAssociatifIndex = btn.closest("select").id;
+      const encheresFiltrees = filtreParPrix(
+        arrayEncheres,
+        nomAssociatifIndex,
+        btn.value
+      );
+      encheresFiltrees.forEach((enchere) => {
+        affichageTimbre(
+          enchere["timbre"],
+          enchere,
+          conteneurTimbre,
+          basCarteEnchere
+        );
+      });
+    });
+  });
+  //Filtre sur date:
+  const boutonsDate = document.querySelectorAll(".filtre-date");
+  boutonsDate.forEach((btn) => {
+    btn.addEventListener("change", () => {
+      retirerStyleFiltre();
+      const nomAssociatifIndex = btn.closest("label").id;
+      trierMisesDatePrix(arrayEncheres, nomAssociatifIndex, btn.value, false);
+    });
+  });
+  //Filtre sur favoris et coup de coeur du lord:
+  const boutonsValeurBooleen = document.querySelectorAll(".filtre-booleen");
+  boutonsValeurBooleen.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      retirerStyleFiltre();
+      const nomAssociatifIndex = btn.id;
+      const btnValue = btn.data.filtreBool;
+      filtrerPar(arrayEncheres, nomAssociatifIndex, btnValue);
+    });
+  });
 };
 
 // **** Execution **** //
