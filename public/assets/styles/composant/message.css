@@ -21,6 +21,13 @@
   color: var(--couleur-erreur);
 }
 
+.message__erreur-accent {
+  background-color: var(--couleur-erreur);
+  color: var(--couleur-fond-accent);
+  margin-bottom: var(--espacement-base);
+  font-weight: var(--epaisseur-police-tres-gras);
+}
+
 .message__information__conteneur {
   display: flex;
   align-items: center;

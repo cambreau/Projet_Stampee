@@ -46,14 +46,14 @@
             </header>
             {%if enchere is defined %}
               <div class="detail-timbre__infos-enchere">
-                <div class="detail-timbre__prix">
+                <div class="detail-timbre__prix" data-prix-plancher="{{enchere.prixPlancher}}">
                   <span class="detail-timbre__prix-label">Prix :</span>
                   <span class="detail-timbre__prix-valeur">{{enchere.prixPlancher}} CAD</span>
                 </div>
                 <div class="detail-timbre__temps" data-date-fin="{{enchere.dateFin}}" data-date-debut="{{enchere.dateDebut}}">
                   
                 </div>
-                <div class="detail-timbre__mises" data-enchere-id="{{enchere.id}}" data-membre-id="{{session.membre_id}}">
+                <div class="detail-timbre__mises">
                   <div class="conteneur-mises">
                     <!-- Genere par JavaScript -->
                   </div>
@@ -104,7 +104,6 @@
                   </li>
                 </ul>
           </section>
-         
         </section>   
       </section>
 </article>

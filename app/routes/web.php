@@ -33,6 +33,7 @@ Route::get('/timbre/supprimer','TimbreController@supprimerTimbre');
 //Encheres
 Route::get('/enchere/catalogue-encheres', 'EnchereController@pageCatalogueEncheres');
 Route::get('/enchere/fiche-detail-enchere','EnchereController@pageFicheDetailEncheres');
+Route::post('/enchere/placer-une-mise','EnchereController@placerUneMise');
 
 //Requetes front vers back-end 
 Route::get('/requete/recupererSession','RequetesFrontController@recupererSession');

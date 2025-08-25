@@ -47,4 +47,20 @@ class EnchereController{
         $enchere = $enchere[0];
          return View::render('/enchere/fiche-detail-enchere',['session'=>$session, 'timbre'=>$timbre, 'imageTimbre'=>$imageTimbre,'imagePrincipale'=>$imagePrincipale, 'enchere'=>$enchere]);
     }
+
+    public function placerUneMise($data){
+        if(!isset($_SESSION['membre_id'])){
+            return View::render('/connexion/page-connexion', ['message'=>'Veuillez vous connecter pour enchérir!']);
+        }
+        else{
+            $session = $_SESSION ?? null;
+            // Il faut que la requête soit de type POST, sinon on renvoie à la page d’erreur.
+            if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+                return View::render('erreur404', ['message'=>'Erreur 404 - Page introuvable!','session'=>$session]);
+            }
+            else{
+
+            }
+        }
+}
 }
