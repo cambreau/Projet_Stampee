@@ -1,3 +1,5 @@
+import { estFavoris } from "./favoris";
+
 /**
  * Fonction qui determine le statut d'une enchere.
  * @param {Date} dateDebut
@@ -41,4 +43,12 @@ export const calculTempsRestant = (dateFin) => {
   diff -= minutes * (1000 * 60);
   const secondes = Math.floor(diff / 1000);
   return `${jours}j ${heures}h ${minutes}m ${secondes}s`;
+};
+
+export const ajoutColonneFavoris = (arrayEncheres, arrayFavoris) => {
+  let arrayEncheresModifie = [...arrayEncheres];
+  arrayEncheresModifie.forEach((enchere) => {
+    enchere.favoris = estFavoris(enchere, arrayFavoris) ? 1 : 0;
+  });
+  return arrayEncheresModifie;
 };

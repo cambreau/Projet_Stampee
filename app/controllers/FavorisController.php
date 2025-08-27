@@ -10,8 +10,6 @@ use App\Models\Favoris;
 
 
 class FavorisController{
-
-    
  }
 
 
