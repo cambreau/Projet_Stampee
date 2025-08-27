@@ -13,7 +13,16 @@ use App\Models\Images;
 class EnchereController{
     public function pageCatalogueEncheres(){
         $session = $_SESSION ?? null;
-        return View::render('/enchere/catalogue-encheres',['session'=>$session]);
+         //Couleurs:
+         $couleursCrud = new Couleurs;
+         $couleurs = $couleursCrud->select();
+         //Etat:
+         $etatCrud = new Etat;
+         $etats = $etatCrud->select();
+         //Pays:
+         $paysCrud = new Pays;
+         $pays = $paysCrud->select();
+        return View::render('/enchere/catalogue-encheres',['session'=>$session,'couleurs'=>$couleurs, 'etats'=>$etats,'pays'=>$pays]);
     }
 
     public function pageFicheDetailEncheres(){

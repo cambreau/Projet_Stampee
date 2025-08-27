@@ -1,3 +1,4 @@
+/* ------------------ Session ------------------ */
 /**
  * Fonction qui appelle la fonction recupererSession pour recuperer toutes les informations
  * de la session.
@@ -12,20 +13,7 @@ export const recupererSession = async () => {
     });
 };
 
-/**
- * Fonction qui appelle la fonction recupererTimbresMembreID pour recuperer toutes les informations
- * des timbres d'un membre.
- * @returns promesse
- */
-export const timbresParMembreId = async () => {
-  return axios
-    .get("/requete/timbreMembreID")
-    .then((res) => res.data)
-    .catch((err) => {
-      console.error(err);
-    });
-};
-
+/* ------------------ Enchere ------------------ */
 /**
  * Fonction qui appelle la fonction recupererToutesEncheres pour recuperer toutes les informations
  * des encheres.
@@ -40,20 +28,22 @@ export const tousEncheres = async () => {
     });
 };
 
+/* ------------------ Timbre ------------------ */
 /**
- * Fonction qui appelle la fonction recupererToutesEncheres pour recuperer toutes les informations
- * des encheres.
+ * Fonction qui appelle la fonction recupererTimbresMembreID pour recuperer toutes les informations
+ * des timbres d'un membre.
  * @returns promesse
  */
-export const ajoutTimbreFavoris = async (timbreId) => {
+export const timbresParMembreId = async () => {
   return axios
-    .get(`/requete/ajoutTimbreFavoris?=${timbreId}`)
+    .get("/requete/timbreMembreID")
     .then((res) => res.data)
     .catch((err) => {
       console.error(err);
     });
 };
 
+/* ------------------ Image ------------------ */
 /**
  * Fonction qui appelle la fonction backend supprimerImageBD pour supprimer une image grace a son ID.
  * @param {*} idImage
@@ -71,6 +61,36 @@ export const supprimerImageBD = async (idImage, imageHTML) => {
     });
 };
 
+/* ------------------ Favoris ------------------ */
+/**
+ * Fonction qui appelle la fonction ajoutTimbreFavoris pour recuperer toutes les informations
+ * des encheres dans favoris.
+ * @returns promesse
+ */
+export const ajoutTimbreFavoris = async (enchereId) => {
+  return axios
+    .get(`/requete/ajoutTimbreFavoris?=${enchereId}`)
+    .then((res) => res.data)
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+/**
+ * Fonction qui appelle la fonction ajoutTimbreFavoris pour recuperer toutes les informations
+ * des encheres dans favoris.
+ * @returns promesse
+ */
+export const recupererTimbreFavoris = async () => {
+  return axios
+    .get(`/requete/recupererTableFavoris`)
+    .then((res) => res.data)
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+/* ------------------ Mises ------------------ */
 /**
  * Fonction qui appelle la fonction recupererMisesParId pour recuperer toutes les informations
  * des mises pour un ID d'enchere.
@@ -79,20 +99,6 @@ export const supprimerImageBD = async (idImage, imageHTML) => {
 export const recupererMisesParId = async (idEnchere) => {
   return axios
     .get(`/requete/recupererMisesParId?id=${idEnchere}`)
-    .then((res) => res.data)
-    .catch((err) => {
-      console.error(err);
-    });
-};
-
-/**
- * Fonction qui appelle la fonction recupererToutesEncheres pour recuperer toutes les informations
- * des encheres.
- * @returns promesse
- */
-export const ajouterMisesParId = async (idEnchere) => {
-  return axios
-    .get(`/requete/ajouterMisesParId?id=${idEnchere}`)
     .then((res) => res.data)
     .catch((err) => {
       console.error(err);

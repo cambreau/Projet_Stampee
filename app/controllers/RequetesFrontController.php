@@ -5,6 +5,7 @@ use App\Models\Etat;
 use App\Models\Enchere;
 use App\Models\Mise;
 use App\Models\Pays;
+use App\Models\Favoris;
 use App\Models\Timbre;
 use App\Providers\View;
 use App\Models\Images;
@@ -125,12 +126,7 @@ class RequetesFrontController{
           header('Content-Type: application/json'); // Indique au navigateur que la réponse renvoyée est du JSON, pas du HTML ou du texte brut.
           $jsonMises = json_encode($mises); // Transforme en JSON.
           echo  $jsonMises; // Envoie au front-end les informations
-       } 
-    
-
-    public function ajouterMisesParId(){
-
-    }
+    } 
 
     public function recupererSession(){
         $session = $session = $_SESSION ?? null;
@@ -138,6 +134,27 @@ class RequetesFrontController{
          header('Content-Type: application/json'); // Indique au navigateur que la réponse renvoyée est du JSON, pas du HTML ou du texte brut.
          $jsonSession = json_encode($session); // Transforme en JSON.
          echo  $jsonSession; // Envoie au front-end les informations
+    }
+
+    public function recupererTableFavoris (){
+        // Il faut être connecté pour avoir des favoris. On valide si $_SESSION['membre_id'] existe.
+        if(!isset($_SESSION['membre_id'])){
+            return View::render('/connexion/page-connexion', ['message'=>'Veuillez vous connecter pour voir vos favoris!']);
+        }
+        else{
+            $favorisCrud = new Favoris;
+            $favoris = $favorisCrud->selectWhere($_SESSION['membre_id'], 'Membre_id');
+            if(count($favoris) < 0){
+                $favoris ="Vous n'avez pas encore ajouté d'enchère à votre liste de favoris.";
+            }
+            else{
+               // ** Transformer les informations en JSON.
+                header('Content-Type: application/json'); // Indique au navigateur que la réponse renvoyée est du JSON, pas du HTML ou du texte brut.
+                $jsonFavoris = json_encode($favoris); // Transforme en JSON.
+                echo  $jsonFavoris; // Envoie au front-end les informations  
+            }
+    
+        }
     }
 
 }

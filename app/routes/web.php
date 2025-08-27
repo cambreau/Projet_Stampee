@@ -44,6 +44,9 @@ Route::delete('/requete/supprimerImageBD','RequetesFrontController@supprimerImag
 Route::get('/requete/ajouterMisesParId','RequetesFrontController@ajouterMisesParId');
 Route::get('/requete/recupererMisesParId','RequetesFrontController@recupererMisesParId');
 
+//Favoris
+Route::get('/requete/recupererTableFavoris','FavorisController@recupererTableFavoris');
+
 Route::dispatch();
 
 

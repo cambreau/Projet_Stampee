@@ -8,12 +8,13 @@
 export const trierMisesDatePrix = (
   arrayMises,
   datePlusRecent = true,
-  prixDecroissant = true
+  prixDecroissant = true,
+  indexDate = "date"
 ) => {
   return [...arrayMises].sort((a, b) => {
     // Tri par date
-    const dateA = new Date(a.date);
-    const dateB = new Date(b.date);
+    const dateA = new Date(a[indexDate]);
+    const dateB = new Date(b[indexDate]);
     if (dateA.getTime() !== dateB.getTime()) {
       return datePlusRecent ? dateB - dateA : dateA - dateB;
     }
@@ -26,41 +27,39 @@ export const trierMisesDatePrix = (
 };
 
 /**
- * Trie un tableau d'objets par prix
- * @param {Array} arrayPrix
- * @param {string} nomAssociatifIndex - clé contenant le prix
- * @param {boolean} croissant - true pour tri croissant, false pour décroissant
- * @returns {Array} tableau trié
- */
-export const filtreParPrix = (
-  arrayPrix,
-  nomAssociatifIndex,
-  croissant = true
-) => {
-  return [...arrayPrix].sort((a, b) => {
-    const prixA = parseFloat(a[nomAssociatifIndex]);
-    const prixB = parseFloat(b[nomAssociatifIndex]);
-    return croissant ? prixA - prixB : prixB - prixA;
-  });
-};
-
-/**
  * Filtre un tableau d'objets selon la valeur d'une clé spécifique.
- * @param {Array} arrayMises
- * @param {string} nomAssociatifIndex - clé contenant la colonne a filtrer.
+ * @param {Array} arrayEncheres
+ * @param {Objet} filtre - clé contenant la colonne a filtrer.
  * @param {string} valeur
  * @returns
  */
-export const filtrerPar = (arrayMises, nomAssociatifIndex, valeur) => {
-  return arrayMises.filter((mise) => mise[nomAssociatifIndex] === valeur);
+export const filtrerPar = (arrayEncheres, filtre, filtreSur) => {
+  const valeurNumerique = filtre.valeurs.map((valeur) => parseInt(valeur));
+  if (filtreSur === "timbre") {
+    return arrayEncheres.filter((enchere) => {
+      return valeurNumerique.includes(enchere["timbre"][filtre.nom]);
+    });
+  } else {
+    return arrayEncheres.filter((enchere) => {
+      return valeurNumerique.includes(enchere[filtre.nom]);
+    });
+  }
 };
 
 /**
- * Retire la classe CSS "filtre-actif" de tous les éléments qui la possèdent.
+ * Fonction qui gere l'affichage (toogle) des filtres.
+ * @param {} evenement
  */
-export const retirerStyleFiltre = () => {
-  const filtres = document.querySelectorAll(".filtre-actif");
-  filtres.forEach((filtre) => {
-    filtre.classList.remove("filtre-actif");
-  });
+export const toogleFiltre = (evenement) => {
+  const fieldset = evenement.currentTarget.parentElement;
+  const listeFiltres = fieldset.querySelector(".filtre__toogle-liste");
+  const estOuvert = listeFiltres.dataset.ouvert;
+
+  if (estOuvert !== "true") {
+    listeFiltres.classList.remove("cache");
+    listeFiltres.dataset.ouvert = true;
+  } else {
+    listeFiltres.classList.add("cache");
+    listeFiltres.dataset.ouvert = false;
+  }
 };

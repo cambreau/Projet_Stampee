@@ -9,39 +9,137 @@
           <section class="filtres">
             <h2 class="filtres__titre">Filtres</h2>
             <div class="filtres__categories">
-              <!-- Prix -->
-                <label for="prixPlancher" class="cache">Prix :</label>
-                <select id="prixPlancher" class="bouton bouton-classique">
-                  <option value="" disabled selected>Filtrer par prix</option>
-                  <option class="filtre-prix" value="true">Par prix croissant</option>
-                  <option class="filtre-prix" value="false">Par prix décroissant</option>
-                </select>
-              <!-- Date -->
-                <label for="date" class="cache">Date :</label>
-                <select id="date" class="bouton bouton-classique">
-                  <option value="" disabled selected>Filtrer par date d'enchère</option>
-                  <option value="true">Du plus récent</option>
-                  <option value="false">Du moins récent</option>
-                </select>
-              <!-- Statut -->
-                <label for="etat" class="cache">Statut :</label>
-                <select id="etat" class="bouton bouton-classique TriIndexAssociatif">
-                  <option value="" disabled selected>Filtrer par statut</option>
-                </select>
-              <!-- Couleurs -->
-                <label for="couleur" class="cache">Couleur :</label>
-                <select id="couleur" class="bouton bouton-classique TriIndexAssociatif">
-                  <option value="" disabled selected>Filtrer par statut</option>
-                </select>
-              <!-- Pays -->
-                <label for="pays" class="cache">Par pays :</label>
-                <select id="pays" class="bouton bouton-classique TriIndexAssociatif">
-                  <option value="" disabled selected>Filtrer par pays</option>
-                </select>
-              <!-- Favoris -->
-                <button class="bouton bouton-classique filtre-booleen" id="favoris" data-filtre-bool="favoris">Favoris</button>
-              <!-- Coup de coeur du lord -->
-                <button class="bouton bouton-classique filtre-booleen" id="coupCoeurLord" data-filtre-bool="coupCoeurLord">Coup de cœur du lord</button>
+              <form class="form-filtres">
+                <!-- Prix -->
+                <fieldset>
+                  <legend>Prix <svg width="30" height="30" viewBox="0 0 24 24">
+                    <path d="M7 10l5 5 5-5H7z"/>
+                  </svg>
+                </legend>
+                  <div class="filtre__toogle-liste cache" data-ouvert="false">
+                    <label class="filtre__option">
+                      <input type="checkbox"  class="datePrix" name="prixPlancher" value="false">
+                      Par prix croissant
+                    </label>
+                    <label class="filtre__option">
+                      <input type="checkbox" class="datePrix" name="prixPlancher" value="true">
+                      Par prix décroissant
+                    </label>
+                  </div>
+                </fieldset>
+                <!-- Date -->
+                <fieldset>
+                  <legend>Date de début d'enchère <svg width="30" height="30" viewBox="0 0 24 24">
+                    <path d="M7 10l5 5 5-5H7z"/>
+                  </svg>
+                </legend>
+                  <div class="filtre__toogle-liste cache" data-ouvert="false">
+                    <label class="filtre__option">
+                      <input type="checkbox" class="datePrix" name="dateDebut" value="true">
+                      Du plus récent
+                    </label>
+                    <label class="filtre__option">
+                      <input type="checkbox" class="datePrix" name="dateDebut" value="false">
+                      Du moins récent
+                    </label>
+                  </div>
+                </fieldset>
+                <fieldset>
+                  <legend>Date de fin d'enchère <svg width="30" height="30" viewBox="0 0 24 24">
+                    <path d="M7 10l5 5 5-5H7z"/>
+                  </svg>
+                </legend>
+                  <div class="filtre__toogle-liste cache" data-ouvert="false">
+                    <label class="filtre__option">
+                      <input type="checkbox" class="datePrix" name="dateFin" value="true">
+                      Du plus récent
+                    </label>
+                    <label class="filtre__option">
+                      <input type="checkbox" class="datePrix" name="dateFin" value="false">
+                      Du moins récent
+                    </label>
+                  </div>
+                </fieldset>
+                <!-- Statut -->
+                <fieldset>
+                  <legend>Statut de l'enchère <svg width="30" height="30" viewBox="0 0 24 24">
+                    <path d="M7 10l5 5 5-5H7z"/>
+                  </svg>
+                </legend>
+                  <div class="filtre__toogle-liste cache" data-ouvert="false">
+                      <label class="filtre__option">
+                        <input class="statutEnchere" type="checkbox" name="statutEnchere" value="En cours">
+                         En cours
+                      </label>
+                      <label class="filtre__option">
+                        <input class="statutEnchere" type="checkbox" name="statutEnchere" value="A venir">
+                        À venir
+                      </label>
+                      <label class="filtre__option">
+                        <input class="statutEnchere" type="checkbox" name="statutEnchere" value="Terminee">
+                        Terminée
+                      </label>
+                  </div>
+                </fieldset>
+                <!-- Condition -->
+                <fieldset>
+                  <legend>Condition <svg width="30" height="30" viewBox="0 0 24 24">
+                    <path d="M7 10l5 5 5-5H7z"/>
+                  </svg>
+                </legend>
+                  <div class="filtre__toogle-liste cache" data-ouvert="false">
+                    {%for etat in etats %}
+                      <label class="filtre__option">
+                        <input class="parIndex" data-filtre-sur="timbre" type="checkbox" name="etatId" value="{{etat.id}}">
+                      {{etat.nom}}
+                      </label>
+                    {%endfor%}
+                  </div>
+                </fieldset>
+                <!-- Couleur -->
+                <fieldset>
+                  <legend>Couleur <svg width="30" height="30" viewBox="0 0 24 24">
+                    <path d="M7 10l5 5 5-5H7z"/>
+                  </svg>
+                </legend>
+                  <div class="filtre__toogle-liste cache" data-ouvert="false">
+                    {%for couleur in couleurs %}
+                      <label class="filtre__option">
+                        <input class="parIndex" data-filtre-sur="timbre" type="checkbox" name="couleursId" value="{{couleur.id}}">
+                        {{couleur.nom}}
+                      </label>
+                    {%endfor%}
+                  </div>
+                </fieldset>
+                <!-- Pays -->
+                <fieldset>
+                  <legend>Pays <svg width="30" height="30" viewBox="0 0 24 24">
+                    <path d="M7 10l5 5 5-5H7z"/>
+                  </svg>
+                </legend>
+                  <div class="filtre__toogle-liste cache" data-ouvert="false">
+                    {%for unPays in pays %}
+                      <label class="filtre__option">
+                        <input class="parIndex" data-filtre-sur="timbre" type="checkbox" name="paysId" value="{{unPays.id}}">
+                        {{unPays.nom}}
+                      </label>
+                    {%endfor%}
+                  </div>
+                </fieldset>
+                <!-- Coup de coeur du Lord -->
+                  <label class="filtre__option legend">
+                    <input class="parIndex" data-filtre-sur="enchere" type="checkbox" name="coupCoeurLord" value="1" >
+                    Coup de coeur du Lord
+                  </label> 
+                    <!-- Favoris -->
+                 {% if session.membre_id is defined %}
+                  <label class="filtre__option legend siSession">
+                    <input class="parIndex" data-filtre-sur="enchere" type="checkbox" name="favoris" value="1">
+                    Favoris
+                  </label>
+                 {% endif %}
+                  <button type="button" class="bouton bouton-classique">Appliquer</button>
+                </form>
             </div>
           </section>
           <div class="conteneur-timbres">
