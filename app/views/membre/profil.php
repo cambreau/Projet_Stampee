@@ -29,14 +29,23 @@
                 </picture>
             </div>
         </section>
+
+        <section class="profil__section">
+            <h2 class="profil__titre">Mes favoris</h2>
+            <div class="conteneur-timbre favoris-profil" id="section-favoris">
+                <!-- Genere par JavaScript -->
+            </div>
+        </section>
         
         <section class="profil__section">
             <h2 class="profil__titre">Mes timbres</h2>
             <a class="bouton bouton-classique" href="{{base}}/timbre/ajout-timbre">Ajouter un timbre</a>
-            <div class="conteneur-timbres">
+            <div class="conteneur-timbres timbre-profil">
                 <!-- Genere par JavaScript -->
             </div>
         </section>
+
+        
       
 </div>
 </article>

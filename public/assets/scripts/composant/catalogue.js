@@ -1,5 +1,5 @@
 import { affichageTimbre } from "./carte-timbre.js";
-import { trierMisesDatePrix, filtrerPar } from "./filtres.js";
+import { filtrerPar } from "./filtres.js";
 import { basCarteEnchere } from "./carte-timbre.js";
 
 export class Catalogue {

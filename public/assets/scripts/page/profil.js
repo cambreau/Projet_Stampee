@@ -1,12 +1,18 @@
-import { timbresParMembreId } from "../requetes-backend.js";
+import {
+  timbresParMembreId,
+  recupererEncheresFavorites,
+} from "../requetes-backend.js";
 import { affichageTimbre } from "../composant/carte-timbre.js";
 import { statutEnchere } from "../composant/encheres.js";
+import { Catalogue } from "../composant/catalogue.js";
 
 async function profilInit() {
   // **** Variables **** //
   const timbres = await timbresParMembreId();
-  const conteneurTimbre = document.querySelector(".conteneur-timbres");
-  console.log(timbres);
+  const conteneurTimbre = document.querySelector(".timbre-profil");
+  const favoris = await recupererEncheresFavorites();
+  const conteneurFavoris = document.querySelector(".favoris-profil");
+
   // **** Logique **** //
   if (timbres.length !== 0) {
     // Console.log montre timbres =[] lorsqu'il n'y a rien dans la BD.
@@ -19,14 +25,22 @@ async function profilInit() {
       );
     });
   } else {
-    messageInformation(conteneurTimbre);
+    messageInformation(conteneurTimbre, "Vous n'avez pas encore de timbre");
+  }
+
+  if (favoris.length !== 0) {
+    console.log(favoris);
+    const catalogueFav = new Catalogue(favoris, conteneurFavoris);
+    catalogueFav.affichageSectionTimbres();
+  } else {
+    messageInformation(conteneurFavoris, "Vous n'avez pas encore de favoris");
   }
 }
 
 /**
  * Fonction qui affiche un message a l'utilisateur pour l'informer qu'il n'a pas encore de timbres
  */
-const messageInformation = (conteneurTimbre) => {
+const messageInformation = (conteneurTimbre, message) => {
   const div = document.createElement("div");
   conteneurTimbre.appendChild(div);
   div.classList.add("message__information__conteneur");
@@ -38,7 +52,7 @@ const messageInformation = (conteneurTimbre) => {
   img.alt = "Illustration d'un timbre";
   picture.appendChild(img);
   const p = document.createElement("p");
-  p.textContent = `Vous n'avez pas encore de timbre`;
+  p.textContent = message;
   div.appendChild(p);
   p.classList.add("message__contenu");
   //Modifier le css du conteneur timbre

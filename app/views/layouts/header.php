@@ -88,7 +88,7 @@
               <a href="{{base}}/membre/profil">Profil</a>
             </li>
             <li class="navigation-principale__menu__item">
-              <a href="#">Mes alertes</a>
+              <a href="{{base}}/membre/profil#favoris">Mes alertes</a>
             </li>
             {%endif%}
             <li class="navigation-principale__menu__item">

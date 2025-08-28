@@ -34,6 +34,24 @@ abstract class CRUD extends \PDO{
         } 
     }
 
+    final public function selectDoubleId($valueId1, $valueId2)
+    {
+        $sql = "SELECT * FROM $this->table WHERE $this->clePrimaire = :$this->clePrimaire and $this->secondId = :$this->secondId";
+        $stmt = $this->prepare($sql);
+        $stmt->bindValue(":$this->clePrimaire", $valueId1);
+        $stmt->bindValue(":$this->secondId", $valueId2);
+        $stmt->execute();
+        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $count = count($rows);
+        if ($count == 1) {
+            return $rows[0];
+        } else {
+            return false;
+        }
+    }
+
+ 
+
        public function selectWhere($value, $champ, $columns = '*', $order='asc'){
         $sql = "SELECT $columns FROM $this->table WHERE $champ = :$champ";
         $stmt = $this->prepare($sql);
@@ -95,6 +113,20 @@ abstract class CRUD extends \PDO{
         }
 
     }
+
+    final public function deleteDoubleId($valueId1, $valueId2)
+    {
+        $sql = "DELETE FROM $this->table WHERE  $this->clePrimaire = :$this->clePrimaire and $this->secondId = :$this->secondId";
+        $stmt = $this->prepare($sql);
+        $stmt->bindValue(":$this->clePrimaire", $valueId1);
+        $stmt->bindValue(":$this->secondId", $valueId2);
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+ 
 
     public function unique($champ, $valeur){
         $sql = "SELECT * FROM $this->table WHERE $champ = :$champ";

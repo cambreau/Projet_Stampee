@@ -77,14 +77,32 @@ export const supprimerImageBD = async (idImage, imageHTML) => {
 
 /* ------------------ Favoris ------------------ */
 /**
- * Fonction qui appelle la fonction ajoutTimbreFavoris pour recuperer toutes les informations
- * des encheres dans favoris.
+ * Fonction qui appelle la fonction ajoutTimbreFavoris
  * @returns promesse
  */
 export const ajoutTimbreFavoris = async (enchereId) => {
   return axios
-    .get(`/requete/ajoutTimbreFavoris?=${enchereId}`)
-    .then((res) => res.data)
+    .get(`/requete/ajoutTimbreFavoris?id=${enchereId}`)
+    .then((res) => {
+      res.data;
+      alert(`Enchère ajoutée aux favoris`);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+/**
+ * Fonction qui appelle la fonction ajoutTimbreFavoris
+ * @returns promesse
+ */
+export const supprimerTimbreFavoris = async (enchereId) => {
+  return axios
+    .get(`/requete/supprimerTimbreFavoris?id=${enchereId}`)
+    .then((res) => {
+      res.data;
+      alert(`Enchère supprimée des favoris !`);
+    })
     .catch((err) => {
       console.error(err);
     });
@@ -98,6 +116,20 @@ export const ajoutTimbreFavoris = async (enchereId) => {
 export const recupererTableFavoris = async () => {
   return axios
     .get(`/requete/recupererTableFavoris`)
+    .then((res) => res.data)
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+/**
+ * Fonction qui appelle la fonction ajoutTimbreFavoris pour recuperer toutes les informations
+ * des encheres dans favoris.
+ * @returns promesse
+ */
+export const recupererEncheresFavorites = async () => {
+  return axios
+    .get(`/requete/recupererEncheresFavorites`)
     .then((res) => res.data)
     .catch((err) => {
       console.error(err);

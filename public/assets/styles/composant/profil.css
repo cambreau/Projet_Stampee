@@ -61,7 +61,6 @@
   display: block;
   max-width: 400px;
   height: auto;
-  margin: auto;
 }
 
 .profil__image img {
@@ -70,7 +69,7 @@
   object-fit: contain;
 }
 
-.profil__section .conteneur-timbres__timbre {
+.profil__section .timbreProfil {
   height: 370px;
 }
 

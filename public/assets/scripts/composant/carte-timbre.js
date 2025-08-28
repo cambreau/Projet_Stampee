@@ -1,5 +1,7 @@
 import { statutEnchere, calculTempsRestant } from "./encheres.js";
 import { formatDateTime } from "./date.js";
+import { gestionFavoris } from "../composant/favoris.js";
+import { recupererSession } from "../requetes-backend.js";
 
 /** Fonction qui gere l'affichage des timbres */
 export const affichageTimbre = async (
@@ -16,6 +18,7 @@ export const affichageTimbre = async (
   imageTimbre(timbre["principale"]["lien"], timbre["nom"], sectionTimbre);
   titreTimbre(timbre["nom"], sectionTimbre);
   particularitesTimbre(timbre, enchere, sectionTimbre);
+  badgeFavCoupCoeur(enchere, sectionTimbre);
 };
 
 /** Fonction pour créer l'image du timbre
@@ -105,5 +108,51 @@ export const basCarteEnchere = (timbre, enchere, parent) => {
     btnEnchere.classList.add("bouton-accent");
     btnEnchere.href = `/enchere/fiche-detail-enchere?id=${timbre["id"]}`;
     footer.appendChild(btnEnchere);
+  }
+};
+
+/** Fonction badge coup de coeur et favoris */
+export const badgeFavCoupCoeur = async (enchere, parent) => {
+  if (enchere["coupCoeurLord"] === 1 || enchere["favoris"] === 1) {
+    const divBadge = document.createElement("div");
+    divBadge.classList.add("badges");
+    parent.appendChild(divBadge);
+    if (enchere["coupCoeurLord"] === 1) {
+      const badgeCCL = document.createElement("pciture");
+      badgeCCL.classList.add("icon_grand");
+      divBadge.appendChild(badgeCCL);
+      const imgCCL = document.createElement("img");
+      imgCCL.src = "/public/assets/images/icon/badgeCcl.svg";
+      imgCCL.alt = "Icon pour coup de coeur du Lord";
+      imgCCL.classList.add("img");
+      badgeCCL.appendChild(imgCCL);
+    }
+
+    const session = await recupererSession();
+    if (session.length !== 0) {
+      let btnFav = document.createElement("picture");
+      btnFav.classList.add("icon_grand", "icon-hover-agrandit");
+      divBadge.appendChild(btnFav);
+
+      btnFav.addEventListener("click", gestionFavoris);
+
+      let imgFav = document.createElement("img");
+      imgFav.classList.add("img");
+      btnFav.appendChild(imgFav);
+
+      btnFav.dataset.idEnchere = enchere["id"];
+
+      console.log(enchere);
+      // configurer l'image selon l'état favoris
+      if (enchere["favoris"] === 1) {
+        btnFav.dataset.gestionFavoris = "supprimer";
+        imgFav.src = "/public/assets/images/icon/suppr-fav.svg";
+        imgFav.alt = "Icône pour supprimer un favori";
+      } else {
+        btnFav.dataset.gestionFavoris = "ajout";
+        imgFav.src = "/public/assets/images/icon/ajout-fav.svg";
+        imgFav.alt = "Icône pour ajouter un favori";
+      }
+    }
   }
 };

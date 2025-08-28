@@ -148,6 +148,61 @@ class RequetesFrontController{
         echo  $jsonFavoris; // Envoie au front-end les informations  
     }
 
+    public function recupererEncheresFavorites(){
+        $encheres=[];
+        if(isset($_SESSION['membre_id'])){
+            $favorisCrud = new Favoris;
+            $favoris = $favorisCrud->selectWhere($_SESSION['membre_id'], 'Membre_id');
+            foreach($favoris as $fav){
+                $enchereCrud = new Enchere;
+                $enchere = $enchereCrud ->selectWhere($fav['Enchere_id'], 'id');
+                $timbreCrud = new Timbre;
+                $enchere[0]["timbre"] = $timbreCrud->selectId($enchere[0]["timbreId"]);
+                // 2. Récupérer les images du timbre :
+                $imagesCrud = new Images;
+                $images=$imagesCrud->selectWhere($enchere[0]["timbreId"],'timbreId');
+                for ($i = 0; $i < count($images); $i++) {
+                if ($images[$i]['principale'] == 1) {
+                    $enchere[0]["timbre"]['principale'] = $images[$i];
+                    unset($images); // Retirer les autres images
+                break; // On arrête après la première trouvée
+                }
+                }
+                array_push($encheres, $enchere[0]);
+                unset($enchere); // Libere de l'espace en effacant la copie.
+            }
+
+        }
+        // ** Transformer les informations en JSON.
+        header('Content-Type: application/json'); // Indique au navigateur que la réponse renvoyée est du JSON, pas du HTML ou du texte brut.
+        $jsonEncheres = json_encode($encheres); // Transforme en JSON.
+        echo  $jsonEncheres; // Envoie au front-end les informations  
+    }
+
+    public function ajoutEnchereFavoris(){       
+        $enchereId = $_GET['id'];
+        $membreId = $_SESSION["membre_id"];
+         // Debug
+     echo "Tentative d'ajout favoris - Membre: $membreId, Enchere: $enchereId";
+        $favorisCrud = new Favoris;
+        $favoris = $favorisCrud->selectDoubleId($membreId,$enchereId);
+        if (empty($favoris)) {
+            $insert = $favorisCrud->insert(['Membre_id'=>$membreId, 'Enchere_id'=>$enchereId]);
+            echo "Résultat insert: " . ($insert ? "succès" : "échec") . "<br>";
+        };  echo "Favoris déjà existant<br>";
+    }
+
+    public function supprimerTimbreFavoris(){       
+        $enchereId =  $_GET['id'];
+        $membreId = $_SESSION["membre_id"];
+
+        $favorisCrud = new Favoris;
+        $favoris = $favorisCrud->selectDoubleId($membreId,$enchereId);
+        if ($favoris) {
+            $delete = $favorisCrud->deleteDoubleId($membreId, $enchereId);
+        };
+    }
+
     public function recupererCoupCoeurLord (){
         //On recupere les encheres coup de coeur du lord.
         $encheresCrud = new Enchere;

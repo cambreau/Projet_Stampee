@@ -44,7 +44,16 @@ Route::delete('/requete/supprimerImageBD','RequetesFrontController@supprimerImag
 Route::get('/requete/ajouterMisesParId','RequetesFrontController@ajouterMisesParId');
 Route::get('/requete/recupererMisesParId','RequetesFrontController@recupererMisesParId');
 Route::get('/requete/recupererTableFavoris','RequetesFrontController@recupererTableFavoris');
+Route::get('/requete/recupererEncheresFavorites','RequetesFrontController@recupererEncheresFavorites');
+Route::get('/requete/supprimerTimbreFavoris','RequetesFrontController@supprimerTimbreFavoris');
+Route::get('/requete/ajoutTimbreFavoris','RequetesFrontController@ajoutEnchereFavoris');
+
+
+
 Route::get('/requete/recupererCoupCoeurLord','RequetesFrontController@recupererCoupCoeurLord');
+
+
+
 Route::dispatch();
 
 

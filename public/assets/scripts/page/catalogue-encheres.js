@@ -15,7 +15,7 @@ async function CatalogueInit() {
   let encheresModifie =
     favoris.length > 0 ? ajoutColonneFavoris(encheres, favoris) : encheres;
   encheresModifie = ajoutColonneStatut(encheresModifie);
-
+  console.log(encheresModifie);
   const conteneurTimbre = document.querySelector(".conteneur-timbres");
   const catalogueEncheres = new Catalogue(
     trierEncheresParStatut(encheresModifie),

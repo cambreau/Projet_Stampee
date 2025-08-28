@@ -16,7 +16,6 @@ if (page === "profil") {
 } else if (page === "accueil") {
   import("./page/accueil.js");
 }
-
 /*----------------------------------------------------------------- */
 /**
  * Menu deroulant pour la naviguation principal du header.

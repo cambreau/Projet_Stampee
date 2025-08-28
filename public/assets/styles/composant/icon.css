@@ -16,3 +16,16 @@
   max-width: 25px;
   height: 100%;
 }
+
+/** Variant grand**/
+.icon_grand {
+  display: block;
+  width: 50px;
+  margin: auto;
+}
+.icon-hover-aggrandit {
+  transition: transform 0.2s ease;
+}
+.icon-hover-aggrandit:hover {
+  transform: scale(1.2);
+}
