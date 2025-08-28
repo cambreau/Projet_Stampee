@@ -25,8 +25,3 @@ Camille Breau
 ### Vision :
 
     Moderniser et digitaliser la philatélie en transformant une passion traditionnelle en une expérience numérique de portée internationale. Portée du projet Dans un premier temps, seule l’interface publique sera développée (phase 1).
-
-## Suivi :
-
-- Header faire les liens des sites de naviguation
-- Connexion lorsque la page catalogue-enchere sera créé, rediriger les utilisateurs vers cette dernière avec un message de succès.
