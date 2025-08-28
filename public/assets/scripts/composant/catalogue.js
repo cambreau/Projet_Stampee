@@ -32,6 +32,7 @@ export class Catalogue {
    */
   messageAucuneEncheres() {
     const divMsg = document.createElement("div");
+    divMsg.classList.add("msg-aucun-element");
     const picture = document.createElement("picture");
     picture.classList.add("img");
     divMsg.appendChild(picture);

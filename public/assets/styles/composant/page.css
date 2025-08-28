@@ -1,3 +1,10 @@
 .page {
   padding: var(--espacement-base);
 }
+
+@media screen and (max-width: 1150px) {
+  .page h1 {
+    text-align: center;
+    margin: 0;
+  }
+}

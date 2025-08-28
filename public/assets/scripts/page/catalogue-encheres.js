@@ -1,10 +1,6 @@
 import { tousEncheres, recupererTableFavoris } from "../requetes-backend.js";
 import { Catalogue } from "../composant/catalogue.js";
-import {
-  toogleFiltre,
-  gererExclusiveCheckboxes,
-  trierEncheresParStatut,
-} from "../composant/filtres.js";
+import { toogleFiltre, trierEncheresParStatut } from "../composant/filtres.js";
 import {
   ajoutColonneFavoris,
   ajoutColonneStatut,
@@ -37,11 +33,6 @@ async function CatalogueInit() {
     "click",
     catalogueEncheres.filtrerEncheres.bind(catalogueEncheres)
   );
-
-  const btnFiltrePrixDate = document.querySelectorAll(".datePrix");
-  btnFiltrePrixDate.forEach((btn) => {
-    btn.addEventListener("change", gererExclusiveCheckboxes);
-  });
 }
 
 // **** Execution **** //

@@ -4,6 +4,10 @@
   border-radius: var(--arrondi-petit);
 }
 
+.message .icon {
+  margin: 0;
+}
+
 .message__contenu {
   display: flex;
   gap: var(--espacement-tres-serre);

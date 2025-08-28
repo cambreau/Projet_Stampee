@@ -1,0 +1,19 @@
+.msg-aucun-element {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--espacement-base);
+  margin: auto;
+  align-items: center;
+}
+
+.msg-aucun-element picture {
+  height: fit-content;
+  width: fit-content;
+}
+
+.msg-aucun-element > p {
+  font-size: var(--taille-police-h3);
+  font-weight: var(--epaisseur-police-gras);
+  color: var(--couleur-fonctionnalite);
+}

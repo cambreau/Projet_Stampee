@@ -70,6 +70,10 @@
   object-fit: contain;
 }
 
+.profil__section .conteneur-timbres__timbre {
+  height: 370px;
+}
+
 @media screen and (max-width: 900px) {
   .profil__image {
     display: none;
