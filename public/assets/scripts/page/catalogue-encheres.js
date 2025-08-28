@@ -10,7 +10,6 @@ import {
 async function CatalogueInit() {
   const encheres = await tousEncheres();
   const favoris = await recupererTableFavoris();
-  console.log(favoris);
   /* Transformation d'encheres pour pouvoir l'utiliser pour les filtres */
   let encheresModifie =
     favoris.length > 0 ? ajoutColonneFavoris(encheres, favoris) : encheres;

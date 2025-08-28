@@ -36,12 +36,6 @@
                   <h2 class="detail-timbre__titre">
                   {{timbre.nom}}
                   </h2>
-                  <a href="#"
-                    ><img
-                      class="icon alerte-ajout"
-                      src="{{asset}}/images/icon/alerte-ajout.webp"
-                      alt="Icône alerte" data-timbre-id="{{timbre.id}}"
-                  /></a>
                 </div>
             </header>
             {%if enchere is defined %}

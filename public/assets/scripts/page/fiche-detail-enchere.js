@@ -6,8 +6,6 @@ import { btnEncherir } from "../composant/btn-encherir.js";
 
 async function ficheDetailEnchere() {
   // **** Variables **** //
-  // FAV const boutonsFavoris = document.querySelectorAll(".alerte-ajout");
-  //Les mises et l'enchere :
   const idEnchere = document.querySelector(".detail-timbre__mises").dataset
     .enchereId;
   const dateDebut = document.querySelector(".detail-timbre__temps").dataset
