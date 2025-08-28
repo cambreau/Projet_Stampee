@@ -34,21 +34,30 @@ export const trierMisesDatePrix = (
  * @returns
  */
 export const filtrerPar = (arrayEncheres, filtre, filtreSur) => {
-  const valeurNumerique = filtre.valeurs.map((valeur) => parseInt(valeur));
   if (filtreSur === "timbre") {
     return arrayEncheres.filter((enchere) => {
-      return valeurNumerique.includes(enchere["timbre"][filtre.nom]);
+      return filtre.valeurs.includes(String(enchere["timbre"][filtre.nom]));
     });
   } else {
     return arrayEncheres.filter((enchere) => {
-      return valeurNumerique.includes(enchere[filtre.nom]);
+      return filtre.valeurs.includes(String(enchere[filtre.nom]));
     });
   }
 };
 
 /**
+ * Fonction qui trie les enchères par statut
+ * @param {Array} arrayEncheres - Liste des enchères à trier
+ * @returns {Array} - Nouvelle liste triée
+ */
+export const trierEncheresParStatut = (arrayEncheres) => {
+  const ordre = { "En cours": 1, "À venir": 2, Terminée: 3 };
+  return [...arrayEncheres].sort((a, b) => ordre[a.statut] - ordre[b.statut]);
+};
+
+/**
  * Fonction qui gere l'affichage (toogle) des filtres.
- * @param {} evenement
+ * @param {Event} evenement
  */
 export const toogleFiltre = (evenement) => {
   const fieldset = evenement.currentTarget.parentElement;

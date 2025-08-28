@@ -80,6 +80,7 @@
   background: var(--couleur-fond);
   transition: all 0.2s ease;
   user-select: none;
+  width: 250px;
 }
 
 /* Survol */
@@ -111,6 +112,10 @@
 .filtres .filtre__option input[type="checkbox"]:checked {
   background: var(--couleur-fonctionnalite-secondaire);
   border-color: var(--couleur-fonctionnalite-secondaire);
+}
+.filtres .filtre__option input[type="checkbox"]:disabled {
+  background-color: #ccc;
+  border: 1px solid #ccc;
 }
 
 .filtres .filtre__option input[type="checkbox"]:checked::after {

@@ -10,56 +10,6 @@
             <h2 class="filtres__titre">Filtres</h2>
             <div class="filtres__categories">
               <form class="form-filtres">
-                <!-- Prix -->
-                <fieldset>
-                  <legend>Prix <svg width="30" height="30" viewBox="0 0 24 24">
-                    <path d="M7 10l5 5 5-5H7z"/>
-                  </svg>
-                </legend>
-                  <div class="filtre__toogle-liste cache" data-ouvert="false">
-                    <label class="filtre__option">
-                      <input type="checkbox"  class="datePrix" name="prixPlancher" value="false">
-                      Par prix croissant
-                    </label>
-                    <label class="filtre__option">
-                      <input type="checkbox" class="datePrix" name="prixPlancher" value="true">
-                      Par prix décroissant
-                    </label>
-                  </div>
-                </fieldset>
-                <!-- Date -->
-                <fieldset>
-                  <legend>Date de début d'enchère <svg width="30" height="30" viewBox="0 0 24 24">
-                    <path d="M7 10l5 5 5-5H7z"/>
-                  </svg>
-                </legend>
-                  <div class="filtre__toogle-liste cache" data-ouvert="false">
-                    <label class="filtre__option">
-                      <input type="checkbox" class="datePrix" name="dateDebut" value="true">
-                      Du plus récent
-                    </label>
-                    <label class="filtre__option">
-                      <input type="checkbox" class="datePrix" name="dateDebut" value="false">
-                      Du moins récent
-                    </label>
-                  </div>
-                </fieldset>
-                <fieldset>
-                  <legend>Date de fin d'enchère <svg width="30" height="30" viewBox="0 0 24 24">
-                    <path d="M7 10l5 5 5-5H7z"/>
-                  </svg>
-                </legend>
-                  <div class="filtre__toogle-liste cache" data-ouvert="false">
-                    <label class="filtre__option">
-                      <input type="checkbox" class="datePrix" name="dateFin" value="true">
-                      Du plus récent
-                    </label>
-                    <label class="filtre__option">
-                      <input type="checkbox" class="datePrix" name="dateFin" value="false">
-                      Du moins récent
-                    </label>
-                  </div>
-                </fieldset>
                 <!-- Statut -->
                 <fieldset>
                   <legend>Statut de l'enchère <svg width="30" height="30" viewBox="0 0 24 24">
@@ -68,15 +18,15 @@
                 </legend>
                   <div class="filtre__toogle-liste cache" data-ouvert="false">
                       <label class="filtre__option">
-                        <input class="statutEnchere" type="checkbox" name="statutEnchere" value="En cours">
+                        <input class="parIndex" type="checkbox" name="statut" data-filtre-sur="enchere" value="En cours">
                          En cours
                       </label>
                       <label class="filtre__option">
-                        <input class="statutEnchere" type="checkbox" name="statutEnchere" value="A venir">
+                        <input class="parIndex" type="checkbox" name="statut" data-filtre-sur="enchere" value="À venir">
                         À venir
                       </label>
                       <label class="filtre__option">
-                        <input class="statutEnchere" type="checkbox" name="statutEnchere" value="Terminee">
+                        <input class="parIndex" type="checkbox" name="statut" data-filtre-sur="enchere" value="Terminée">
                         Terminée
                       </label>
                   </div>

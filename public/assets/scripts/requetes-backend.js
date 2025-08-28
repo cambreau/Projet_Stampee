@@ -28,6 +28,20 @@ export const tousEncheres = async () => {
     });
 };
 
+/**
+ * Fonction qui appelle la fonction recupererCoupCoeurLord pour recuperer toutes les informations
+ * des encheres coup de coeur du lord.
+ * @returns promesse
+ */
+export const recupererCoupCoeurLord = async () => {
+  return axios
+    .get("/requete/recupererCoupCoeurLord")
+    .then((res) => res.data)
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
 /* ------------------ Timbre ------------------ */
 /**
  * Fonction qui appelle la fonction recupererTimbresMembreID pour recuperer toutes les informations
@@ -81,7 +95,7 @@ export const ajoutTimbreFavoris = async (enchereId) => {
  * des encheres dans favoris.
  * @returns promesse
  */
-export const recupererTimbreFavoris = async () => {
+export const recupererTableFavoris = async () => {
   return axios
     .get(`/requete/recupererTableFavoris`)
     .then((res) => res.data)

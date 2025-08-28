@@ -1,11 +1,11 @@
 import { affichageTimbre } from "./carte-timbre.js";
-import { statutEnchere, calculTempsRestant } from "./encheres.js";
 import { trierMisesDatePrix, filtrerPar } from "./filtres.js";
+import { basCarteEnchere } from "./carte-timbre.js";
 
 export class Catalogue {
   constructor(arrayEncheres, sectionHTMLTimbres) {
     this.arrayEncheres = arrayEncheres; // Jamais filtrer cet array => Array d'origine.
-    this.arrayEncheresFiltre = arrayEncheres;
+    this.arrayEncheresFiltre = [...arrayEncheres];
     this.sectionHTMLTimbres = sectionHTMLTimbres;
   }
 
@@ -13,75 +13,39 @@ export class Catalogue {
    * Fonction qui affiche les timbres dans la section timbres du catalogue
    */
   affichageSectionTimbres() {
-    this.arrayEncheresFiltre.forEach((enchere) => {
-      affichageTimbre(
-        enchere["timbre"],
-        enchere,
-        this.sectionHTMLTimbres,
-        this.basCarteEnchere
-      );
-    });
+    if (this.arrayEncheresFiltre.length === 0) {
+      this.messageAucuneEncheres();
+    } else {
+      this.arrayEncheresFiltre.forEach((enchere) => {
+        affichageTimbre(
+          enchere["timbre"],
+          enchere,
+          this.sectionHTMLTimbres,
+          basCarteEnchere
+        );
+      });
+    }
   }
 
   /**
-   * Fonction pour créer le bas de la carte enchere
-   * @param {Object} timbre
-   * @param {HTMLElement} parent
+   * Aucune encheres
    */
-  basCarteEnchere(timbre, enchere, parent) {
-    // Création conteneur footer de la carte
-    const footer = document.createElement("footer");
-    footer.classList.add("conteneur-timbres__timbre__bas-carte");
-    parent.appendChild(footer);
-    // Statut de l'enchere et temps restant:
-    const dates = document.createElement("p");
-    dates.textContent = `${enchere["dateDebut"]} - ${enchere["dateFin"]}`;
-    const statutValeur = statutEnchere(
-      enchere["dateDebut"],
-      enchere["dateFin"]
-    );
-    const statut = document.createElement("p");
-    footer.appendChild(statut);
-    statut.classList.add("detail-timbre__compteur");
-    const statutEnchereLabel = document.createElement("span");
-    statut.appendChild(statutEnchereLabel);
-    if (statutValeur === "En cours") {
-      // affichage immédiat
-      statut.textContent = `Temps restant: ${calculTempsRestant(
-        enchere["dateFin"]
-      )}`;
-      // Mise à jour toutes les secondes
-      const chrono = setInterval(() => {
-        statut.textContent = `Temps restant : ${calculTempsRestant(
-          enchere["dateFin"]
-        )}`;
-      }, 1000);
-    } else {
-      statut.textContent = statutValeur;
-    }
+  messageAucuneEncheres() {
+    const divMsg = document.createElement("div");
+    const picture = document.createElement("picture");
+    picture.classList.add("img");
+    divMsg.appendChild(picture);
 
-    const prixEnchere = document.createElement("p");
-    footer.appendChild(prixEnchere);
-    prixEnchere.classList.add(
-      "conteneur-timbres__timbre__bas-carte-enchere__prix"
-    );
-    const prixEnchereLabel = document.createElement("span");
-    prixEnchere.appendChild(prixEnchereLabel);
-    prixEnchereLabel.textContent =
-      statutValeur !== "Terminée" ? "Prix plancher :" : null;
-    const prixEnchereValeur = document.createTextNode(
-      ` ${enchere["prixPlancher"]} CAD`
-    );
-    prixEnchere.appendChild(prixEnchereValeur);
+    const img = document.createElement("img");
+    img.src = "/public/assets/images/aucun-resultat.png";
+    img.alt = "Illustration pour aucun résultat trouvé";
+    picture.appendChild(img);
 
-    if (statutValeur == "En cours") {
-      const btnEnchere = document.createElement("a");
-      btnEnchere.textContent = "Voir l’enchère";
-      btnEnchere.classList.add("bouton");
-      btnEnchere.classList.add("bouton-accent");
-      btnEnchere.href = `/enchere/fiche-detail-enchere?id=${timbre["id"]}`;
-      footer.appendChild(btnEnchere);
-    }
+    const message = document.createElement("p");
+    message.textContent = "Aucune enchère ne correspond à votre recherche.";
+    divMsg.appendChild(message);
+
+    this.sectionHTMLTimbres.appendChild(divMsg);
   }
 
   /**
@@ -99,47 +63,24 @@ export class Catalogue {
    */
   filtrerEncheres(evenement) {
     evenement.preventDefault();
+
     this.SupprimerSectionTimbres();
+
     const filtresIndex = this.recupererFiltresIndex();
     filtresIndex.forEach((filtre) => {
       const filtrerSur = document.querySelector(
         `form input[name="${filtre.nom}"]`
       ).dataset.filtreSur;
-      console.log(filtrerSur);
       this.arrayEncheresFiltre = filtrerPar(
         this.arrayEncheresFiltre,
         filtre,
         filtrerSur
       );
     });
-    console.log(this.arrayEncheresFiltre);
-    const filtresDatePrix = this.recupererFiltresDatePrix();
-    console.log(filtresDatePrix);
-    this.arrayEncheresFiltre = trierMisesDatePrix(
-      this.arrayEncheresFiltre,
-      filtresDatePrix["date"],
-      filtresDatePrix["prix"]
-    );
 
     this.affichageSectionTimbres();
-  }
 
-  /**
-   * Fonction qui recupere les choix de l'utilisateur pour les filtres date et prix.
-   * @returns array valeurFiltres
-   */
-  recupererFiltresDatePrix() {
-    const filtresSelectionnesDatePrix = document.querySelectorAll(
-      ".filtre__option input[type='checkbox']:checked datePrix"
-    );
-    const filtresFinauxDatePrix = [];
-    filtresSelectionnesDatePrix.forEach((filtreHTML) => {
-      filtresFinauxDatePrix.push({
-        indexAssociatif: filtreHTML.name,
-        filtre: filtreHTML.value,
-      });
-    });
-    return filtresFinauxDatePrix;
+    this.arrayEncheresFiltre = [...this.arrayEncheres];
   }
 
   /**
@@ -157,6 +98,7 @@ export class Catalogue {
         filtre: filtreHTML.value,
       });
     });
+    console.log("valeur filtres avant organisation:");
     console.log(valeurFiltres);
     return this.organiserLesChoixFiltres(valeurFiltres);
   }
@@ -180,7 +122,8 @@ export class Catalogue {
       // Ajouter la valeur
       filtreNom.valeurs.push(objetFiltre.filtre);
     });
-
+    console.log("voici filtres finaux");
+    console.log(filtres);
     return filtres;
   }
 }

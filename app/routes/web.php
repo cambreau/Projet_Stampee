@@ -43,10 +43,8 @@ Route::get("/requete/tousEncheres", 'RequetesFrontController@recupererToutesEnch
 Route::delete('/requete/supprimerImageBD','RequetesFrontController@supprimerImageBD' );
 Route::get('/requete/ajouterMisesParId','RequetesFrontController@ajouterMisesParId');
 Route::get('/requete/recupererMisesParId','RequetesFrontController@recupererMisesParId');
-
-//Favoris
-Route::get('/requete/recupererTableFavoris','FavorisController@recupererTableFavoris');
-
+Route::get('/requete/recupererTableFavoris','RequetesFrontController@recupererTableFavoris');
+Route::get('/requete/recupererCoupCoeurLord','RequetesFrontController@recupererCoupCoeurLord');
 Route::dispatch();
 
 

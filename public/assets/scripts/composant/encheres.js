@@ -1,4 +1,4 @@
-import { estFavoris } from "./favoris";
+import { estFavoris } from "./favoris.js";
 
 /**
  * Fonction qui determine le statut d'une enchere.
@@ -18,7 +18,7 @@ export const statutEnchere = (dateDebut, dateFin) => {
   } else if (maintenant >= debut && maintenant <= fin) {
     return "En cours";
   } else {
-    return "Terminée - Non vendu";
+    return "Terminée";
   }
 };
 
@@ -46,9 +46,16 @@ export const calculTempsRestant = (dateFin) => {
 };
 
 export const ajoutColonneFavoris = (arrayEncheres, arrayFavoris) => {
-  let arrayEncheresModifie = [...arrayEncheres];
-  arrayEncheresModifie.forEach((enchere) => {
+  arrayEncheres.forEach((enchere) => {
     enchere.favoris = estFavoris(enchere, arrayFavoris) ? 1 : 0;
   });
-  return arrayEncheresModifie;
+  return arrayEncheres;
+};
+
+export const ajoutColonneStatut = (arrayEncheres) => {
+  arrayEncheres.forEach((enchere) => {
+    const statut = statutEnchere(enchere.dateDebut, enchere.dateFin);
+    enchere.statut = statut;
+  });
+  return arrayEncheres;
 };

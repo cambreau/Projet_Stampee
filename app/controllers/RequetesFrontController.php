@@ -137,26 +137,46 @@ class RequetesFrontController{
     }
 
     public function recupererTableFavoris (){
-        // Il faut être connecté pour avoir des favoris. On valide si $_SESSION['membre_id'] existe.
-        if(!isset($_SESSION['membre_id'])){
-            return View::render('/connexion/page-connexion', ['message'=>'Veuillez vous connecter pour voir vos favoris!']);
-        }
-        else{
+        $favoris=[];
+        if(isset($_SESSION['membre_id'])){
             $favorisCrud = new Favoris;
             $favoris = $favorisCrud->selectWhere($_SESSION['membre_id'], 'Membre_id');
-            if(count($favoris) < 0){
-                $favoris ="Vous n'avez pas encore ajouté d'enchère à votre liste de favoris.";
-            }
-            else{
-               // ** Transformer les informations en JSON.
-                header('Content-Type: application/json'); // Indique au navigateur que la réponse renvoyée est du JSON, pas du HTML ou du texte brut.
-                $jsonFavoris = json_encode($favoris); // Transforme en JSON.
-                echo  $jsonFavoris; // Envoie au front-end les informations  
-            }
-    
         }
+        // ** Transformer les informations en JSON.
+        header('Content-Type: application/json'); // Indique au navigateur que la réponse renvoyée est du JSON, pas du HTML ou du texte brut.
+        $jsonFavoris = json_encode($favoris); // Transforme en JSON.
+        echo  $jsonFavoris; // Envoie au front-end les informations  
+    }
+
+    public function recupererCoupCoeurLord (){
+        //On recupere les encheres coup de coeur du lord.
+        $encheresCrud = new Enchere;
+        $coupCoeurLord = $encheresCrud ->selectWhere('1','coupCoeurLord');
+        // On recupere les informations des timbres et des images.
+        $timbreCrud = new Timbre;
+        $imagesCrud = new Images;
+        foreach($coupCoeurLord as $key => $enchere) {
+            // 1. Récupérer le timbre de l'enchere:
+            $enchere["timbre"] = $timbreCrud->selectId($enchere["timbreId"]);
+            // 2. Récupérer les images du timbre :
+            $images=$imagesCrud->selectWhere($enchere["timbreId"],'timbreId');
+            for ($i = 0; $i < count($images); $i++) {
+                if ($images[$i]['principale'] == 1) {
+                    $enchere["timbre"]['principale'] = $images[$i];
+                    unset($images); // Retirer les autres images
+                break; // On arrête après la première trouvée
+                }
+            }
+            $coupCoeurLord[$key] = $enchere; // Car $enchere est une copie et par consequent, ne modifie pas l'array initial $encheres.
+            unset($enchere); // Libere de l'espace en effacant la copie.
+        } 
+        // ** Transformer les informations en JSON.
+        header('Content-Type: application/json'); // Indique au navigateur que la réponse renvoyée est du JSON, pas du HTML ou du texte brut.
+        $jsonEncheres = json_encode($coupCoeurLord); // Transforme en JSON.
+        echo  $jsonEncheres; // Envoie au front-end les informations
     }
 
 }
+
 
 

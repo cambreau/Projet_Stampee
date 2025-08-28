@@ -1,15 +1,30 @@
 import { tousEncheres, recupererTableFavoris } from "../requetes-backend.js";
 import { Catalogue } from "../composant/catalogue.js";
-import { toogleFiltre } from "../composant/filtres.js";
+import {
+  toogleFiltre,
+  gererExclusiveCheckboxes,
+  trierEncheresParStatut,
+} from "../composant/filtres.js";
+import {
+  ajoutColonneFavoris,
+  ajoutColonneStatut,
+} from "../composant/encheres.js";
 
 // ----------------------------------------------------------------------------------------
 async function CatalogueInit() {
   const encheres = await tousEncheres();
   const favoris = await recupererTableFavoris();
-  const encheresAvecFavoris = ajoutColonneFavoris(encheres, favoris);
-  const conteneurTimbre = document.querySelector(".conteneur-timbres");
+  console.log(favoris);
+  /* Transformation d'encheres pour pouvoir l'utiliser pour les filtres */
+  let encheresModifie =
+    favoris.length > 0 ? ajoutColonneFavoris(encheres, favoris) : encheres;
+  encheresModifie = ajoutColonneStatut(encheresModifie);
 
-  const catalogueEncheres = new Catalogue(encheresAvecFavoris, conteneurTimbre);
+  const conteneurTimbre = document.querySelector(".conteneur-timbres");
+  const catalogueEncheres = new Catalogue(
+    trierEncheresParStatut(encheresModifie),
+    conteneurTimbre
+  );
   catalogueEncheres.affichageSectionTimbres();
 
   const titreListeFiltre = document.querySelectorAll("legend");
@@ -22,6 +37,11 @@ async function CatalogueInit() {
     "click",
     catalogueEncheres.filtrerEncheres.bind(catalogueEncheres)
   );
+
+  const btnFiltrePrixDate = document.querySelectorAll(".datePrix");
+  btnFiltrePrixDate.forEach((btn) => {
+    btn.addEventListener("change", gererExclusiveCheckboxes);
+  });
 }
 
 // **** Execution **** //

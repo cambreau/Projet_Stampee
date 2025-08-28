@@ -13,6 +13,8 @@ if (page === "profil") {
   import("./page/modifier-timbre.js");
 } else if (page === "fiche-detail-enchere") {
   import("./page/fiche-detail-enchere.js");
+} else if (page === "accueil") {
+  import("./page/accueil.js");
 }
 
 /*----------------------------------------------------------------- */
